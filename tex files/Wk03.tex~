@@ -1,0 +1,92 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage{parskip}
+
+\title{MLT Week-3}
+\author{Sherry Thomas \\ 21f3001449}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+The week commences with an introduction to the concept of clustering and a comprehensive examination of the K-means algorithm, a crucial element within the topic. The week also delves into the constraints of the K-means approach and offers potential remedial measures to address such limitations.
+\end{abstract}
+
+\newpage
+
+\section{Introduction to Clustering}
+Clustering is a method of unsupervised machine learning that groups similar objects into clusters, discovering structure in data for exploratory analysis or as a pre-processing step for other algorithms. \\
+Our objective is to group $n$ datapoints into $k$ clusters. \\
+\underline{Notation}:
+$$
+\{x_1, x_2, \dots, x_n \} \hspace{6em} x_i \in \mathbb{R}^d 
+$$
+$$
+\{z_1, z_2, \dots, z_n\} \hspace{2em} z_i \in \{1, 2, \dots, k\}
+$$
+\underline{Objective Function}:
+$$
+F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}_2 ^2
+$$
+where
+$$
+\mu _k = \frac{\sum _{i = 1} ^{n} {x_i \cdot 1(z_i=k)}}{\sum _{i = 1} ^{n} {1(z_i=k)}}
+$$
+\underline{Goal}:
+$$
+\min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2
+$$
+Unfortunately, finding a solution manually is an NP-Hard problem due to the existence of $k^n$ possibilities. As a result, alternative approaches must be considered to address this challenge.
+
+\section{K-means Clustering (Lloyd's Algorithm)}
+Lloyd's Algorithm, also known as the k-means algorithm, is a widely used and straightforward method for clustering that divides a dataset into $K$ pre-determined clusters by iteratively computing the mean distance between the points and their cluster centroids.
+
+\subsection{The Algorithm}
+
+The algorithm is as follows:
+
+\underline{Step 1: Initialization}: \\
+Assign $z_1^0, z_2^0, \ldots, z_n^0$ where $z_i^0 \in \{1, 2, \ldots, k\}$. The approach on how to initialize them is discussed later.
+    
+\underline{Step 2: Compute Means}: \\
+$$
+\mu _k ^t = \frac{\sum _{i = 1} ^{n} {x_i \cdot 1(z_i^t=k)}}{\sum _{i = 1} ^{n} {1(z_i^t=k)}} \hspace{2em} \forall k
+$$
+    
+\underline{Step 3: Reassignment Step}: \\
+$$
+z _i ^{t+1} = \underset{k}{\arg \min} {|| x_i - \mu _{k} ^t ||}_2 ^2 \hspace{2em} \forall i
+$$
+
+\underline{Step 4: Loop until Convergence}: \\
+Repeat steps 2 and 3 until convergence for $t$ iterations.
+
+\subsection{Fact regarding Lloyd's Algorithm}
+Lloyd's Algorithm, also known as K-means, is guaranteed to converge to a solution. While the converged solution may not be the optimal one, it has been observed to produce acceptable clustering results in practice.
+
+\section{Convergence of K-means Algorithm}
+The objective function strictly reduces after each reassignment.
+$$
+F(z_1^{t+1}, z_2^{t+1}, \ldots, z_n^{t+1}) \le F(z_1^{t}, z_2^{t}, \ldots, z_n^{t})
+$$
+And as there are only finite number of reassignments possible, the algorithm must converge. \\
+\underline{Alternate Explanation}: K-means algorithm converges because it is an iterative procedure that minimizes the sum of squared distances between points and their cluster centroids, which is a convex function with a global minimum. The algorithm will reach the convergence point, guaranteed to exist, under mild assumptions on the initial cluster means, making it a reliable tool for clustering.
+
+\section{Credits}
+\begin{itemize}
+    \item Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.
+\end{itemize}
+
+\end{document}
