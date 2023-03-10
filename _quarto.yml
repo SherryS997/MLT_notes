@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "MLT Notes"
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Home"
+        contents: 
+          - href: index.qmd
+            text: Content
+          - href: about.qmd
+            text: About
+      - section: "Notes"
+        contents:
+          - href: pages/Wk04.qmd
+            text: Week-04
+            title: Week-04
+          - href: pages/Wk05.qmd
+            text: Week-05
+            title: Week-05
+          - href: pages/Wk06.qmd
+            text: Week-06
+            title: Week-06
+          - href: pages/Wk07.qmd
+            text: Week-07
+            title: Week-07
+
+format:
+  html:
+    theme: zephyr
+    css: styles.css
+    toc: true
+
+
+

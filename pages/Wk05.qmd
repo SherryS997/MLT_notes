@@ -1,12 +1,6 @@
-\title{MLT Week-5}
-\author{Sherry Thomas \\ 21f3001449}
-
-\maketitle
-\tableofcontents
-
-\begin{abstract}
-The week commences with an exploration of Supervised Learning, specifically focusing on the topic of Regression. The aim is to provide a comprehensive understanding of the underlying mechanism of this popular machine learning technique, and its various applications. Additionally, this study delves into the variants of Regression, including kernel regression, and examines the probabilistic aspects of the technique.
-\end{abstract}
+---
+title: "Supervised Learning - Regression - Least Squares; Bayesian view"
+---
 
 # Introduction to Supervised Learning
 Supervised learning is a machine learning technique in which the algorithm is trained on labeled data, where the target variable or the outcome is known. The goal of supervised learning is to learn a mapping between the input data and the corresponding output variable.
@@ -33,6 +27,7 @@ $$
 This error can be as small as zero, and this is achieved when $h(x_i)=y_i \hspace{0.5em} \forall i$. But this may not be the desired output as it may represent nothing more than memorizing the data and its outputs.
 
 The memorization problem can be mitigated by introducing a structure to the mapping. The simplest structure being of the linear kind, we shall use it as the underlying structure for our data.
+
 Let $\mathcal{H}_{\text{linear}}$ represent the solution space for the mapping in the linear space.
 $$
 \mathcal{H}_{\text{linear}}=\Biggr \lbrace{h_w: \mathbb{R}^d \rightarrow \mathbb{R} \hspace{0.5em} s.t. \hspace{0.5em} h_w(x)=w^Tx \hspace{0.5em} \forall w \in \mathbb{R}^d } \Biggr \rbrace
@@ -138,5 +133,5 @@ $$
 $$
 Therefore, Maximum Likelihood Estimator assuming Zero mean Gaussian Noise is the same as linear regression with square error.
 
-# Credits:
+# Credits
 Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.
