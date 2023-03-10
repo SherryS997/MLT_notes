@@ -2,6 +2,8 @@
 title: "Supervised Learning - Classification - K-NN, Decision tree"
 ---
 
+PDF Link: [notes](../notes/Wk07.pdf)
+
 # Introduction to Binary Classification
 Binary classification is a machine learning task where the goal is to classify objects into one of two categories. It is a fundamental problem in various fields, including computer vision, natural language processing, and bioinformatics.
 

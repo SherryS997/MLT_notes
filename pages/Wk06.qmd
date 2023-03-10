@@ -2,6 +2,10 @@
 title: "Supervised Learning - Regression - Ridge/LASSO"
 ---
 
+:::{.callout-note}
+This page is still under development.
+:::
+
 # Goodness of Maximum Likelihood Estimator for linear regression
 Given a dataset $\{x_1, \ldots, x_n\}$ where $x_i \in \mathbb{R}^d$, let $\{y_1, \ldots, y_n\}$ be the labels, where $y_i \in \mathbb{R}$.
 $$

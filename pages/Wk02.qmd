@@ -2,6 +2,8 @@
 title: "Unsupervised Learning - Representation learning - Kernel PCA"
 ---
 
+PDF Link: [notes](../notes/Wk02.pdf)
+
 # Introduction
 For a given dataset $D \in \mathbb{R} ^{d \times n}$, the covariance matrix is $C \in \mathbb{R} ^{d \times d}$. PCA for this dataset can have the following two problems:
 

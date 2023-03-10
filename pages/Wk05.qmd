@@ -2,6 +2,8 @@
 title: "Supervised Learning - Regression - Least Squares; Bayesian view"
 ---
 
+PDF Link: [notes](../notes/Wk05.pdf)
+
 # Introduction to Supervised Learning
 Supervised learning is a machine learning technique in which the algorithm is trained on labeled data, where the target variable or the outcome is known. The goal of supervised learning is to learn a mapping between the input data and the corresponding output variable.
 

@@ -2,6 +2,8 @@
 title: "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm"
 ---
 
+PDF Link: [notes](../notes/Wk04.pdf)
+
 # Introduction to Estimation
 Estimators in machine learning are algorithms or models used to estimate unknown parameters or predict outcomes based on data. The aim of the method is to find/predict the unknow parameters describing the distribution of the data.
 

@@ -2,6 +2,8 @@
 title: "Unsupervised Learning - Clustering - K-means/Kernel K-means"
 ---
 
+PDF Link: [notes](../notes/Wk03.pdf)
+
 # Introduction to Clustering
 Clustering is a method of unsupervised machine learning that groups similar objects into clusters, discovering structure in data for exploratory analysis or as a pre-processing step for other algorithms.
 
