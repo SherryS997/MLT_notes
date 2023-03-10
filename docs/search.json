@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "Notes/Useful Resources/markdown-cheat-sheet.html",
+    "href": "Notes/Useful Resources/markdown-cheat-sheet.html",
+    "title": "MLT Notes",
+    "section": "",
+    "text": "Thanks for visiting The Markdown Guide!\nThis Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic syntax and extended syntax.\n\n\nThese are the elements outlined in John Gruber’s original design document. All Markdown applications support these elements."
+  },
+  {
+    "objectID": "Notes/Useful Resources/markdown-cheat-sheet.html#h2",
+    "href": "Notes/Useful Resources/markdown-cheat-sheet.html#h2",
+    "title": "MLT Notes",
+    "section": "H2",
+    "text": "H2\n\nH3\n\n\nBold\nbold text\n\n\nItalic\nitalicized text\n\n\nBlockquote\n\nblockquote\n\n\n\nOrdered List\n\nFirst item\nSecond item\nThird item\n\n\n\nUnordered List\n\nFirst item\nSecond item\nThird item\n\n\n\nCode\ncode\n\n\nHorizontal Rule\n\n\n\nLink\nMarkdown Guide\n\n\nImage\n\n\n\nalt text"
+  },
+  {
+    "objectID": "Notes/Useful Resources/markdown-cheat-sheet.html#extended-syntax",
+    "href": "Notes/Useful Resources/markdown-cheat-sheet.html#extended-syntax",
+    "title": "MLT Notes",
+    "section": "Extended Syntax",
+    "text": "Extended Syntax\nThese elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements.\n\nTable\n\n\n\nSyntax\nDescription\n\n\n\n\nHeader\nTitle\n\n\nParagraph\nText\n\n\n\n\n\nFenced Code Block\n{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"age\": 25\n}\n\n\nFootnote\nHere’s a sentence with a footnote. 1\n\n\nHeading ID\n\n\nMy Great Heading\n\n\nDefinition List\n\nterm\n\ndefinition\n\n\n\n\nStrikethrough\nThe world is flat.\n\n\nTask List\n\nWrite the press release\nUpdate the website\nContact the media\n\n\n\nEmoji\nThat is so funny! :joy:\n(See also Copying and Pasting Emoji)\n\n\nHighlight\nI need to highlight these ==very important words==.\n\n\nSubscript\nH2O\n\n\nSuperscript\nX2"
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk04.html",
+    "href": "Notes/md and tex files/Wk04.html",
+    "title": "MLT Notes",
+    "section": "",
+    "text": "Estimators in machine learning are algorithms or models used to estimate unknown parameters or predict outcomes based on data. The aim of the method is to find/predict the unknow parameters describing the distribution of the data.\nLet \\(\\{x_1, x_2, \\ldots, x_n\\}\\) be a dataset where \\(x_i \\in \\{0,1\\}\\). We assume that the datapoints are independent and identically distributed.\nIndependence means \\(P(x_i|x_j) = P(x_i)\\). Identically distributed means \\(P(x_i)=P(x_j)=p\\)."
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk04.html#fishers-principle-of-maximum-likelihood",
+    "href": "Notes/md and tex files/Wk04.html#fishers-principle-of-maximum-likelihood",
+    "title": "MLT Notes",
+    "section": "Fisher’s Principle of Maximum Likelihood",
+    "text": "Fisher’s Principle of Maximum Likelihood\nFisher’s principle of maximum likelihood is a statistical method used to estimate the parameters of a statistical model by choosing the parameter values that maximize the likelihood function, which measures how well the model fits the observed data.\nApplying the likelihood function on the above dataset, we get \\[\\begin{align*}\n\\mathcal{L}(p;\\{x_1, x_2, \\ldots, x_n\\}) &= P(x_1, x_2, \\ldots, x_n;p)\\\\\n&=p(x_1;p)p(x_2;p)\\ldots p(x_n;p) \\\\\n&=\\prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}}\n\\end{align*}\\] \\[\\begin{align*}\n\\therefore \\log(\\mathcal{L}(p;\\{x_1, x_2, \\ldots, x_n\\})) &=\\underset{p} {\\arg \\max}\\log \\left ( \\prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}} \\right ) \\\\\n\\text{Differentiating wrt $p$, we get}\\\\\n\\therefore \\hat{p}_{ML} &= \\frac{1}{n}\\sum _{i=1} ^n x_i\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk04.html#likelihood-estimation-on-gaussian-distributions",
+    "href": "Notes/md and tex files/Wk04.html#likelihood-estimation-on-gaussian-distributions",
+    "title": "MLT Notes",
+    "section": "Likelihood Estimation on Gaussian Distributions",
+    "text": "Likelihood Estimation on Gaussian Distributions\nLet \\(\\{x_1, x_2, \\ldots, x_n\\}\\) be a dataset where \\(x_i \\sim \\mathcal{N}(\\mu,\\sigma^2)\\). We assume that the datapoints are independent and identically distributed.\n\\[\\begin{align*}\n\\mathcal{L}(\\mu, \\sigma^2;\\{x_1, x_2, \\ldots, x_n\\}) &= f_{x_1, x_2, \\ldots, x_n}(x_1, x_2, \\ldots, x_n;\\mu, \\sigma^2) \\\\\n&=\\prod _{i=1} ^n  f_{x_i}(x_i;\\mu, \\sigma^2) \\\\\n&=\\prod _{i=1} ^n \\left [ \\frac{1}{\\sqrt{2\\pi}\\sigma} e^{\\frac{-(x_i-\\mu)^2}{2\\sigma^2}} \\right ] \\\\\n\\therefore \\log(\\mathcal{L}(p;\\{x_1, x_2, \\ldots, x_n\\})) &= \\sum _{i=1} ^n \\left[ \\log \\left (\\frac{1}{\\sqrt{2\\pi}\\sigma}  \\right ) - \\frac{(x_i-\\mu)^2}{2\\sigma^2} \\right] \\\\\n\\end{align*}\\] \\[\n\\text{Differentiating wrt $\\mu$ and $\\sigma$, we get}\n\\] \\[\\begin{align*}\n\\hat{\\mu}_{ML} &= \\frac{1}{n}\\sum _{i=1} ^n x_i \\\\\n\\hat{\\sigma^2}_{ML} &= \\frac{1}{n}\\sum _{i=1} ^n (x_i-\\mu)^2\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk04.html#convexity-and-jensens-inequality",
+    "href": "Notes/md and tex files/Wk04.html#convexity-and-jensens-inequality",
+    "title": "MLT Notes",
+    "section": "Convexity and Jensen’s Inequality",
+    "text": "Convexity and Jensen’s Inequality\nConvexity is a property of a function or set that implies a unique line segment can be drawn between any two points within the function or set. For a concave function, this property can be expressed as, \\[\nf \\left (\\sum _{k=1} ^K \\lambda_k a_k \\right ) \\ge \\sum _{k=1} ^K \\lambda_k f(a_k)\n\\] where \\[\n\\sum _{k=1} ^K \\lambda _k = 1\n\\] \\[\na_k \\text{ are points of the function}\n\\] This is also known as Jensen’s Inequality."
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk05.html",
+    "href": "Notes/md and tex files/Wk05.html",
+    "title": "MLT Notes",
+    "section": "",
+    "text": "Supervised learning is a machine learning technique in which the algorithm is trained on labeled data, where the target variable or the outcome is known. The goal of supervised learning is to learn a mapping between the input data and the corresponding output variable.\nGiven a dataset \\(\\{x_1, \\ldots, x_n\\}\\) where \\(x_i \\in \\mathbb{R}^d\\), let \\(\\{y_1, \\ldots, y_n\\}\\) be the labels, where \\(y_i\\) could belong to the following:\n\nRegression: \\(y_i \\in \\mathbb{R}\\) Example: Rainfall Prediction\nBinary Classification: \\(y_i \\in \\{0, 1\\}\\) Example: Distinguishing between cats and dogs\nMulti-class Classification: \\(y_i \\in \\{0, 1, \\ldots, K\\}\\) Example: Digit classification"
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk05.html#stochastic-gradient-descent",
+    "href": "Notes/md and tex files/Wk05.html#stochastic-gradient-descent",
+    "title": "MLT Notes",
+    "section": "Stochastic Gradient Descent",
+    "text": "Stochastic Gradient Descent\nStochastic gradient descent (SGD) is an optimization algorithm used in machine learning for finding the parameters that minimize the loss function of a model. In contrast to traditional gradient descent, which updates the model parameters based on the entire dataset, SGD updates the parameters based on a randomly selected subset of the data, known as a batch. This results in faster training times and makes SGD particularly useful for large datasets.\nFor every step \\(t\\), rather than updating \\(w\\) using the entire dataset, we use a small randomly selected (\\(k\\)) data points to update \\(w\\). Therefore, the new gradient is \\(2(\\tilde{X}\\tilde{X}^Tw^t - \\tilde{X}\\tilde{y})\\) where \\(\\tilde{X}\\) and \\(\\tilde{y}\\) is the small sample randomly selected from the dataset. This is manageable because \\(\\tilde{X} \\in \\mathbb{R}^{d \\times k}\\) which is considerably smaller that \\(X\\).\nAfter T rounds, we use, \\[\nw ^T _{SGD} = \\frac{1}{T}  \\sum _{i=1} ^T w^i\n\\] This has a certain guarantee to have optimal convergence partly because of the randomness involved in it."
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk06.html",
+    "href": "Notes/md and tex files/Wk06.html",
+    "title": "MLT Notes",
+    "section": "",
+    "text": "Goodness of Maximum Likelihood Estimator for linear regression\nGiven a dataset \\(\\{x_1, \\ldots, x_n\\}\\) where \\(x_i \\in \\mathbb{R}^d\\), let \\(\\{y_1, \\ldots, y_n\\}\\) be the labels, where \\(y_i \\in \\mathbb{R}\\). \\[\ny|X = w^Tx + \\epsilon\n\\] where \\(\\epsilon \\sim \\mathcal{N}(0,\\sigma^2)\\) and \\(w \\in \\mathbb{R}^d\\). Let \\(\\hat{w}_{ML}\\) signify the maximum likelihood parameter for linear regression. \\[\n\\hat{w}_{ML}=w^*=(XX^T)^+Xy\n\\] \\(\\therefore\\) To measure how good our parameter is, we use the follow: \\[\n\\mathbb{E} [|| \\hat{w}_{ML} - w ||^2_2]\n\\] This is known as the Mean Squared Error (MSE) and turns out to be equal to \\[\n\\mathbb{E} [|| \\hat{w}_{ML} - w ||^2_2] = \\sigma^2 *trace((XX^T)^{-1})\n\\]\n\n\nCross-validation for minimizing MSE\nLet the eigenvalues of \\(XX^T\\) be \\(\\{\\lambda_1, \\ldots, \\lambda_d\\}\\). Hence the eigenvalues of \\((XX^T)^{-1}\\) are \\(\\{\\frac{1}{\\lambda_1}, \\ldots, \\frac{1}{\\lambda_d}\\}\\).\n\\(\\therefore\\) The MSE is, \\[\n\\mathbb{E} [|| \\hat{w}_{ML} - w ||^2_2] = \\sigma^2 \\sum_{i=1}^d  \\frac{1}{\\lambda_i}\n\\] Consider the following estimator, \\[\n\\hat{w}_{new}=(XX^T + \\lambda I)^+Xy\n\\] where \\(\\lambda \\in \\mathbb{R}\\) and \\(I \\in \\mathbb{R}^{d\\times d}\\) is the Identity Matrix. Using this we get, \\[\ntrace((XX^T + \\lambda I)^{-1}) = \\sum_{i=1}^d  \\frac{1}{\\lambda_i + \\lambda}\n\\] According to the Existence Theorem,"
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk07.html",
+    "href": "Notes/md and tex files/Wk07.html",
+    "title": "MLT Notes",
+    "section": "",
+    "text": "Binary classification is a machine learning task where the goal is to classify objects into one of two categories. It is a fundamental problem in various fields, including computer vision, natural language processing, and bioinformatics.\nGiven a dataset \\(\\{x_1, \\ldots, x_n\\}\\) where \\(x_i \\in \\mathbb{R}^d\\), let \\(\\{y_1, \\ldots, y_n\\}\\) be the labels, where \\(y_i \\in \\{0, 1\\}\\). The goal is given by \\(h: \\mathbb{R}^d \\rightarrow \\{0, 1\\}\\).\nThe loss for this function is given by, \\[\nloss(h)=\\frac{1}{n}\\sum ^n _{i=1}\\mathbb{1}\\left ( h(x_i) \\ne y_i \\right )\n\\] Let \\(\\mathcal{H}_{\\text{linear}}\\) represent the solution space for the mapping in the linear space. \\[\n\\mathcal{H}_{\\text{linear}}=\\Biggr \\lbrace{h_w: \\mathbb{R}^d \\rightarrow \\{1, 0\\} \\hspace{0.5em} s.t. \\hspace{0.5em} h_w(x)=sign(w^Tx) \\hspace{0.5em} \\forall w \\in \\mathbb{R}^d } \\Biggr \\rbrace\n\\] Therefore, the objective function is given by, \\[\n\\min _{h \\in \\mathcal{H}_{\\text{linear}}} \\sum _{i=1} ^n \\mathbb{1}\\left ( h(x_i) \\ne y_i \\right )\n\\] This objective function presents an NP-Hard Problem, indicating the challenge in arriving at optimal and sufficient parameters. Therefore, improved implementations are necessary to address this complexity and achieve satisfactory results."
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk07.html#issues-with-k-nn",
+    "href": "Notes/md and tex files/Wk07.html#issues-with-k-nn",
+    "title": "MLT Notes",
+    "section": "Issues with K-NN",
+    "text": "Issues with K-NN\nFollowing are the issues with the algorithm:\n\nThe choice of distance function itself can give different results. The Euclidean distance might not always be the best fit!\nIt can be computationally demanding. When making a prediction for a single test datapoint, the distances between that datapoint and all training points must be calculated and sorted. As a result, the algorithm has a complexity of \\(O(nlog(n))\\), where \\(n\\) represents the size of the dataset.\nNo model is learned by this algorithm. It always needs the training dataset to make proper predictions."
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk07.html#goodness-of-a-question",
+    "href": "Notes/md and tex files/Wk07.html#goodness-of-a-question",
+    "title": "MLT Notes",
+    "section": "Goodness of a Question",
+    "text": "Goodness of a Question\nLet \\(D=\\{(x_1, y_1), \\ldots, (x_n,y_n)\\}\\) be the dataset. We partition it using a question into \\(D_{yes}\\) and \\(D_{no}\\).\nWhat we need is a measure of “Impurity” for a set of labels \\(\\{y_1, \\ldots, y_n\\}\\). This measure can be given by various ways, but we will use the Entropy Function.\nThe Entropy function is given by, \\[\nEntropy(\\{y_1, \\ldots, y_n\\}) = Entropy(p) = -\\left( p\\log(p)+(1-p)\\log(1-p) \\right )\n\\] where conventionally \\(\\log(0)\\) is treated as \\(0\\).\nPictorial Representation of the Entropy function:\n\n\n\nEntropy Function\n\n\nThen, we use Information Gain to measure the goodness of the split.\nInformation gain is a commonly used criterion in decision tree algorithms that measures the reduction in entropy or impurity of a dataset after splitting based on a given feature. By selecting features with high information gain, decision trees can effectively differentiate between the different classes of data and make accurate predictions.\nInformation gain is given by, \\[\n\\text{Information Gain}(feature,value)=Entropy(D) - \\left [ \\gamma Entropy(D_{yes})+(1-\\gamma)Entropy(D_{no}) \\right ]\n\\] where \\(\\gamma\\) is given by, \\[\n\\gamma=\\frac{|D_{yes}|}{|D|}\n\\]"
+  },
+  {
+    "objectID": "Notes/md and tex files/Wk07.html#decision-tree-algorithm",
+    "href": "Notes/md and tex files/Wk07.html#decision-tree-algorithm",
+    "title": "MLT Notes",
+    "section": "Decision Tree Algorithm",
+    "text": "Decision Tree Algorithm\nThe algorithm is as follows:\n\nDiscretize each feature in [min,max] range.\nPick the question that has the largest information gain.\nRepeat the procedure for \\(D_{yes}\\) and \\(D_{no}\\).\nStop growing the tree if a node becomes sufficiently “pure”.\n\nThe goodness of a question can also be measured using different methods like the Gini Index, etc.\nPictorial Depiction of decision boundary and its decision tree:\n\n\n\nDecision Boundary"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MLT Notes",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "pages/Wk04.html",
+    "href": "pages/Wk04.html",
+    "title": "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm",
+    "section": "",
+    "text": "Estimators in machine learning are algorithms or models used to estimate unknown parameters or predict outcomes based on data. The aim of the method is to find/predict the unknow parameters describing the distribution of the data.\nLet \\(\\{x_1, x_2, \\ldots, x_n\\}\\) be a dataset where \\(x_i \\in \\{0,1\\}\\). We assume that the datapoints are independent and identically distributed.\nIndependence means \\(P(x_i|x_j) = P(x_i)\\). Identically distributed means \\(P(x_i)=P(x_j)=p\\)."
+  },
+  {
+    "objectID": "pages/Wk04.html#fishers-principle-of-maximum-likelihood",
+    "href": "pages/Wk04.html#fishers-principle-of-maximum-likelihood",
+    "title": "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm",
+    "section": "Fisher’s Principle of Maximum Likelihood",
+    "text": "Fisher’s Principle of Maximum Likelihood\nFisher’s principle of maximum likelihood is a statistical method used to estimate the parameters of a statistical model by choosing the parameter values that maximize the likelihood function, which measures how well the model fits the observed data.\nApplying the likelihood function on the above dataset, we get \\[\\begin{align*}\n\\mathcal{L}(p;\\{x_1, x_2, \\ldots, x_n\\}) &= P(x_1, x_2, \\ldots, x_n;p)\\\\\n&=p(x_1;p)p(x_2;p)\\ldots p(x_n;p) \\\\\n&=\\prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}}\n\\end{align*}\\] \\[\\begin{align*}\n\\therefore \\log(\\mathcal{L}(p;\\{x_1, x_2, \\ldots, x_n\\})) &=\\underset{p} {\\arg \\max}\\log \\left ( \\prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}} \\right ) \\\\\n\\text{Differentiating wrt $p$, we get}\\\\\n\\therefore \\hat{p}_{ML} &= \\frac{1}{n}\\sum _{i=1} ^n x_i\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "pages/Wk04.html#likelihood-estimation-on-gaussian-distributions",
+    "href": "pages/Wk04.html#likelihood-estimation-on-gaussian-distributions",
+    "title": "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm",
+    "section": "Likelihood Estimation on Gaussian Distributions",
+    "text": "Likelihood Estimation on Gaussian Distributions\nLet \\(\\{x_1, x_2, \\ldots, x_n\\}\\) be a dataset where \\(x_i \\sim \\mathcal{N}(\\mu,\\sigma^2)\\). We assume that the datapoints are independent and identically distributed.\n\\[\\begin{align*}\n\\mathcal{L}(\\mu, \\sigma^2;\\{x_1, x_2, \\ldots, x_n\\}) &= f_{x_1, x_2, \\ldots, x_n}(x_1, x_2, \\ldots, x_n;\\mu, \\sigma^2) \\\\\n&=\\prod _{i=1} ^n  f_{x_i}(x_i;\\mu, \\sigma^2) \\\\\n&=\\prod _{i=1} ^n \\left [ \\frac{1}{\\sqrt{2\\pi}\\sigma} e^{\\frac{-(x_i-\\mu)^2}{2\\sigma^2}} \\right ] \\\\\n\\therefore \\log(\\mathcal{L}(p;\\{x_1, x_2, \\ldots, x_n\\})) &= \\sum _{i=1} ^n \\left[ \\log \\left (\\frac{1}{\\sqrt{2\\pi}\\sigma}  \\right ) - \\frac{(x_i-\\mu)^2}{2\\sigma^2} \\right] \\\\\n\\end{align*}\\] \\[\n\\text{Differentiating wrt $\\mu$ and $\\sigma$, we get}\n\\] \\[\\begin{align*}\n\\hat{\\mu}_{ML} &= \\frac{1}{n}\\sum _{i=1} ^n x_i \\\\\n\\hat{\\sigma^2}_{ML} &= \\frac{1}{n}\\sum _{i=1} ^n (x_i-\\mu)^2\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "pages/Wk04.html#convexity-and-jensens-inequality",
+    "href": "pages/Wk04.html#convexity-and-jensens-inequality",
+    "title": "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm",
+    "section": "Convexity and Jensen’s Inequality",
+    "text": "Convexity and Jensen’s Inequality\nConvexity is a property of a function or set that implies a unique line segment can be drawn between any two points within the function or set. For a concave function, this property can be expressed as, \\[\nf \\left (\\sum _{k=1} ^K \\lambda_k a_k \\right ) \\ge \\sum _{k=1} ^K \\lambda_k f(a_k)\n\\] where \\[\n\\sum _{k=1} ^K \\lambda _k = 1\n\\] \\[\na_k \\text{ are points of the function}\n\\] This is also known as Jensen’s Inequality."
+  },
+  {
+    "objectID": "pages/Wk05.html",
+    "href": "pages/Wk05.html",
+    "title": "Supervised Learning - Regression - Least Squares; Bayesian view",
+    "section": "",
+    "text": "Supervised learning is a machine learning technique in which the algorithm is trained on labeled data, where the target variable or the outcome is known. The goal of supervised learning is to learn a mapping between the input data and the corresponding output variable.\nGiven a dataset \\(\\{x_1, \\ldots, x_n\\}\\) where \\(x_i \\in \\mathbb{R}^d\\), let \\(\\{y_1, \\ldots, y_n\\}\\) be the labels, where \\(y_i\\) could belong to the following:\n\nRegression: \\(y_i \\in \\mathbb{R}\\) Example: Rainfall Prediction\nBinary Classification: \\(y_i \\in \\{0, 1\\}\\) Example: Distinguishing between cats and dogs\nMulti-class Classification: \\(y_i \\in \\{0, 1, \\ldots, K\\}\\) Example: Digit classification"
+  },
+  {
+    "objectID": "pages/Wk05.html#stochastic-gradient-descent",
+    "href": "pages/Wk05.html#stochastic-gradient-descent",
+    "title": "Supervised Learning - Regression - Least Squares; Bayesian view",
+    "section": "Stochastic Gradient Descent",
+    "text": "Stochastic Gradient Descent\nStochastic gradient descent (SGD) is an optimization algorithm used in machine learning for finding the parameters that minimize the loss function of a model. In contrast to traditional gradient descent, which updates the model parameters based on the entire dataset, SGD updates the parameters based on a randomly selected subset of the data, known as a batch. This results in faster training times and makes SGD particularly useful for large datasets.\nFor every step \\(t\\), rather than updating \\(w\\) using the entire dataset, we use a small randomly selected (\\(k\\)) data points to update \\(w\\). Therefore, the new gradient is \\(2(\\tilde{X}\\tilde{X}^Tw^t - \\tilde{X}\\tilde{y})\\) where \\(\\tilde{X}\\) and \\(\\tilde{y}\\) is the small sample randomly selected from the dataset. This is manageable because \\(\\tilde{X} \\in \\mathbb{R}^{d \\times k}\\) which is considerably smaller that \\(X\\).\nAfter T rounds, we use, \\[\nw ^T _{SGD} = \\frac{1}{T}  \\sum _{i=1} ^T w^i\n\\] This has a certain guarantee to have optimal convergence partly because of the randomness involved in it."
+  },
+  {
+    "objectID": "pages/Wk06.html",
+    "href": "pages/Wk06.html",
+    "title": "Supervised Learning - Regression - Ridge/LASSO",
+    "section": "",
+    "text": "Goodness of Maximum Likelihood Estimator for linear regression\nGiven a dataset \\(\\{x_1, \\ldots, x_n\\}\\) where \\(x_i \\in \\mathbb{R}^d\\), let \\(\\{y_1, \\ldots, y_n\\}\\) be the labels, where \\(y_i \\in \\mathbb{R}\\). \\[\ny|X = w^Tx + \\epsilon\n\\] where \\(\\epsilon \\sim \\mathcal{N}(0,\\sigma^2)\\) and \\(w \\in \\mathbb{R}^d\\). Let \\(\\hat{w}_{ML}\\) signify the maximum likelihood parameter for linear regression. \\[\n\\hat{w}_{ML}=w^*=(XX^T)^+Xy\n\\] \\(\\therefore\\) To measure how good our parameter is, we use the follow: \\[\n\\mathbb{E} [|| \\hat{w}_{ML} - w ||^2_2]\n\\] This is known as the Mean Squared Error (MSE) and turns out to be equal to \\[\n\\mathbb{E} [|| \\hat{w}_{ML} - w ||^2_2] = \\sigma^2 *trace((XX^T)^{-1})\n\\]\n\n\nCross-validation for minimizing MSE\nLet the eigenvalues of \\(XX^T\\) be \\(\\{\\lambda_1, \\ldots, \\lambda_d\\}\\). Hence the eigenvalues of \\((XX^T)^{-1}\\) are \\(\\{\\frac{1}{\\lambda_1}, \\ldots, \\frac{1}{\\lambda_d}\\}\\).\n\\(\\therefore\\) The MSE is, \\[\n\\mathbb{E} [|| \\hat{w}_{ML} - w ||^2_2] = \\sigma^2 \\sum_{i=1}^d  \\frac{1}{\\lambda_i}\n\\] Consider the following estimator, \\[\n\\hat{w}_{new}=(XX^T + \\lambda I)^+Xy\n\\] where \\(\\lambda \\in \\mathbb{R}\\) and \\(I \\in \\mathbb{R}^{d\\times d}\\) is the Identity Matrix. Using this we get, \\[\ntrace((XX^T + \\lambda I)^{-1}) = \\sum_{i=1}^d  \\frac{1}{\\lambda_i + \\lambda}\n\\] According to the Existence Theorem,"
+  },
+  {
+    "objectID": "pages/Wk07.html",
+    "href": "pages/Wk07.html",
+    "title": "Supervised Learning - Classification - K-NN, Decision tree",
+    "section": "",
+    "text": "Binary classification is a machine learning task where the goal is to classify objects into one of two categories. It is a fundamental problem in various fields, including computer vision, natural language processing, and bioinformatics.\nGiven a dataset \\(\\{x_1, \\ldots, x_n\\}\\) where \\(x_i \\in \\mathbb{R}^d\\), let \\(\\{y_1, \\ldots, y_n\\}\\) be the labels, where \\(y_i \\in \\{0, 1\\}\\). The goal is given by \\(h: \\mathbb{R}^d \\rightarrow \\{0, 1\\}\\).\nThe loss for this function is given by, \\[\nloss(h)=\\frac{1}{n}\\sum ^n _{i=1}\\mathbb{1}\\left ( h(x_i) \\ne y_i \\right )\n\\] Let \\(\\mathcal{H}_{\\text{linear}}\\) represent the solution space for the mapping in the linear space. \\[\n\\mathcal{H}_{\\text{linear}}=\\Biggr \\lbrace{h_w: \\mathbb{R}^d \\rightarrow \\{1, 0\\} \\hspace{0.5em} s.t. \\hspace{0.5em} h_w(x)=sign(w^Tx) \\hspace{0.5em} \\forall w \\in \\mathbb{R}^d } \\Biggr \\rbrace\n\\] Therefore, the objective function is given by, \\[\n\\min _{h \\in \\mathcal{H}_{\\text{linear}}} \\sum _{i=1} ^n \\mathbb{1}\\left ( h(x_i) \\ne y_i \\right )\n\\] This objective function presents an NP-Hard Problem, indicating the challenge in arriving at optimal and sufficient parameters. Therefore, improved implementations are necessary to address this complexity and achieve satisfactory results."
+  },
+  {
+    "objectID": "pages/Wk07.html#issues-with-k-nn",
+    "href": "pages/Wk07.html#issues-with-k-nn",
+    "title": "Supervised Learning - Classification - K-NN, Decision tree",
+    "section": "Issues with K-NN",
+    "text": "Issues with K-NN\nFollowing are the issues with the algorithm:\n\nThe choice of distance function itself can give different results. The Euclidean distance might not always be the best fit!\nIt can be computationally demanding. When making a prediction for a single test datapoint, the distances between that datapoint and all training points must be calculated and sorted. As a result, the algorithm has a complexity of \\(O(nlog(n))\\), where \\(n\\) represents the size of the dataset.\nNo model is learned by this algorithm. It always needs the training dataset to make proper predictions."
+  },
+  {
+    "objectID": "pages/Wk07.html#goodness-of-a-question",
+    "href": "pages/Wk07.html#goodness-of-a-question",
+    "title": "Supervised Learning - Classification - K-NN, Decision tree",
+    "section": "Goodness of a Question",
+    "text": "Goodness of a Question\nLet \\(D=\\{(x_1, y_1), \\ldots, (x_n,y_n)\\}\\) be the dataset. We partition it using a question into \\(D_{yes}\\) and \\(D_{no}\\).\nWhat we need is a measure of “Impurity” for a set of labels \\(\\{y_1, \\ldots, y_n\\}\\). This measure can be given by various ways, but we will use the Entropy Function.\nThe Entropy function is given by, \\[\nEntropy(\\{y_1, \\ldots, y_n\\}) = Entropy(p) = -\\left( p\\log(p)+(1-p)\\log(1-p) \\right )\n\\] where conventionally \\(\\log(0)\\) is treated as \\(0\\).\nPictorial Representation of the Entropy function:\n\n\n\nEntropy Function\n\n\nThen, we use Information Gain to measure the goodness of the split.\nInformation gain is a commonly used criterion in decision tree algorithms that measures the reduction in entropy or impurity of a dataset after splitting based on a given feature. By selecting features with high information gain, decision trees can effectively differentiate between the different classes of data and make accurate predictions.\nInformation gain is given by, \\[\n\\text{Information Gain}(feature,value)=Entropy(D) - \\left [ \\gamma Entropy(D_{yes})+(1-\\gamma)Entropy(D_{no}) \\right ]\n\\] where \\(\\gamma\\) is given by, \\[\n\\gamma=\\frac{|D_{yes}|}{|D|}\n\\]"
+  },
+  {
+    "objectID": "pages/Wk07.html#decision-tree-algorithm",
+    "href": "pages/Wk07.html#decision-tree-algorithm",
+    "title": "Supervised Learning - Classification - K-NN, Decision tree",
+    "section": "Decision Tree Algorithm",
+    "text": "Decision Tree Algorithm\nThe algorithm is as follows:\n\nDiscretize each feature in [min,max] range.\nPick the question that has the largest information gain.\nRepeat the procedure for \\(D_{yes}\\) and \\(D_{no}\\).\nStop growing the tree if a node becomes sufficiently “pure”.\n\nThe goodness of a question can also be measured using different methods like the Gini Index, etc.\nPictorial Depiction of decision boundary and its decision tree:\n\n\n\nDecision Boundary"
+  }
+]
