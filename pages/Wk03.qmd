@@ -71,11 +71,11 @@ For $C_1$,
 \end{gather*}
 The cluster regions are known as half-spaces or Voronoi regions.
 
-![Voronoi regions for three clusters](./images/clustering.png)
+![Voronoi regions for three clusters](../images/clustering.png)
 
 But what if the dataset is as follow:
 
-![](./images/ccircles.png)
+![](../images/ccircles.png)
 
 The standard k-means algorithm may not perform well when the underlying clusters in the dataset have a non-linear structure. In such cases, alternative methods such as Kernel K-means or Spectral Clustering can be employed to improve clustering accuracy. However, the intricacies of these methods will not be covered in this session.
 
