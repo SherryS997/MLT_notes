@@ -16,6 +16,15 @@ website:
             text: About
       - section: "Notes"
         contents:
+          - href: pages/Wk01.qmd
+            text: Week-01
+            title: Week-01
+          - href: pages/Wk02.qmd
+            text: Week-02
+            title: Week-02
+          - href: pages/Wk03.qmd
+            text: Week-03
+            title: Week-03
           - href: pages/Wk04.qmd
             text: Week-04
             title: Week-04

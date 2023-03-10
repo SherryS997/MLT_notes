@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MLT Notes - Supervised Learning - Regression - Ridge/LASSO</title>
+<title>MLT Notes - Unsupervised Learning - Clustering - K-means/Kernel K-means</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Supervised Learning - Regression - Ridge/LASSO</h1>
+      <h1 class="quarto-secondary-nav-title">Unsupervised Learning - Clustering - K-means/Kernel K-means</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Wk03.html" class="sidebar-item-text sidebar-link">Week-03</a>
+  <a href="../pages/Wk03.html" class="sidebar-item-text sidebar-link active">Week-03</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -148,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Wk06.html" class="sidebar-item-text sidebar-link active">Week-06</a>
+  <a href="../pages/Wk06.html" class="sidebar-item-text sidebar-link">Week-06</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -167,8 +167,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#goodness-of-maximum-likelihood-estimator-for-linear-regression" id="toc-goodness-of-maximum-likelihood-estimator-for-linear-regression" class="nav-link active" data-scroll-target="#goodness-of-maximum-likelihood-estimator-for-linear-regression">Goodness of Maximum Likelihood Estimator for linear regression</a></li>
-  <li><a href="#cross-validation-for-minimizing-mse" id="toc-cross-validation-for-minimizing-mse" class="nav-link" data-scroll-target="#cross-validation-for-minimizing-mse">Cross-validation for minimizing MSE</a></li>
+  <li><a href="#introduction-to-clustering" id="toc-introduction-to-clustering" class="nav-link active" data-scroll-target="#introduction-to-clustering">Introduction to Clustering</a></li>
+  <li><a href="#k-means-clustering-lloyds-algorithm" id="toc-k-means-clustering-lloyds-algorithm" class="nav-link" data-scroll-target="#k-means-clustering-lloyds-algorithm">K-means Clustering (Lloyd’s Algorithm)</a>
+  <ul class="collapse">
+  <li><a href="#the-algorithm" id="toc-the-algorithm" class="nav-link" data-scroll-target="#the-algorithm">The Algorithm</a></li>
+  <li><a href="#fact-regarding-lloyds-algorithm" id="toc-fact-regarding-lloyds-algorithm" class="nav-link" data-scroll-target="#fact-regarding-lloyds-algorithm">Fact regarding Lloyd’s Algorithm</a></li>
+  </ul></li>
+  <li><a href="#convergence-of-k-means-algorithm" id="toc-convergence-of-k-means-algorithm" class="nav-link" data-scroll-target="#convergence-of-k-means-algorithm">Convergence of K-means Algorithm</a></li>
+  <li><a href="#nature-of-clusters-produced-by-k-means" id="toc-nature-of-clusters-produced-by-k-means" class="nav-link" data-scroll-target="#nature-of-clusters-produced-by-k-means">Nature of Clusters Produced by K-means</a></li>
+  <li><a href="#initialization-of-centroids-and-k-means" id="toc-initialization-of-centroids-and-k-means" class="nav-link" data-scroll-target="#initialization-of-centroids-and-k-means">Initialization of Centroids and K-means++}</a></li>
+  <li><a href="#choice-of-k" id="toc-choice-of-k" class="nav-link" data-scroll-target="#choice-of-k">Choice of K</a></li>
+  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -177,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Supervised Learning - Regression - Ridge/LASSO</h1>
+<h1 class="title d-none d-lg-block">Unsupervised Learning - Clustering - K-means/Kernel K-means</h1>
 </div>
 
 
@@ -192,28 +201,98 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="goodness-of-maximum-likelihood-estimator-for-linear-regression" class="level1">
-<h1>Goodness of Maximum Likelihood Estimator for linear regression</h1>
-<p>Given a dataset <span class="math inline">\(\{x_1, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the labels, where <span class="math inline">\(y_i \in \mathbb{R}\)</span>. <span class="math display">\[
-y|X = w^Tx + \epsilon
-\]</span> where <span class="math inline">\(\epsilon \sim \mathcal{N}(0,\sigma^2)\)</span> and <span class="math inline">\(w \in \mathbb{R}^d\)</span>. Let <span class="math inline">\(\hat{w}_{ML}\)</span> signify the maximum likelihood parameter for linear regression. <span class="math display">\[
-\hat{w}_{ML}=w^*=(XX^T)^+Xy
-\]</span> <span class="math inline">\(\therefore\)</span> To measure how good our parameter is, we use the follow: <span class="math display">\[
-\mathbb{E} [|| \hat{w}_{ML} - w ||^2_2]
-\]</span> This is known as the Mean Squared Error (MSE) and turns out to be equal to <span class="math display">\[
-\mathbb{E} [|| \hat{w}_{ML} - w ||^2_2] = \sigma^2 *trace((XX^T)^{-1})
-\]</span></p>
+<section id="introduction-to-clustering" class="level1">
+<h1>Introduction to Clustering</h1>
+<p>Clustering is a method of unsupervised machine learning that groups similar objects into clusters, discovering structure in data for exploratory analysis or as a pre-processing step for other algorithms.</p>
+<p>Our objective is to group <span class="math inline">\(n\)</span> datapoints into <span class="math inline">\(k\)</span> clusters.</p>
+<p>Notation: <span class="math display">\[
+\{x_1, x_2, \dots, x_n \} \hspace{6em} x_i \in \mathbb{R}^d
+\]</span> <span class="math display">\[
+\{z_1, z_2, \dots, z_n\} \hspace{2em} z_i \in \{1, 2, \dots, k\}
+\]</span> <strong>Objective Function</strong>: <span class="math display">\[
+F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}_2 ^2
+\]</span> where <span class="math display">\[
+\mu _k = \frac{\displaystyle \sum _{i = 1} ^{n} {x_i \cdot \mathbf{1}(z_i=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbf{1}(z_i=k)}}
+\]</span> <strong>Goal</strong>: <span class="math display">\[
+\min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2
+\]</span> Unfortunately, finding a solution manually is an NP-Hard problem due to the existence of <span class="math inline">\(k^n\)</span> possibilities. As a result, alternative approaches must be considered to address this challenge.</p>
 </section>
-<section id="cross-validation-for-minimizing-mse" class="level1">
-<h1>Cross-validation for minimizing MSE</h1>
-<p>Let the eigenvalues of <span class="math inline">\(XX^T\)</span> be <span class="math inline">\(\{\lambda_1, \ldots, \lambda_d\}\)</span>. Hence the eigenvalues of <span class="math inline">\((XX^T)^{-1}\)</span> are <span class="math inline">\(\{\frac{1}{\lambda_1}, \ldots, \frac{1}{\lambda_d}\}\)</span>.</p>
-<p><span class="math inline">\(\therefore\)</span> The MSE is, <span class="math display">\[
-\mathbb{E} [|| \hat{w}_{ML} - w ||^2_2] = \sigma^2 \sum_{i=1}^d  \frac{1}{\lambda_i}
-\]</span> Consider the following estimator, <span class="math display">\[
-\hat{w}_{new}=(XX^T + \lambda I)^+Xy
-\]</span> where <span class="math inline">\(\lambda \in \mathbb{R}\)</span> and <span class="math inline">\(I \in \mathbb{R}^{d\times d}\)</span> is the Identity Matrix. Using this we get, <span class="math display">\[
-trace((XX^T + \lambda I)^{-1}) = \sum_{i=1}^d  \frac{1}{\lambda_i + \lambda}
-\]</span> According to the Existence Theorem,</p>
+<section id="k-means-clustering-lloyds-algorithm" class="level1">
+<h1>K-means Clustering (Lloyd’s Algorithm)</h1>
+<p>Lloyd’s Algorithm, also known as the k-means algorithm, is a widely used and straightforward method for clustering that divides a dataset into <span class="math inline">\(K\)</span> pre-determined clusters by iteratively computing the mean distance between the points and their cluster centroids.</p>
+<section id="the-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-algorithm">The Algorithm</h2>
+<p>The algorithm is as follows:</p>
+<p><strong>Step 1: Initialization</strong>: Assign <span class="math inline">\(z_1^0, z_2^0, \ldots, z_n^0\)</span> where <span class="math inline">\(z_i^0 \in \{1, 2, \ldots, k\}\)</span>. The approach on how to initialize them is discussed later.</p>
+<p><strong>Step 2: Compute Means</strong>: <span class="math display">\[
+\mu _k ^t = \frac{\displaystyle \sum _{i = 1} ^{n} {x_i \cdot \mathbf{1}(z_i^t=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbf{1}(z_i^t=k)}} \hspace{2em} \forall k
+\]</span></p>
+<p><strong>Step 3: Reassignment Step</strong>: <span class="math display">\[
+z _i ^{t+1} = \underset{k}{\arg \min} {|| x_i - \mu _{k} ^t ||}_2 ^2 \hspace{2em} \forall i
+\]</span></p>
+<p><strong>Step 4: Loop until Convergence</strong>: Repeat steps 2 and 3 until convergence for <span class="math inline">\(t\)</span> iterations.</p>
+</section>
+<section id="fact-regarding-lloyds-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="fact-regarding-lloyds-algorithm">Fact regarding Lloyd’s Algorithm</h2>
+<p>Lloyd’s Algorithm, also known as K-means, is guaranteed to converge to a solution. While the converged solution may not be the optimal one, it has been observed to produce acceptable clustering results in practice.</p>
+</section>
+</section>
+<section id="convergence-of-k-means-algorithm" class="level1">
+<h1>Convergence of K-means Algorithm</h1>
+<p>The objective function strictly reduces after each reassignment. <span class="math display">\[
+F(z_1^{t+1}, z_2^{t+1}, \ldots, z_n^{t+1}) \le F(z_1^{t}, z_2^{t}, \ldots, z_n^{t})
+\]</span> And as there are only finite number of reassignments possible, the algorithm must converge.</p>
+<p><strong>Alternate Explanation</strong>: K-means algorithm converges because it is an iterative procedure that minimizes the sum of squared distances between points and their cluster centroids, which is a convex function with a global minimum. The algorithm will reach the convergence point, guaranteed to exist, under mild assumptions on the initial cluster means, making it a reliable tool for clustering.</p>
+</section>
+<section id="nature-of-clusters-produced-by-k-means" class="level1">
+<h1>Nature of Clusters Produced by K-means</h1>
+<p>Let <span class="math inline">\(\mu _1\)</span> and <span class="math inline">\(\mu _2\)</span> be the centroids of the clusters <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> respectively. \ For <span class="math inline">\(C_1\)</span>, <span class="math display">\[\begin{gather*}
+    {|| x - \mu _{1} ||}^2 \le {|| x - \mu _{2} ||}^2 \\
+    \therefore x^T(\mu _2 - \mu _1) \le \frac{||\mu _2||^2 - ||\mu _1||^2}{2} \hspace{2em} \forall x
+\end{gather*}\]</span> The cluster regions are known as half-spaces or Voronoi regions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/clustering.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Voronoi regions for three clusters</figcaption><p></p>
+</figure>
+</div>
+<p>But what if the dataset is as follow:</p>
+<p><img src="./images/ccircles.png" class="img-fluid"></p>
+<p>The standard k-means algorithm may not perform well when the underlying clusters in the dataset have a non-linear structure. In such cases, alternative methods such as Kernel K-means or Spectral Clustering can be employed to improve clustering accuracy. However, the intricacies of these methods will not be covered in this session.</p>
+</section>
+<section id="initialization-of-centroids-and-k-means" class="level1">
+<h1>Initialization of Centroids and K-means++}</h1>
+One possible way to initialize the centroids is to randomly assign datapoints from the dataset as centroids. \ The other method is K-means++.
+<p>The premise is to select centroids that are as far as possible from each other.</p>
+<ul>
+<li>Step 1: Choose <span class="math inline">\(\mu _1 ^0\)</span> randomly from the dataset.</li>
+<li>Step 2: For <span class="math inline">\(l \in \{2, 3, \ldots, k\}\)</span>, choose <span class="math inline">\(\mu _l ^0\)</span> probablistically proportional to score(<span class="math inline">\(S\)</span>) where <span class="math inline">\(S\)</span> is, <span class="math display">\[
+  S(x) = \min _{\{j=1, 2, \ldots, l-1\}} {|| x - \mu _{j} ^0 ||}^2 \hspace{2em} \forall x
+\]</span> The probabilistic aspect of the algorithm provides an expected guarantee of optimal convergence in K-means. The guarantee is given by, <span class="math display">\[
+  \mathbb{E} \left[ \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2 \right ]
+  \le O(\log k) \left [ \min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2 \right ]
+\]</span> where <span class="math inline">\(O(\log k)\)</span> is a constant of order <span class="math inline">\(\log k\)</span>.</li>
+<li>Step 3: Once the centroids are determined, we proceed with Lloyd’s Algorithm.</li>
+</ul>
+</section>
+<section id="choice-of-k" class="level1">
+<h1>Choice of K</h1>
+<p>A pre-requisite of K-means is <span class="math inline">\(k\)</span> or the number of clusters. But what if <span class="math inline">\(k\)</span> is unknown? If <span class="math inline">\(k\)</span> is choosen to be equal to <span class="math inline">\(n\)</span>, <span class="math display">\[
+F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||} ^2 = 0
+\]</span> But we don’t want as many clusters as datapoints. Therefore, <span class="math inline">\(k\)</span> needs to be as small as possible. We do this by penalizing large values of k. <span class="math display">\[
+\underset{k}{\arg \min} \left [ \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||} ^2 + \text{Penalty}(k) \right ]
+\]</span> Two common criteria for making the above argument:</p>
+<ul>
+<li>Akaike Information Criterion: <span class="math inline">\(\left [ 2K - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
+<li>Bayesian Information Criterion: <span class="math inline">\(\left [ K\ln(n) - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
+</ul>
+<p>Details for the same will be discussed in future lectures.</p>
+</section>
+<section id="credits" class="level1">
+<h1>Credits</h1>
+<ul>
+<li>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</li>
+</ul>
 
 
 </section>

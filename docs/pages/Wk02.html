@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MLT Notes - Supervised Learning - Regression - Ridge/LASSO</title>
+<title>MLT Notes - Unsupervised Learning - Representation learning - Kernel PCA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Supervised Learning - Regression - Ridge/LASSO</h1>
+      <h1 class="quarto-secondary-nav-title">Unsupervised Learning - Representation learning - Kernel PCA</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -128,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Wk02.html" class="sidebar-item-text sidebar-link">Week-02</a>
+  <a href="../pages/Wk02.html" class="sidebar-item-text sidebar-link active">Week-02</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -148,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Wk06.html" class="sidebar-item-text sidebar-link active">Week-06</a>
+  <a href="../pages/Wk06.html" class="sidebar-item-text sidebar-link">Week-06</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -167,8 +167,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#goodness-of-maximum-likelihood-estimator-for-linear-regression" id="toc-goodness-of-maximum-likelihood-estimator-for-linear-regression" class="nav-link active" data-scroll-target="#goodness-of-maximum-likelihood-estimator-for-linear-regression">Goodness of Maximum Likelihood Estimator for linear regression</a></li>
-  <li><a href="#cross-validation-for-minimizing-mse" id="toc-cross-validation-for-minimizing-mse" class="nav-link" data-scroll-target="#cross-validation-for-minimizing-mse">Cross-validation for minimizing MSE</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#reducing-the-time-complexity-to-find-eigenvalues-and-eigenvectors" id="toc-reducing-the-time-complexity-to-find-eigenvalues-and-eigenvectors" class="nav-link" data-scroll-target="#reducing-the-time-complexity-to-find-eigenvalues-and-eigenvectors">Reducing the Time Complexity to find Eigenvalues and Eigenvectors</a></li>
+  <li><a href="#finding-pca-for-non-linear-relationships" id="toc-finding-pca-for-non-linear-relationships" class="nav-link" data-scroll-target="#finding-pca-for-non-linear-relationships">Finding PCA for Non-Linear Relationships</a>
+  <ul class="collapse">
+  <li><a href="#transforming-features" id="toc-transforming-features" class="nav-link" data-scroll-target="#transforming-features">Transforming Features</a></li>
+  <li><a href="#kernel-functions" id="toc-kernel-functions" class="nav-link" data-scroll-target="#kernel-functions">Kernel Functions</a></li>
+  </ul></li>
+  <li><a href="#kernel-pca" id="toc-kernel-pca" class="nav-link" data-scroll-target="#kernel-pca">Kernel PCA</a></li>
+  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -177,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Supervised Learning - Regression - Ridge/LASSO</h1>
+<h1 class="title d-none d-lg-block">Unsupervised Learning - Representation learning - Kernel PCA</h1>
 </div>
 
 
@@ -192,28 +199,109 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="goodness-of-maximum-likelihood-estimator-for-linear-regression" class="level1">
-<h1>Goodness of Maximum Likelihood Estimator for linear regression</h1>
-<p>Given a dataset <span class="math inline">\(\{x_1, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the labels, where <span class="math inline">\(y_i \in \mathbb{R}\)</span>. <span class="math display">\[
-y|X = w^Tx + \epsilon
-\]</span> where <span class="math inline">\(\epsilon \sim \mathcal{N}(0,\sigma^2)\)</span> and <span class="math inline">\(w \in \mathbb{R}^d\)</span>. Let <span class="math inline">\(\hat{w}_{ML}\)</span> signify the maximum likelihood parameter for linear regression. <span class="math display">\[
-\hat{w}_{ML}=w^*=(XX^T)^+Xy
-\]</span> <span class="math inline">\(\therefore\)</span> To measure how good our parameter is, we use the follow: <span class="math display">\[
-\mathbb{E} [|| \hat{w}_{ML} - w ||^2_2]
-\]</span> This is known as the Mean Squared Error (MSE) and turns out to be equal to <span class="math display">\[
-\mathbb{E} [|| \hat{w}_{ML} - w ||^2_2] = \sigma^2 *trace((XX^T)^{-1})
-\]</span></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>For a given dataset <span class="math inline">\(D \in \mathbb{R} ^{d \times n}\)</span>, the covariance matrix is <span class="math inline">\(C \in \mathbb{R} ^{d \times d}\)</span>. PCA for this dataset can have the following two problems:</p>
+<ul>
+<li>Time Complexity: The algorithimic complexity of finding the eigenvalues and eigenvectors of <span class="math inline">\(C\)</span> is <span class="math inline">\(O(d ^3)\)</span>. Hence, as <span class="math inline">\(d\)</span> grows, the time taken becomes very large.</li>
+<li>Non-Linear Dataset: The dataset may lie in a non-linear subspace. As PCA tries to get linear combination of Principal Components, non-linear datasets may result in non-optimal outputs.</li>
+</ul>
 </section>
-<section id="cross-validation-for-minimizing-mse" class="level1">
-<h1>Cross-validation for minimizing MSE</h1>
-<p>Let the eigenvalues of <span class="math inline">\(XX^T\)</span> be <span class="math inline">\(\{\lambda_1, \ldots, \lambda_d\}\)</span>. Hence the eigenvalues of <span class="math inline">\((XX^T)^{-1}\)</span> are <span class="math inline">\(\{\frac{1}{\lambda_1}, \ldots, \frac{1}{\lambda_d}\}\)</span>.</p>
-<p><span class="math inline">\(\therefore\)</span> The MSE is, <span class="math display">\[
-\mathbb{E} [|| \hat{w}_{ML} - w ||^2_2] = \sigma^2 \sum_{i=1}^d  \frac{1}{\lambda_i}
-\]</span> Consider the following estimator, <span class="math display">\[
-\hat{w}_{new}=(XX^T + \lambda I)^+Xy
-\]</span> where <span class="math inline">\(\lambda \in \mathbb{R}\)</span> and <span class="math inline">\(I \in \mathbb{R}^{d\times d}\)</span> is the Identity Matrix. Using this we get, <span class="math display">\[
-trace((XX^T + \lambda I)^{-1}) = \sum_{i=1}^d  \frac{1}{\lambda_i + \lambda}
-\]</span> According to the Existence Theorem,</p>
+<section id="reducing-the-time-complexity-to-find-eigenvalues-and-eigenvectors" class="level1">
+<h1>Reducing the Time Complexity to find Eigenvalues and Eigenvectors</h1>
+<p>Let’s take a dataset <span class="math inline">\(X\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where \ <span class="math inline">\(d\)</span>: no. of features \ <span class="math inline">\(n\)</span>: no. of datapoints <span class="math display">\[
+X=\left [
+\begin{array}{ccccc}
+    | &amp; | &amp; | &amp; &amp; | \\
+    x_1 &amp; x_2 &amp; x_3 &amp; \ldots &amp; x_n \\
+    | &amp; | &amp; | &amp; &amp; |
+\end{array}
+\right ]
+X \in \mathbb{R} ^{d \times n}
+\]</span> The covariance matrix <span class="math inline">\(C\)</span> of <span class="math inline">\(X\)</span> is given by, <span class="math display">\[
+C=\frac{1}{n}(X  X ^T) \text{\hspace{2em}where } C \in \mathbb{R}^{d \times d} \hspace{2em} \ldots[1]
+\]</span> Let <span class="math inline">\(w_k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(\lambda _k\)</span> of <span class="math inline">\(C\)</span>. \ We know <span class="math display">\[
+Cw_k=\lambda _k w_k
+\]</span> Substituting <span class="math inline">\(C\)</span> from <span class="math inline">\([1]\)</span> in the above equation, and solving for <span class="math inline">\(w_k\)</span>, we get <span class="math display">\[
+w_k = \sum _{i=1} ^n (\frac{x_i ^T w_k}{n \lambda _k})\cdot{x_i}
+\]</span> <span class="math inline">\(\therefore\)</span> <span class="math inline">\(w_k\)</span> is a linear combination of datapoints! Hence, we can say <span class="math display">\[
+w_k= X \alpha _k \text{\hspace{2em} for some } \alpha _k \hspace{2em} \ldots [2]
+\]</span> Let <span class="math inline">\(X ^T X = K\)</span> where <span class="math inline">\(K \in \mathbb{R} ^{n \times n}\)</span>. We shall use this to solve for <span class="math inline">\(\alpha _k\)</span>. After some algebra (Refer to lectures), we get: <span class="math display">\[
+K \alpha _k = (n \lambda _k) \alpha _k
+\]</span> We know that the non-zero eigenvalues of <span class="math inline">\(XX^T\)</span> and <span class="math inline">\(X^T X\)</span> are the same according to the Spectral Theorm.</p>
+<p><strong>Explanation for the above</strong>: If <span class="math inline">\(\lambda \ne 0\)</span> is an eigenvalue of <span class="math inline">\(XX^T\)</span> with eigenvector <span class="math inline">\(w\)</span>, then <span class="math inline">\(XX^Tw=\lambda w\)</span>.</p>
+<p>Multiply both sides by <span class="math inline">\(X^T\)</span> to get <span class="math display">\[X^TX(X^Tw)=\lambda X^Tw\]</span> But then we see that <span class="math inline">\(\lambda\)</span> is still an eigenvalue for <span class="math inline">\(X^TX\)</span> and the corresponding eigenvector is simply <span class="math inline">\(X^Tw\)</span>.</p>
+<p>Let <span class="math inline">\(\beta _k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(n \lambda _k\)</span> of <span class="math inline">\(K\)</span>.</p>
+<p>On solving the eigen equation for <span class="math inline">\(K\)</span>, we get <span class="math display">\[
+\alpha _k= \frac{\beta _k}{\sqrt{n \lambda _k}} \hspace{2em} \ldots [3]
+\]</span> Using equations [2] and [3], we can get the eigenvalues and eigenvectors of <span class="math inline">\(C\)</span> using <span class="math inline">\(K\)</span> and hence, bringing the time complexity from <span class="math inline">\(O(d ^3)\)</span> to <span class="math inline">\(O(n^3)\)</span>.</p>
+</section>
+<section id="finding-pca-for-non-linear-relationships" class="level1">
+<h1>Finding PCA for Non-Linear Relationships</h1>
+<section id="transforming-features" class="level2">
+<h2 class="anchored" data-anchor-id="transforming-features">Transforming Features</h2>
+<p>We solve the problem of non-linear relationships by mapping them to higher dimensions. <span class="math display">\[
+x \to \phi(x) \hspace{2em} \mathbb{R} ^d \to \mathbb{R} ^D \hspace{2em} \text{where } [D &gt;&gt; d]
+\]</span> To compute <span class="math inline">\(D\)</span>:</p>
+<p>Let <span class="math inline">\(x=\left [ \begin{array} {cc}  f_1 &amp; f_2 \end{array} \right ]\)</span> be features of a dataset containing datapoints lying on a curve of degree two in a two-dimensional space.</p>
+<p>To make it linear from quadratic, we map the features to <span class="math inline">\(\phi(x)=\left [ \begin{array} {cccccc}  1 &amp; f_1^2 &amp; f_2^2 &amp; f_1f_2 &amp; f_1 &amp; f_2 \end{array} \right ]\)</span></p>
+<p>Mapping <span class="math inline">\(d\)</span> features to the polygonial power <span class="math inline">\(p\)</span> gives <span class="math inline">\(^{d+p} C_d\)</span> new features.</p>
+<p><strong>Issue</strong>: Finding <span class="math inline">\(\phi(x)\)</span> may be very hard.</p>
+<p>Solution for this issue is in the next point.</p>
+</section>
+<section id="kernel-functions" class="level2">
+<h2 class="anchored" data-anchor-id="kernel-functions">Kernel Functions</h2>
+<p>A function that maps <span class="math inline">\(k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span>, and is a “valid”, is called a Kernel Function.\ Proof of a “Valid” Kernel:</p>
+<ul>
+<li>Method 1: Exhibit the map to <span class="math inline">\(\phi\)</span> explicitly. [may be hard]</li>
+<li>Method 2: Using Mercer’s Theorem:
+<ul>
+<li><span class="math inline">\(k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span> is a “valid” kernel if and only if:
+<ul>
+<li><span class="math inline">\(k\)</span> is symmetric i.e <span class="math inline">\(k(x,x') = k(x',x)\)</span></li>
+<li>For any dataset <span class="math inline">\(\{x_1,x_2,\ldots,x_n \}\)</span>, the matrix <span class="math inline">\(K \in \mathbb{R}^{n \times n}\)</span>, where <span class="math inline">\(K_{ij} = k(i,j)\)</span>, is Positive Semi-Definite.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Two Popular Kernel Functions: * Polynomial Kernel: <span class="math inline">\(k(x,x') = (x^Tx + 1)^p\)</span> * Radial Basis Function Kernel or Gaussian Kernel: <span class="math inline">\(exp(-\frac{||x-x'||^2}{2\sigma^2})\)</span></p>
+</section>
+</section>
+<section id="kernel-pca" class="level1">
+<h1>Kernel PCA</h1>
+<p>Let’s take a dataset <span class="math inline">\(X\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where</p>
+<ul>
+<li><p><span class="math inline">\(d\)</span>: no. of features</p></li>
+<li><p><span class="math inline">\(n\)</span>: no. of datapoints <span class="math display">\[
+X=\left [
+\begin{array}{ccccc}
+  | &amp; | &amp; | &amp; &amp; | \\
+  x_1 &amp; x_2 &amp; x_3 &amp; \ldots &amp; x_4 \\
+  | &amp; | &amp; | &amp; &amp; |
+\end{array}
+\right ]
+\]</span></p></li>
+<li><p>Step 1: Calculate <span class="math inline">\(K \in \mathbb{R}^{n \times n}\)</span> using a kernel function where <span class="math inline">\(K_{ij}=k(x_i,x_j)\)</span>.</p></li>
+<li><p>Step 2: Center the kernel using the following formula. <span class="math display">\[
+  K^C=K-IK-KI+IKI
+  \]</span> where <span class="math inline">\(K^C\)</span> is the centered kernel, and <span class="math inline">\(I \in \mathbb{R}^{n \times n}\)</span> where all the elements are <span class="math inline">\(\frac{1}{n}\)</span>.</p></li>
+<li><p>Step 3: Compute the eigenvalues <span class="math inline">\(\{\beta _1, \beta _2, \ldots, \beta _l\}\)</span> and eigenvectors <span class="math inline">\(\{n\lambda _1, n\lambda _2, \ldots, n\lambda _l\}\)</span> of <span class="math inline">\(K^C\)</span> and normalize to get <span class="math display">\[
+  \forall u \hspace{2em} \alpha _u = \frac{\beta _u}{\sqrt{n \lambda _u}}
+  \]</span></p></li>
+<li><p>Step 4: Compute <span class="math inline">\(\sum _{j=1} ^{n} \alpha _{kj} K^C_{ij} \hspace{1em} \forall k\)</span> <span class="math display">\[
+  x_i \in \mathbb{R}^{d} \to
+  \left [
+\begin{array}{cccc}
+  \sum _{j=1} ^{n} \alpha _{1j} K^C_{ij} &amp; \sum _{j=1} ^{n} \alpha _{2j} K^C_{ij} &amp; \ldots &amp; \sum _{j=1} ^{n} \alpha _{dj} K^C_{ij}
+\end{array}
+\right ]
+  \]</span></p></li>
+</ul>
+</section>
+<section id="credits" class="level1">
+<h1>Credits</h1>
+<ul>
+<li>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</li>
+</ul>
 
 
 </section>
