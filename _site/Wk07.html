@@ -208,7 +208,7 @@ loss(h)=\frac{1}{n}\sum ^n _{i=1}\mathbb{1}\left ( h(x_i) \ne y_i \right )
 \]</span> But this poses an issue in classification. Look at the diagram below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/lin_class.png" class="img-fluid figure-img"></p>
+<p><img src="../images/lin_class.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Linear classification and the problem due to outliers</figcaption><p></p>
 </figure>
 </div>
@@ -223,11 +223,11 @@ loss(h)=\frac{1}{n}\sum ^n _{i=1}\mathbb{1}\left ( h(x_i) \ne y_i \right )
 <li>Predict <span class="math inline">\(y_{test} = \text{majority}(y_1^*, y_2^*, \ldots, y_k^*)\)</span></li>
 </ul>
 <p>Look at the following diagrams to the see the effect of the value of <span class="math inline">\(k\)</span> on the classification:</p>
-<p><img src="./images/k1.png" class="img-fluid" alt="k=1"> <span class="math display">\[
+<p><img src="../images/k1.png" class="img-fluid" alt="k=1"> <span class="math display">\[
 \text{When }k=1\text{, the classification is too sensitive to the outliers.}
-\]</span> <img src="./images/kn.png" class="img-fluid" alt="k=1"> <span class="math display">\[
+\]</span> <img src="../images/kn.png" class="img-fluid" alt="k=1"> <span class="math display">\[
 \text{When }k=n\text{, the classification is too smooth.}
-\]</span> <img src="./images/k*.png" class="img-fluid" alt="k=k^*"> <span class="math display">\[
+\]</span> <img src="../images/k*.png" class="img-fluid" alt="k=k^*"> <span class="math display">\[
 \text{When }k=k^*\text{, the classification is just right.}
 \]</span> The choice of <span class="math inline">\(k\)</span> is usually done by cross-validation, where <span class="math inline">\(k\)</span> is treated as a hyper-parameter. The smaller <span class="math inline">\(k\)</span> is, the more complex the classification will be.</p>
 <section id="issues-with-k-nn" class="level2">
@@ -248,7 +248,7 @@ loss(h)=\frac{1}{n}\sum ^n _{i=1}\mathbb{1}\left ( h(x_i) \ne y_i \right )
 <p>Pictorial depiction of the decision tree:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/decision_tree.png" class="img-fluid figure-img"></p>
+<p><img src="../images/decision_tree.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Decision Tree</figcaption><p></p>
 </figure>
 </div>
@@ -263,7 +263,7 @@ Entropy(\{y_1, \ldots, y_n\}) = Entropy(p) = -\left( p\log(p)+(1-p)\log(1-p) \ri
 <p>Pictorial Representation of the Entropy function:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/entropy.png" class="img-fluid figure-img"></p>
+<p><img src="../images/entropy.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Entropy Function</figcaption><p></p>
 </figure>
 </div>
@@ -288,7 +288,7 @@ Entropy(\{y_1, \ldots, y_n\}) = Entropy(p) = -\left( p\log(p)+(1-p)\log(1-p) \ri
 <p>Pictorial Depiction of decision boundary and its decision tree:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/decision_bound.png" class="img-fluid figure-img"></p>
+<p><img src="../images/decision_bound.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Decision Boundary</figcaption><p></p>
 </figure>
 </div>
