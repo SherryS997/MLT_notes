@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "MLT Notes",
     "section": "",
-    "text": "Still under development."
+    "text": "Note\n\n\n\nThis site is still under development.\n\n\nTable of Contents:\n\nIntroduction; Unsupervised Learning - Representation learning - PCA\nUnsupervised Learning - Representation learning - Kernel PCA\nUnsupervised Learning - Clustering - K-means/Kernel K-means\nUnsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm\nSupervised Learning - Regression - Least Squares; Bayesian view\nSupervised Learning - Regression - Ridge/LASSO\nSupervised Learning - Classification - K-NN, Decision tree"
   },
   {
     "objectID": "pages/Wk04.html",

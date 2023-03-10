@@ -4,6 +4,7 @@ project:
 
 website:
   title: "MLT Notes"
+  repo-url: https://github.com/SherryS997/MLT_notes
   sidebar:
     style: "docked"
     search: true

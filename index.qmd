@@ -2,4 +2,16 @@
 title: "MLT Notes"
 ---
 
-Still under development.
+:::{.callout-note}
+This site is still under development.
+:::
+
+**Table of Contents:**
+
+1. [Introduction; Unsupervised Learning - Representation learning - PCA](./pages/Wk01.html)
+2. [Unsupervised Learning - Representation learning - Kernel PCA](./pages/Wk02.html)
+3. [Unsupervised Learning - Clustering - K-means/Kernel K-means](./pages/Wk03.html)
+4. [Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm](./pages/Wk04.html)
+5. [Supervised Learning - Regression - Least Squares; Bayesian view](./pages/Wk05.html)
+6. [Supervised Learning - Regression - Ridge/LASSO](./pages/Wk06.html)
+7. [Supervised Learning - Classification - K-NN, Decision tree](./pages/Wk07.html)
