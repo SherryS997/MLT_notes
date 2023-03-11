@@ -166,5 +166,12 @@
     "title": "Unsupervised Learning - Clustering - K-means/Kernel K-means",
     "section": "Fact regarding Lloyd’s Algorithm",
     "text": "Fact regarding Lloyd’s Algorithm\nLloyd’s Algorithm, also known as K-means, is guaranteed to converge to a solution. While the converged solution may not be the optimal one, it has been observed to produce acceptable clustering results in practice."
+  },
+  {
+    "objectID": "pages/Wk03.html#k-means",
+    "href": "pages/Wk03.html#k-means",
+    "title": "Unsupervised Learning - Clustering - K-means/Kernel K-means",
+    "section": "K-means++",
+    "text": "K-means++\nThe premise is to select centroids that are as far as possible from each other.\n\nStep 1: Choose \\(\\mu _1 ^0\\) randomly from the dataset.\nStep 2: For \\(l \\in \\{2, 3, \\ldots, k\\}\\), choose \\(\\mu _l ^0\\) probablistically proportional to score(\\(S\\)) where \\(S\\) is, \\[\n  S(x) = \\min _{\\{j=1, 2, \\ldots, l-1\\}} {|| x - \\mu _{j} ^0 ||}^2 \\hspace{2em} \\forall x\n\\] The probabilistic aspect of the algorithm provides an expected guarantee of optimal convergence in K-means. The guarantee is given by, \\[\n  \\mathbb{E} \\left[ \\sum _{i=1} ^{n} {|| x_i - \\mu _{z_i} ||}^2 \\right ]\n  \\le O(\\log k) \\left [ \\min _{\\{z_1, z_2, \\ldots, z_n\\}} \\sum _{i=1} ^{n} {|| x_i - \\mu _{z_i} ||}^2 \\right ]\n\\] where \\(O(\\log k)\\) is a constant of order \\(\\log k\\).\nStep 3: Once the centroids are determined, we proceed with Lloyd’s Algorithm."
   }
 ]

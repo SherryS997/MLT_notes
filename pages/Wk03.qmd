@@ -81,10 +81,12 @@ But what if the dataset is as follow:
 
 The standard k-means algorithm may not perform well when the underlying clusters in the dataset have a non-linear structure. In such cases, alternative methods such as Kernel K-means or Spectral Clustering can be employed to improve clustering accuracy. However, the intricacies of these methods will not be covered in this session.
 
-# Initialization of Centroids and K-means++}
-One possible way to initialize the centroids is to randomly assign datapoints from the dataset as centroids. \\
+# Initialization of Centroids and K-means++
+One possible way to initialize the centroids is to randomly assign datapoints from the dataset as centroids.
+
 The other method is K-means++.
-\subsection{K-means++}
+
+## K-means++
 The premise is to select centroids that are as far as possible from each other.
 
 * Step 1: Choose $\mu _1 ^0$ randomly from the dataset.

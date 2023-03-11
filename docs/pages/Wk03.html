@@ -175,7 +175,10 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#convergence-of-k-means-algorithm" id="toc-convergence-of-k-means-algorithm" class="nav-link" data-scroll-target="#convergence-of-k-means-algorithm">Convergence of K-means Algorithm</a></li>
   <li><a href="#nature-of-clusters-produced-by-k-means" id="toc-nature-of-clusters-produced-by-k-means" class="nav-link" data-scroll-target="#nature-of-clusters-produced-by-k-means">Nature of Clusters Produced by K-means</a></li>
-  <li><a href="#initialization-of-centroids-and-k-means" id="toc-initialization-of-centroids-and-k-means" class="nav-link" data-scroll-target="#initialization-of-centroids-and-k-means">Initialization of Centroids and K-means++}</a></li>
+  <li><a href="#initialization-of-centroids-and-k-means" id="toc-initialization-of-centroids-and-k-means" class="nav-link" data-scroll-target="#initialization-of-centroids-and-k-means">Initialization of Centroids and K-means++</a>
+  <ul class="collapse">
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means">K-means++</a></li>
+  </ul></li>
   <li><a href="#choice-of-k" id="toc-choice-of-k" class="nav-link" data-scroll-target="#choice-of-k">Choice of K</a></li>
   <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
@@ -262,8 +265,11 @@ F(z_1^{t+1}, z_2^{t+1}, \ldots, z_n^{t+1}) \le F(z_1^{t}, z_2^{t}, \ldots, z_n^{
 <p>The standard k-means algorithm may not perform well when the underlying clusters in the dataset have a non-linear structure. In such cases, alternative methods such as Kernel K-means or Spectral Clustering can be employed to improve clustering accuracy. However, the intricacies of these methods will not be covered in this session.</p>
 </section>
 <section id="initialization-of-centroids-and-k-means" class="level1">
-<h1>Initialization of Centroids and K-means++}</h1>
-One possible way to initialize the centroids is to randomly assign datapoints from the dataset as centroids. \ The other method is K-means++.
+<h1>Initialization of Centroids and K-means++</h1>
+<p>One possible way to initialize the centroids is to randomly assign datapoints from the dataset as centroids.</p>
+<p>The other method is K-means++.</p>
+<section id="k-means" class="level2">
+<h2 class="anchored" data-anchor-id="k-means">K-means++</h2>
 <p>The premise is to select centroids that are as far as possible from each other.</p>
 <ul>
 <li>Step 1: Choose <span class="math inline">\(\mu _1 ^0\)</span> randomly from the dataset.</li>
@@ -275,6 +281,7 @@ One possible way to initialize the centroids is to randomly assign datapoints fr
 \]</span> where <span class="math inline">\(O(\log k)\)</span> is a constant of order <span class="math inline">\(\log k\)</span>.</li>
 <li>Step 3: Once the centroids are determined, we proceed with Lloyd’s Algorithm.</li>
 </ul>
+</section>
 </section>
 <section id="choice-of-k" class="level1">
 <h1>Choice of K</h1>
