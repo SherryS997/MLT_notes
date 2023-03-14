@@ -11,7 +11,11 @@ For a given dataset $D \in \mathbb{R} ^{d \times n}$, the covariance matrix is $
 * Non-Linear Dataset: The dataset may lie in a non-linear subspace. As PCA tries to get linear combination of Principal Components, non-linear datasets may result in non-optimal outputs.
 
 # Reducing the Time Complexity to find Eigenvalues and Eigenvectors
-Let's take a dataset $X$ with a large number of features($d$) i.e. $[d >> n]$ where \\ $d$: no. of features \\ $n$: no. of datapoints
+Let's take a dataset $X$ with a large number of features($d$) i.e. $[d >> n]$ where
+
+* $d$: no. of features
+* $n$: no. of datapoints
+
 $$
 X=\left [
 \begin{array}{ccccc}
@@ -26,7 +30,8 @@ The covariance matrix $C$ of $X$ is given by,
 $$
 C=\frac{1}{n}(X  X ^T) \text{\hspace{2em}where } C \in \mathbb{R}^{d \times d} \hspace{2em} \ldots[1]
 $$
-Let $w_k$ be the the eigenvector corresponding to the $k ^{th}$ largest eigenvalue $\lambda _k$ of $C$. \\
+Let $w_k$ be the the eigenvector corresponding to the $k ^{th}$ largest eigenvalue $\lambda _k$ of $C$.
+
 We know
 $$
 Cw_k=\lambda _k w_k
@@ -86,7 +91,8 @@ Mapping $d$ features to the polygonial power $p$ gives $^{d+p} C_d$ new features
 Solution for this issue is in the next point.
 
 ## Kernel Functions
-A function that maps $k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$, and is a "valid", is called a Kernel Function.\\
+A function that maps $k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$, and is a "valid", is called a Kernel Function.
+
 Proof of a "Valid" Kernel:
 
 * Method 1: Exhibit the map to $\phi$ explicitly. [may be hard]

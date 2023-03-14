@@ -210,7 +210,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="reducing-the-time-complexity-to-find-eigenvalues-and-eigenvectors" class="level1">
 <h1>Reducing the Time Complexity to find Eigenvalues and Eigenvectors</h1>
-<p>Let’s take a dataset <span class="math inline">\(X\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where \ <span class="math inline">\(d\)</span>: no. of features \ <span class="math inline">\(n\)</span>: no. of datapoints <span class="math display">\[
+<p>Let’s take a dataset <span class="math inline">\(X\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where</p>
+<ul>
+<li><span class="math inline">\(d\)</span>: no. of features</li>
+<li><span class="math inline">\(n\)</span>: no. of datapoints</li>
+</ul>
+<p><span class="math display">\[
 X=\left [
 \begin{array}{ccccc}
     | &amp; | &amp; | &amp; &amp; | \\
@@ -221,7 +226,8 @@ X=\left [
 X \in \mathbb{R} ^{d \times n}
 \]</span> The covariance matrix <span class="math inline">\(C\)</span> of <span class="math inline">\(X\)</span> is given by, <span class="math display">\[
 C=\frac{1}{n}(X  X ^T) \text{\hspace{2em}where } C \in \mathbb{R}^{d \times d} \hspace{2em} \ldots[1]
-\]</span> Let <span class="math inline">\(w_k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(\lambda _k\)</span> of <span class="math inline">\(C\)</span>. \ We know <span class="math display">\[
+\]</span> Let <span class="math inline">\(w_k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(\lambda _k\)</span> of <span class="math inline">\(C\)</span>.</p>
+<p>We know <span class="math display">\[
 Cw_k=\lambda _k w_k
 \]</span> Substituting <span class="math inline">\(C\)</span> from <span class="math inline">\([1]\)</span> in the above equation, and solving for <span class="math inline">\(w_k\)</span>, we get <span class="math display">\[
 w_k = \sum _{i=1} ^n (\frac{x_i ^T w_k}{n \lambda _k})\cdot{x_i}
@@ -252,7 +258,8 @@ x \to \phi(x) \hspace{2em} \mathbb{R} ^d \to \mathbb{R} ^D \hspace{2em} \text{wh
 </section>
 <section id="kernel-functions" class="level2">
 <h2 class="anchored" data-anchor-id="kernel-functions">Kernel Functions</h2>
-<p>A function that maps <span class="math inline">\(k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span>, and is a “valid”, is called a Kernel Function.\ Proof of a “Valid” Kernel:</p>
+<p>A function that maps <span class="math inline">\(k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span>, and is a “valid”, is called a Kernel Function.</p>
+<p>Proof of a “Valid” Kernel:</p>
 <ul>
 <li>Method 1: Exhibit the map to <span class="math inline">\(\phi\)</span> explicitly. [may be hard]</li>
 <li>Method 2: Using Mercer’s Theorem:

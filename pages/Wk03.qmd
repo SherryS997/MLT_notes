@@ -65,7 +65,8 @@ And as there are only finite number of reassignments possible, the algorithm mus
 **Alternate Explanation**: K-means algorithm converges because it is an iterative procedure that minimizes the sum of squared distances between points and their cluster centroids, which is a convex function with a global minimum. The algorithm will reach the convergence point, guaranteed to exist, under mild assumptions on the initial cluster means, making it a reliable tool for clustering.
 
 # Nature of Clusters Produced by K-means
-Let $\mu _1$ and $\mu _2$ be the centroids of the clusters $C_1$ and $C_2$ respectively. \\
+Let $\mu _1$ and $\mu _2$ be the centroids of the clusters $C_1$ and $C_2$ respectively.
+
 For $C_1$,
 \begin{gather*}
     {|| x - \mu _{1} ||}^2 \le {|| x - \mu _{2} ||}^2 \\

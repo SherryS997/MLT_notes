@@ -63,7 +63,8 @@ From the above equation we find that $w$ is the eigenvector corresponding to the
 $w$ is also called the First Principal Component of the dataset.
 
 ## Potential Algorithm
-With this information, we can give the following algorithm:\\
+With this information, we can give the following algorithm:
+
 Given a dataset $\{x_1, x_2, \ldots, x_n\}$ where $x_i \in \mathbb{R}^{d}$,
 
 * Center the dataset
@@ -119,7 +120,8 @@ $$
 Hence, the higher the variance captured, the lower is the error obtained.
 
 ## P.C.A. Algorithm
-Given a centered dataset $\{x_1, x_2, \ldots, x_n\}$ where $x_i \in \mathbb{R}^{d}$, let $C$ be its covariance matrix.\\
+Given a centered dataset $\{x_1, x_2, \ldots, x_n\}$ where $x_i \in \mathbb{R}^{d}$, let $C$ be its covariance matrix.
+
 The algorithm is as follows:
 
 * Step 1: Find the eigenvalues and eigenvectors of $C$. Let $\{\lambda_1, \lambda_2, \ldots, \lambda_d \}$ be its eigenvalues placed in the descending order, and let $\{w_1, w_2, \ldots, w_d \}$ be its corresponding eigenvectors of unit length.

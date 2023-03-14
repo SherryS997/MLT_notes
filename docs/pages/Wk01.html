@@ -266,7 +266,8 @@ ul.task-list li input[type="checkbox"] {
 <p><span class="math inline">\(w\)</span> is also called the First Principal Component of the dataset.</p>
 <section id="potential-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="potential-algorithm">Potential Algorithm</h2>
-<p>With this information, we can give the following algorithm:\ Given a dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>,</p>
+<p>With this information, we can give the following algorithm:</p>
+<p>Given a dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>,</p>
 <ul>
 <li>Center the dataset <span class="math display">\[
 \mu = \frac{1}{n} \sum _{i=1} ^{n} x_i
@@ -307,7 +308,8 @@ x_i = x_i - \mu  \hspace{2em} \forall i
 </section>
 <section id="p.c.a.-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="p.c.a.-algorithm">P.C.A. Algorithm</h2>
-<p>Given a centered dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>, let <span class="math inline">\(C\)</span> be its covariance matrix.\ The algorithm is as follows:</p>
+<p>Given a centered dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>, let <span class="math inline">\(C\)</span> be its covariance matrix.</p>
+<p>The algorithm is as follows:</p>
 <ul>
 <li>Step 1: Find the eigenvalues and eigenvectors of <span class="math inline">\(C\)</span>. Let <span class="math inline">\(\{\lambda_1, \lambda_2, \ldots, \lambda_d \}\)</span> be its eigenvalues placed in the descending order, and let <span class="math inline">\(\{w_1, w_2, \ldots, w_d \}\)</span> be its corresponding eigenvectors of unit length.</li>
 <li>Step 2: Calculate <span class="math inline">\(K\)</span>, where <span class="math inline">\(K\)</span> is the number of required top eigenvalues and eigenvectors, according to the required variance that needs to be covered.</li>
