@@ -6,6 +6,11 @@ website:
   title: "MLT Notes"
   repo-url: https://github.com/SherryS997/MLT_notes
   sidebar:
+    tools:
+      - icon: linkedin
+        href: https://www.linkedin.com/in/sherry-thomassp/
+      - icon: github
+        href: https://github.com/SherryS997/MLT_notes
     style: "docked"
     search: true
     contents:
