@@ -375,7 +375,7 @@ f(x_{test};\hat{\mu}_1, \hat{\Sigma_1})*\hat{p}&amp;\ge f(x_{test};\hat{\mu}_0, 
 e^{-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_1)}*\hat{p}&amp;\ge e^{-(x_{test}-\hat{\mu}_0)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_0)}*(1-\hat{p}) \\
 -(x_{test}-\hat{\mu}_1)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_1)+\log(\hat{p})&amp;\ge -(x_{test}-\hat{\mu}_0)^T\hat{\Sigma_0}(x_{test}-\hat{\mu}_0) + \log(1-\hat{p}) \\
 \end{align*}\]</span> <span class="math display">\[
-x_{test}^T(\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1})x-2(\hat{\mu}_1^T\hat{\Sigma}_1^{-1}-\hat{\mu}_0^T\hat{\Sigma}_0^{-1})x+(\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\hat{\mu}_0-\hat{\mu}_1^T\hat{\Sigma}_1^{-1}\hat{\mu}_1) + log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
+x_{test}^T(\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1})x_{test}-2(\hat{\mu}_1^T\hat{\Sigma}_1^{-1}-\hat{\mu}_0^T\hat{\Sigma}_0^{-1})x_{test}+(\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\hat{\mu}_0-\hat{\mu}_1^T\hat{\Sigma}_1^{-1}\hat{\mu}_1) + log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
 \]</span> Hence, we can say that the decision function is of the form <span class="math inline">\(x^TQx-2b^Tx+c\ge0\)</span> where <span class="math inline">\(Q=\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1}\)</span>, <span class="math inline">\(b=\hat{\mu}_1^T\hat{\Sigma}_1^{-1}-\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\)</span>, and <span class="math inline">\(c=(\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\hat{\mu}_0-\hat{\mu}_1^T\hat{\Sigma}_1^{-1}\hat{\mu}_1) + log(\frac{1-\hat{p}}{\hat{p}})\)</span>. Hence, the decision boundary is a quadratic function when the covariance matrices are not equal for both classes.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
