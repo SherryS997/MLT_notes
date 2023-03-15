@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MLT Notes - Supervised Learning - Classification - Generative Models - Naive Bayes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Supervised Learning - Classification - Generative Models - Naive Bayes</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">MLT Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://www.linkedin.com/in/sherry-thomassp/" title="" class="sidebar-tool px-1"><i class="bi bi-linkedin"></i></a>
+    <a href="https://github.com/SherryS997/MLT_notes" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Home</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Content</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Notes</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk01.html" class="sidebar-item-text sidebar-link">Week-01</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk02.html" class="sidebar-item-text sidebar-link">Week-02</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk03.html" class="sidebar-item-text sidebar-link">Week-03</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk04.html" class="sidebar-item-text sidebar-link">Week-04</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk05.html" class="sidebar-item-text sidebar-link">Week-05</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk06.html" class="sidebar-item-text sidebar-link">Week-06</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk07.html" class="sidebar-item-text sidebar-link">Week-07</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Wk08.html" class="sidebar-item-text sidebar-link active">Week-08</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#generative-model-based-algorithm" id="toc-generative-model-based-algorithm" class="nav-link active" data-scroll-target="#generative-model-based-algorithm">Generative Model Based Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#alternate-generative-model" id="toc-alternate-generative-model" class="nav-link" data-scroll-target="#alternate-generative-model">Alternate Generative Model</a></li>
+  </ul></li>
+  <li><a href="#naive-bayes-algorithm" id="toc-naive-bayes-algorithm" class="nav-link" data-scroll-target="#naive-bayes-algorithm">Naive Bayes Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#prediction-using-the-parameters" id="toc-prediction-using-the-parameters" class="nav-link" data-scroll-target="#prediction-using-the-parameters">Prediction using the parameters</a></li>
+  <li><a href="#pitfalls-of-naive-bayes" id="toc-pitfalls-of-naive-bayes" class="nav-link" data-scroll-target="#pitfalls-of-naive-bayes">Pitfalls of Naive Bayes</a></li>
+  </ul></li>
+  <li><a href="#decision-function-of-naive-bayes" id="toc-decision-function-of-naive-bayes" class="nav-link" data-scroll-target="#decision-function-of-naive-bayes">Decision Function of Naive Bayes</a></li>
+  <li><a href="#gaussian-naive-bayes" id="toc-gaussian-naive-bayes" class="nav-link" data-scroll-target="#gaussian-naive-bayes">Gaussian Naive Bayes</a>
+  <ul class="collapse">
+  <li><a href="#prediction-using-bayes-rule" id="toc-prediction-using-bayes-rule" class="nav-link" data-scroll-target="#prediction-using-bayes-rule">Prediction using Bayes Rule</a></li>
+  <li><a href="#decision-boundaries-for-different-covariances" id="toc-decision-boundaries-for-different-covariances" class="nav-link" data-scroll-target="#decision-boundaries-for-different-covariances">Decision Boundaries for Different Covariances</a></li>
+  </ul></li>
+  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Supervised Learning - Classification - Generative Models - Naive Bayes</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>PDF Link: <a href="../notes/Wk08.pdf">notes</a></p>
+<section id="generative-model-based-algorithm" class="level1">
+<h1>Generative Model Based Algorithm</h1>
+<p>A Generative Model Based Algorithm tries to model the probability distribution of the input data and then generates new samples from this distribution. It involves learning the joint probability distribution of the features and labels of the training data, and then using this model to make predictions for new, unseen data.</p>
+<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \{0, 1\}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
+<p>General Steps in the algorithm are:</p>
+<ul>
+<li>Decide the labels by tossing a coin <span class="math inline">\(P(y_i=1)=p\)</span>.</li>
+<li>Decide features using the labels in step 1 using <span class="math inline">\(P(x_i|y_i)\)</span>.</li>
+</ul>
+<p>The parameters in the model are as follows:</p>
+<ul>
+<li>Parameter <span class="math inline">\(\hat{p}\)</span> to decide the label: 1</li>
+<li>Parameters for <span class="math inline">\(P(x|y=1)\)</span>: <span class="math inline">\(2^d-1\)</span></li>
+<li>Parameters for <span class="math inline">\(P(x|y=0)\)</span>: <span class="math inline">\(2^d-1\)</span></li>
+</ul>
+<p>Hence, the total number of parameters <span class="math display">\[\begin{align*}
+    &amp;=1 + (2^d-1) + (2^d-1)\\
+    &amp;=1 + 2(2^d-1)\\
+    &amp;=2^{d+1}-1
+\end{align*}\]</span></p>
+<p><strong>Issues</strong>:</p>
+<ul>
+<li>Too many parameters.</li>
+<li>Not a reasonable model.</li>
+</ul>
+<section id="alternate-generative-model" class="level2">
+<h2 class="anchored" data-anchor-id="alternate-generative-model">Alternate Generative Model</h2>
+<p>An alternate model begins with the class conditional independence assumption. The <strong>class conditional independence assumption</strong> is a common assumption made in machine learning algorithms that assumes the features of an object are conditionally independent given its class label.</p>
+<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \{0, 1\}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
+<p>General Steps in the algorithm are:</p>
+<ul>
+<li>Decide the labels by tossing a coin <span class="math inline">\(P(y_i=1)=p\)</span>.</li>
+<li>Decide features for <span class="math inline">\(x\)</span> given <span class="math inline">\(y\)</span> using: <span class="math display">\[
+P(x = [f_1, f_2, \ldots, f_d]|y) = \prod_{i=1}^d(p^y_i)^{f_i}(1-p^y_i)^{1-f_i}
+\]</span></li>
+</ul>
+<p>The parameters in the model are as follows:</p>
+<ul>
+<li>Parameter <span class="math inline">\(\hat{p}\)</span> to decide the label: 1</li>
+<li>Parameters for <span class="math inline">\(P(x|y=1)\)</span>: <span class="math inline">\(d\)</span></li>
+<li>Parameters for <span class="math inline">\(P(x|y=0)\)</span>: <span class="math inline">\(d\)</span></li>
+</ul>
+<p>Hence, the total number of parameters <span class="math display">\[\begin{align*}
+    &amp;=1 + d + d\\
+    &amp;=2d+1
+\end{align*}\]</span></p>
+<p>The parameters are estimated using Maximum Likelihood Estimation.</p>
+</section>
+</section>
+<section id="naive-bayes-algorithm" class="level1">
+<h1>Naive Bayes Algorithm</h1>
+<p>The model is given by, <span class="math display">\[
+P(x = [f_1, f_2, \ldots, f_d]|y) = \prod_{i=1}^d(p^y_i)^{f_i}(1-p^y_i)^{1-f_i}
+\]</span> The parameters to be estimated are <span class="math inline">\(p,\{p^0_1,p^0_2,\ldots,p^0_d\},\{p^1_1,p^1_2,\ldots,p^1_d\}\)</span>. Using Maximum Likelihood Estimation, we get the following results: <span class="math display">\[\begin{align*}
+\hat{p}&amp;=\frac{1}{n}\sum_{i=1}^ny_i\\
+\hat{p}^y_j &amp;= \frac{\displaystyle \sum_{i=1}^n\mathbb{1}(f^i_j=1,y_i=y)}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=y)} \hspace{1em} \genfrac{}{}{0pt}{}{\forall j \in\{1,2,\ldots,d\}}{\forall y \in \{0,1\}}
+\end{align*}\]</span></p>
+<section id="prediction-using-the-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-using-the-parameters">Prediction using the parameters</h2>
+<p>Given <span class="math inline">\(x^{test}\in\{0,1\}^d\)</span>, prediction for <span class="math inline">\(\hat{y}^{test}\)</span> is done using the following: <span class="math display">\[
+P(\hat{y}^{test}=1|x^{test}) \ge P(\hat{y}^{test}=0|x^{test})
+\]</span> If the above is true, <span class="math inline">\(\hat{y}^{test}=1\)</span>, otherwise <span class="math inline">\(0\)</span>.</p>
+<p>Using Bayes rule, we can get the values for <span class="math inline">\(P(\hat{y}^{test}=1|x^{test})\)</span> and <span class="math inline">\(P(\hat{y}^{test}=0|x^{test})\)</span>: <span class="math display">\[\begin{align*}
+P(\hat{y}^{test}=1|x^{test})&amp;=\frac{P(x^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)}{P(x^{test})}\\
+P(\hat{y}^{test}=0|x^{test})&amp;=\frac{P(x^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)}{P(x^{test})}
+\end{align*}\]</span> As we predict by comparing the two values, we can do this without actually solving for <span class="math inline">\(P(x^{test})\)</span>.</p>
+<p>Solving for <span class="math inline">\(P(x^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)\)</span>, we get, <span class="math display">\[\begin{align*}
+&amp;=P(x^{test} = [f_1, f_2, \ldots, f_d]|y^{test}=1)*P(\hat{y}^{test}=1)\\
+&amp;=\left(\prod_{i=1}^d(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\right)*\hat{p}
+\end{align*}\]</span> Similarly we solve for <span class="math inline">\(P(x^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)\)</span>.</p>
+<p>Therefore, if <span class="math display">\[
+\left(\prod_{i=1}^d(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\right)*\hat{p} \ge \left(\prod_{i=1}^d(\hat{p}^0_i)^{f_i}(1-\hat{p}^0_i)^{1-f_i}\right)*(1-\hat{p})
+\]</span> we predict <span class="math inline">\(y^{test}=1\)</span>, othewise <span class="math inline">\(y^{test}=0\)</span>.</p>
+<p>The model implements two main things:</p>
+<ul>
+<li>Class Conditional Independence Assumption</li>
+<li>Bayes Rule</li>
+</ul>
+<p>Therefore, we call this algorithm Naive Bayes.</p>
+<p>In short, <strong>Naive Bayes</strong> is a classification algorithm based on Bayes’ theorem, which assumes that the features are independent of each other given the class label. It calculates the probability of a sample belonging to a class by estimating the conditional probability of each feature given the class and then multiplying them together using Bayes’ theorem. Despite its simple assumption, Naive Bayes is known to perform well in various applications, particularly when there are many features but relatively few training examples.</p>
+</section>
+<section id="pitfalls-of-naive-bayes" class="level2">
+<h2 class="anchored" data-anchor-id="pitfalls-of-naive-bayes">Pitfalls of Naive Bayes</h2>
+<p>The most prominent issue with Naive Bayes is that if a feature is not seen in the training set but seen in the testing set, the prediction probability for both the classes would be zero. <span class="math display">\[\begin{align*}
+P(\hat{y}^{test}=1|x^{test} = [f_1, f_2, \ldots, f_d])&amp;\propto\left(\prod_{i=1}^d(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\right)*\hat{p}\\
+P(\hat{y}^{test}=0|x^{test} = [f_1, f_2, \ldots, f_d])&amp;\propto\left(\prod_{i=1}^d(\hat{p}^0_i)^{f_i}(1-\hat{p}^0_i)^{1-f_i}\right)*(1-\hat{p})
+\end{align*}\]</span> Even if one feature <span class="math inline">\(f_i\)</span> was zero in training set, we get <span class="math inline">\(\hat{p}^1_i=\hat{p}^0_i=0\)</span>, which ultimately results in <span class="math inline">\(P(\hat{y}^{test}=0|x^{test})=P(\hat{y}^{test}=1|x^{test})=0\)</span>.</p>
+<p>A popular fix for this is to introduce two “pseudo” datapoints with labels <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> each into the dataset whose features are all ones. This technique is also known as Laplace smoothing.</p>
+<p>Briefly speaking, <strong>Laplace smoothing</strong> is a technique used to address the zero-frequency problem in probabilistic models, particularly in text classification. It involves adding a small constant value to the count of each feature and the number of unique classes to avoid zero probability estimates, which can cause problems during model training and prediction. By adding this smoothing term, the model becomes more robust and can handle unseen data more effectively.</p>
+</section>
+</section>
+<section id="decision-function-of-naive-bayes" class="level1">
+<h1>Decision Function of Naive Bayes</h1>
+<p>Given <span class="math inline">\(x^{test}\in\{0,1\}^d\)</span>, prediction for <span class="math inline">\(\hat{y}^{test}\)</span> is <span class="math inline">\(1\)</span> if: <span class="math display">\[\begin{multline*}\\
+\frac{P(\hat{y}^{test}=1|x^{test})}{P(\hat{y}^{test}=0|x^{test})}\ge 1\\
+\log \left (\frac{P(\hat{y}^{test}=1|x^{test})}{P(\hat{y}^{test}=0|x^{test})}\right )\ge 0\\
+\log \left (\frac{\displaystyle\frac{P(x^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)}{P(x^{test})}}{\displaystyle\frac{P(x^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)}{P(x^{test})}}\right )\ge 0 \\
+\log \left (\prod_{i=1}^d\frac{(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\hat{p}}{(\hat{p}^0_i)^{f_i}(1-\hat{p}^0_i)^{1-f_i}(1-\hat{p})}\right )\ge 0 \\
+\log \left (\prod_{i=1}^d\left(\frac{\hat{p}^1_i}{\hat{p}^0_i}\right)^{f_i}\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)^{1-f_i}\frac{\hat{p}}{1-\hat{p}}\right )\ge 0 \\
+\sum_{i=1}^d \left (f_i\log\left(\frac{\hat{p}^1_i}{\hat{p}^0_i}\right)+(1-f_i)\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\right )\ge 0 \\
+\sum_{i=1}^d \left (f_i\log\left(\frac{\hat{p}^1_i(1-\hat{p}^0_i)}{\hat{p}^0_i(1-\hat{p}^1_i)}\right)\right )+\sum_{i=1}^d\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\ge 0\\ \\
+\end{multline*}\]</span> Hence, we can say that the decision function is of the form <span class="math inline">\(w^Tx+b\ge0\)</span> where <span class="math inline">\(w\in\mathbb{R}^d\)</span>, <span class="math inline">\(w_i=\displaystyle\log\left(\frac{\hat{p}^1_i(1-\hat{p}^0_i)}{\hat{p}^0_i(1-\hat{p}^1_i)}\right)\)</span> and <span class="math inline">\(b=\displaystyle\sum_{i=1}^d\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\)</span>.</p>
+<p>Therefore, the decision function of Naive Bayes is <strong>Linear</strong>.</p>
+<p>The decision boundary is given by <span class="math inline">\(\{x=P(y=1|x)=P(y=0|x)\}\)</span>.</p>
+</section>
+<section id="gaussian-naive-bayes" class="level1">
+<h1>Gaussian Naive Bayes</h1>
+<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
+<p>Let <span class="math inline">\(P(x|y=1)\sim\mathcal{N}(\mu_1,\Sigma)\)</span> and <span class="math inline">\(P(x|y=0)\sim\mathcal{N}(\mu_0,\Sigma)\)</span>. We assume that the covariances are equal.</p>
+<p>The parameters to be estimated are <span class="math inline">\(\hat{p}\)</span>, <span class="math inline">\(\mu_0\)</span>, <span class="math inline">\(\mu_1\)</span>, and <span class="math inline">\(\Sigma\)</span>.</p>
+<p>Using Maximum Likelihood Estimation, we get the following results: <span class="math display">\[\begin{align*}
+\hat{p}&amp;=\frac{1}{n}\sum_{i=1}^ny_i \\
+\hat{\mu_1} &amp;= \frac{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=1)*x_i}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=1)} \\
+\hat{\mu_0} &amp;= \frac{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=0)*x_i}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=0)} \\
+\hat{\Sigma} &amp;= \frac{1}{n} \displaystyle \sum_{i=1}^n(x_i-\hat{\mu}_{y_i})(x_i-\hat{\mu}_{y_i})^T
+\end{align*}\]</span> Where <span class="math inline">\(\hat{p}\)</span> is the proportion of data points labeled <span class="math inline">\(1\)</span>, <span class="math inline">\(\hat{\mu_1}\)</span> is the sample mean of data points labeled <span class="math inline">\(1\)</span>, <span class="math inline">\(\hat{\mu_0}\)</span> is the sample mean of data points labeled <span class="math inline">\(0\)</span>, and <span class="math inline">\(\hat{\Sigma}\)</span> is covariance matrix of the centered dataset.</p>
+<section id="prediction-using-bayes-rule" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-using-bayes-rule">Prediction using Bayes Rule</h2>
+<p>Prediction is based on the following equation: <span class="math display">\[
+P(y_{test}=1|x_{test})\propto P(x_{test}|y_{test})*P(y_{test})
+\]</span> where <span class="math inline">\(P(x_{test}|y_{test})\equiv f(x_{test};\hat{\mu}_{y_{test}}, \hat{\Sigma})\)</span> and <span class="math inline">\(P(y_{test})\equiv \hat{p}\)</span>.</p>
+<p>Predict <span class="math inline">\(y_{test}=1\)</span> if: <span class="math display">\[\begin{align*}
+f(x_{test};\hat{\mu}_1, \hat{\Sigma})*\hat{p}&amp;\ge f(x_{test};\hat{\mu}_0, \hat{\Sigma})*(1-\hat{p}) \\
+e^{-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma}(x_{test}-\hat{\mu}_1)}*\hat{p}&amp;\ge e^{-(x_{test}-\hat{\mu}_0)^T\hat{\Sigma}(x_{test}-\hat{\mu}_0)}*(1-\hat{p}) \\
+-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma}(x_{test}-\hat{\mu}_1)+\log(\hat{p})&amp;\ge -(x_{test}-\hat{\mu}_0)^T\hat{\Sigma}(x_{test}-\hat{\mu}_0) + \log(1-\hat{p}) \\
+\end{align*}\]</span> <span class="math display">\[
+\left( (\hat{\mu}_1-\hat{\mu}_0)^T\hat{\Sigma}^{-1} \right)x_{test} + \hat{\mu}_0^T\hat{\Sigma}^{-1}\hat{\mu}_0 - \hat{\mu}_1^T\hat{\Sigma}^{-1}\hat{\mu}_1 + log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
+\]</span> Hence, we can say that the decision function is of the form <span class="math inline">\(w^Tx+b\ge0\)</span> where <span class="math inline">\(w\in\mathbb{R}^d\)</span>, <span class="math inline">\(w_i= (\hat{\mu}_1-\hat{\mu}_0)^T\hat{\Sigma}^{-1}\)</span> and <span class="math inline">\(b=\hat{\mu}_0^T\hat{\Sigma}^{-1}\hat{\mu}_0 - \hat{\mu}_1^T\hat{\Sigma}^{-1}\hat{\mu}_1 + log(\frac{1-\hat{p}}{\hat{p}})\)</span>.</p>
+<p>Therefore, the decision function of Gaussian Naive Bayes when the covariance matrix is equal for both classes is <strong>Linear</strong>.</p>
+</section>
+<section id="decision-boundaries-for-different-covariances" class="level2">
+<h2 class="anchored" data-anchor-id="decision-boundaries-for-different-covariances">Decision Boundaries for Different Covariances</h2>
+<ol type="1">
+<li><strong>When the covariance matrices are equal for both classes</strong>: As seen previously, the decision boundary is linear.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/equal_var.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">When the covariance matrices are equal for both classes</figcaption><p></p>
+</figure>
+</div>
+<ol start="2" type="1">
+<li><strong>When the covariance matrices are Identity matrices for both classes</strong>: The decision boundary is linear as well as the perpendicular bisector of the line drawn from <span class="math inline">\(\hat{\mu}_1\)</span> and <span class="math inline">\(\hat{\mu}_0\)</span>.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/identity_var.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">When the covariance matrices are Identity matrices for both classes</figcaption><p></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li><strong>When the covariance matrices are not equal for both classes</strong>: Let <span class="math inline">\(\hat{\Sigma}_1\)</span> and <span class="math inline">\(\hat{\Sigma}_0\)</span> be the covariance matrices for classes <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> respectively. They are given by, <span class="math display">\[\begin{align*}
+\hat{\Sigma}_1 &amp;= \frac{1}{n} \displaystyle \sum_{i=1}^n(\mathbb{1}(y_i=1)*x_i-\hat{\mu}_1)(\mathbb{1}(y_i=1)*x_i-\hat{\mu}_1)^T \\
+\hat{\Sigma}_0 &amp;= \frac{1}{n} \displaystyle \sum_{i=1}^n(\mathbb{1}(y_i=0)*x_i-\hat{\mu}_0)(\mathbb{1}(y_i=0)*x_i-\hat{\mu}_0)^T
+\end{align*}\]</span> Predict <span class="math inline">\(y_{test}=1\)</span> if: <span class="math display">\[\begin{align*}
+f(x_{test};\hat{\mu}_1, \hat{\Sigma_1})*\hat{p}&amp;\ge f(x_{test};\hat{\mu}_0, \hat{\Sigma_0})*(1-\hat{p}) \\
+e^{-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_1)}*\hat{p}&amp;\ge e^{-(x_{test}-\hat{\mu}_0)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_0)}*(1-\hat{p}) \\
+-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_1)+\log(\hat{p})&amp;\ge -(x_{test}-\hat{\mu}_0)^T\hat{\Sigma_0}(x_{test}-\hat{\mu}_0) + \log(1-\hat{p}) \\
+\end{align*}\]</span> <span class="math display">\[
+x_{test}^T(\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1})x-2(\hat{\mu}_1^T\hat{\Sigma}_1^{-1}-\hat{\mu}_0^T\hat{\Sigma}_0^{-1})x+(\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\hat{\mu}_0-\hat{\mu}_1^T\hat{\Sigma}_1^{-1}\hat{\mu}_1) + log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
+\]</span> Hence, we can say that the decision function is of the form <span class="math inline">\(x^TQx-2b^Tx+c\ge0\)</span> where <span class="math inline">\(Q=\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1}\)</span>, <span class="math inline">\(b=\hat{\mu}_1^T\hat{\Sigma}_1^{-1}-\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\)</span>, and <span class="math inline">\(c=(\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\hat{\mu}_0-\hat{\mu}_1^T\hat{\Sigma}_1^{-1}\hat{\mu}_1) + log(\frac{1-\hat{p}}{\hat{p}})\)</span>. Hence, the decision boundary is a quadratic function when the covariance matrices are not equal for both classes.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/non-equal_var.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">When the covariance matrices are not equal for both classes</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="credits" class="level1">
+<h1>Credits</h1>
+<p>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

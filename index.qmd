@@ -15,3 +15,4 @@ This site is still under development.
 5. [Supervised Learning - Regression - Least Squares; Bayesian view](./pages/Wk05.html)
 6. [Supervised Learning - Regression - Ridge/LASSO](./pages/Wk06.html)
 7. [Supervised Learning - Classification - K-NN, Decision tree](./pages/Wk07.html)
+8. [Supervised Learning - Classification - Generative Models - Naive Bayes](./pages/Wk08.html)

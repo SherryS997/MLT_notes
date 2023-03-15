@@ -43,6 +43,9 @@ website:
           - href: pages/Wk07.qmd
             text: Week-07
             title: Week-07
+          - href: pages/Wk08.qmd
+            text: Week-08
+            title: Week-08
 
 format:
   html:
