@@ -177,7 +177,7 @@ Therefore, the decision function of Gaussian Naive Bayes when the covariance mat
 
 ![When the covariance matrices are equal for both classes](../images/equal_var.png)
 
-2. **When the covariance matrices are Identity matrices for both classes**: The decision boundary is linear as well as the perpendicular bisector of the line drawn from $\hat{\mu}_1$ and $\hat{\mu}_0$.
+2. **When the covariance matrices are Identity matrices for both classes**: The decision boundary is linear as well as the perpendicular bisector of the line drawn from $\hat{\mu}_1$ to $\hat{\mu}_0$.
 
 ![When the covariance matrices are Identity matrices for both classes](../images/identity_var.png)
 
