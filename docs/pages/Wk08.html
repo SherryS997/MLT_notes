@@ -323,6 +323,7 @@ P(\hat{y}^{test}=0|x^{test} = [f_1, f_2, \ldots, f_d])&amp;\propto\left(\prod_{i
 </section>
 <section id="gaussian-naive-bayes" class="level1">
 <h1>Gaussian Naive Bayes</h1>
+<p><strong>Gaussian Naive Bayes</strong>, also known as <strong>Gaussian Discriminant Analysis (GDA)</strong> or <strong>Gaussian Discriminant Analysis Naive Bayes (GDANB)</strong>, is a variant of the Naive Bayes algorithm for classification, which assumes that the features follow a Gaussian (normal) distribution and calculates the likelihood of a class for a given set of feature values by estimating the mean and variance of the feature values for each class.</p>
 <p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
 <p>Let <span class="math inline">\(P(x|y=1)\sim\mathcal{N}(\mu_1,\Sigma)\)</span> and <span class="math inline">\(P(x|y=0)\sim\mathcal{N}(\mu_0,\Sigma)\)</span>. We assume that the covariances are equal.</p>
 <p>The parameters to be estimated are <span class="math inline">\(\hat{p}\)</span>, <span class="math inline">\(\mu_0\)</span>, <span class="math inline">\(\mu_1\)</span>, and <span class="math inline">\(\Sigma\)</span>.</p>

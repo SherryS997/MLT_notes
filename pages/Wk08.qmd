@@ -137,6 +137,8 @@ Therefore, the decision function of Naive Bayes is **Linear**.
 The decision boundary is given by $\{x=P(y=1|x)=P(y=0|x)\}$.
 
 # Gaussian Naive Bayes
+**Gaussian Naive Bayes**, also known as **Gaussian Discriminant Analysis (GDA)** or **Gaussian Discriminant Analysis Naive Bayes (GDANB)**, is a variant of the Naive Bayes algorithm for classification, which assumes that the features follow a Gaussian (normal) distribution and calculates the likelihood of a class for a given set of feature values by estimating the mean and variance of the feature values for each class.
+
 Let $D=\{(x_1, y_1), \ldots, (x_n,y_n)\}$ be the dataset, where $x_i \in \mathbb{R}^d$ and $y_i \in \{0, 1\}$.
 
 Let $P(x|y=1)\sim\mathcal{N}(\mu_1,\Sigma)$ and $P(x|y=0)\sim\mathcal{N}(\mu_0,\Sigma)$. We assume that the covariances are equal.
