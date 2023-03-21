@@ -16,3 +16,4 @@ This site is still under development.
 6. [Supervised Learning - Regression - Ridge/LASSO](./pages/Wk06.html)
 7. [Supervised Learning - Classification - K-NN, Decision tree](./pages/Wk07.html)
 8. [Supervised Learning - Classification - Generative Models - Naive Bayes](./pages/Wk08.html)
+9. [Discriminative Models - Perceptron; Logistic Regression](./pages/Wk09.html)
