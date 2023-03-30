@@ -68,7 +68,7 @@ The normal equation for linear regression, as seen before, needs the calculation
 As we know $w^*$ is the solution of an unconstrained optimization problem, we can solve it using gradient descent. It is given by,
 \begin{align*}
 w^{t+1} &= w^t - \eta^t \bigtriangledown f(w^t) \\
-\therefore w^{t+1} &= w^t - \eta^t \left [ 2(XX^T)w - 2(Xy) \right ]
+\therefore w^{t+1} &= w^t - \eta^t \left [ 2(XX^T)w^t - 2(Xy) \right ]
 \end{align*}
 where $\eta$ is a scalar used to control the step-size of the descent and $t$ is the current iteration.
 
@@ -77,7 +77,7 @@ Even in the above equation, the calculation of $XX^T$ is needed which is a compu
 ## Stochastic Gradient Descent
 Stochastic gradient descent (SGD) is an optimization algorithm used in machine learning for finding the parameters that minimize the loss function of a model. In contrast to traditional gradient descent, which updates the model parameters based on the entire dataset, SGD updates the parameters based on a randomly selected subset of the data, known as a batch. This results in faster training times and makes SGD particularly useful for large datasets.
 
-For every step $t$, rather than updating $w$ using the entire dataset, we use a small randomly selected ($k$) data points to update $w$. Therefore, the new gradient is $2(\tilde{X}\tilde{X}^Tw^t - \tilde{X}\tilde{y})$ where $\tilde{X}$ and $\tilde{y}$ is the small sample randomly selected from the dataset. This is manageable because $\tilde{X} \in \mathbb{R}^{d \times k}$ which is considerably smaller that $X$.
+For every step $t$, rather than updating $w$ using the entire dataset, we use a small randomly selected ($k$) data points to update $w$. Therefore, the new gradient is $2(\tilde{X}\tilde{X}^Tw^t - \tilde{X}\tilde{y})$ where $\tilde{X}$ and $\tilde{y}$ is the small sample randomly selected from the dataset. This is manageable because $\tilde{X} \in \mathbb{R}^{d \times k}$ which is considerably smaller than $X$.
 
 After T rounds, we use,
 $$

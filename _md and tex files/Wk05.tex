@@ -153,7 +153,7 @@ As we know \(w^*\) is the solution of an unconstrained optimization
 problem, we can solve it using gradient descent. It is given by,
 \begin{align*}
 w^{t+1} &= w^t - \eta^t \bigtriangledown f(w^t) \\
-\therefore \hspace{0.5em} w^{t+1} &= w^t - \eta^t \left [ 2(XX^T)w - 2(Xy) \right ]
+\therefore \hspace{0.5em} w^{t+1} &= w^t - \eta^t \left [ 2(XX^T)w^t - 2(Xy) \right ]
 \end{align*} where \(\eta\) is a scalar used to control the step-size of
 the descent and \(t\) is the current iteration.
 
@@ -179,7 +179,7 @@ dataset, we use a small randomly selected (\(k\)) data points to update
 and \(\tilde{y}\) is the small sample randomly selected from the
 dataset. This is manageable because
 \(\tilde{X} \in \mathbb{R}^{d \times k}\) which is considerably smaller
-that \(X\).
+than \(X\).
 
 After T rounds, we use, \[
 w ^T _{SGD} = \frac{1}{T}  \sum _{i=1} ^T w^i
