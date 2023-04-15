@@ -374,7 +374,7 @@ f(w^*) \le f(w^*) + \alpha^* g(w^*)
 <p>This algorithm only works if the dataset is linearly separable with a <span class="math inline">\(\gamma &gt; 0\)</span>.</p>
 <ol type="1">
 <li>Calculate <span class="math inline">\(Q=X^TX\)</span> directly or using a kernel as per the dataset.</li>
-<li>Use the dual formula, (<span class="math inline">\(\alpha^T1 - \frac{1}{2}\alpha^TY^TQY\alpha\)</span>), in the gradient descent algorithm to find a satisfactory <span class="math inline">\(\alpha\)</span>. Let the intial <span class="math inline">\(\alpha\)</span> be a zero vector <span class="math inline">\(\in \mathbb{R}^n_+\)</span>.</li>
+<li>Use the gradient of the dual formula (<span class="math inline">\(\alpha^T1 - \frac{1}{2}\alpha^TY^TQY\alpha\)</span>), in the gradient descent algorithm to find a satisfactory <span class="math inline">\(\alpha\)</span>. Let the intial <span class="math inline">\(\alpha\)</span> be a zero vector <span class="math inline">\(\in \mathbb{R}^n_+\)</span>.</li>
 <li>To predict:
 <ul>
 <li>For non-kernelized SVM: <span class="math inline">\(\text{label}(x_{test}) = w^Tx_{test} = \sum _{i=1} ^n \alpha _i y_i(x_i^Tx_{test})\)</span></li>
