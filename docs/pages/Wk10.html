@@ -387,7 +387,7 @@ f(w^*) \le f(w^*) + \alpha^* g(w^*)
 <h1>Soft-Margin SVM</h1>
 <p><strong>Soft-Margin SVM</strong> is an extension of the standard SVM algorithm that allows for some misclassifications in the training data. This is useful when the data is not linearly separable, as it allows the SVM to still find a decision boundary that separates the classes as best as possible while allowing for some errors. The degree to which misclassifications are allowed is controlled by a regularization parameter(<span class="math inline">\(C\)</span>), which is used to balance the trade-off between maximizing the margin and minimizing the number of misclassifications.</p>
 <p>The primal formulation for this is given by, <span class="math display">\[
-\min_{w, \epsilon}  \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i \quad s.t. (w^Tx_i)y_i + \epsilon_i \ge 1 \quad \forall i
+\min_{w, \epsilon}  \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i \quad s.t. \quad (w^Tx_i)y_i + \epsilon_i \ge 1;\quad \epsilon_i \ge 0\quad \forall i
 \]</span> where <span class="math inline">\(C\)</span> is the hyperparameter that is used to balance the trade-off between maximizing the margin and minimizing the number of misclassifications, and <span class="math inline">\(\epsilon_i\)</span> is the additional value required to satisy the constraints.</p>
 </section>
 <section id="credits" class="level1">

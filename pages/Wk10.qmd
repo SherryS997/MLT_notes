@@ -225,7 +225,7 @@ This algorithm only works if the dataset is linearly separable with a $\gamma > 
 
 The primal formulation for this is given by,
 $$
-\min_{w, \epsilon}  \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i \quad s.t. (w^Tx_i)y_i + \epsilon_i \ge 1 \quad \forall i
+\min_{w, \epsilon}  \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i \quad s.t. \quad (w^Tx_i)y_i + \epsilon_i \ge 1;\quad \epsilon_i \ge 0\quad \forall i
 $$
 where $C$ is the hyperparameter that is used to balance the trade-off between maximizing the margin and minimizing the number of misclassifications, and $\epsilon_i$ is the additional value required to satisy the constraints.
 
