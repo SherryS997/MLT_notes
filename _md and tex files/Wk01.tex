@@ -113,10 +113,10 @@ $$
 From the above equation, we can say that we can represent the data using $\{x_i^Tw_1, x_i^Tw_2, \ldots, x_i^Tw_d\}$, which are constants, and $\{w_1, w_2, \ldots, w_d\}$ which are vectors.\\
 Therefore, data which was initially $d \times n$ can now be represented with $d (d + n)$ elements which doesn't seem great at first. \\
 But if the data lies in a lower sub-space, the residues can be zero without the need for $d$ principal components. \\
-If the data can be represented using only $K$ principal components, where $K << d$, the data now can be compressed from $d \times n$ to $k(d + n)$.
+If the data can be represented using only $k$ principal components, where $k << d$, the data now can be compressed from $d \times n$ to $k(d + n)$.
 
 \subsection{Approximate Representation}
-If the data can be approximately represented by a lower sub-space, is it enough that we use only those $K$ projections? How much variance should be covered?
+If the data can be approximately represented by a lower sub-space, is it enough that we use only those $k$ projections? How much variance should be covered?
 \newpage
 Given a centered dataset $\{x_1, x_2, \ldots, x_n\}$ where $x_i \in \mathbb{R}^{d}$, let $C$ be its covariance matrix, and let $\{\lambda_1, \lambda_2, \ldots, \lambda_d \}$ be its eigenvalues, which are non-negative because the covariance matrix is a positive semi-definite matrix, placed in descending order, and let $\{w_1, w_2, \ldots, w_d \}$ be its corresponding eigenvectors of unit length. \\
 The eigen equation for the covariance matrix can be given by,

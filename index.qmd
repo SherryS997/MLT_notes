@@ -18,3 +18,4 @@ This site is still under development.
 8. [Supervised Learning - Classification - Generative Models - Naive Bayes](./pages/Wk08.html)
 9. [Discriminative Models - Perceptron; Logistic Regression](./pages/Wk09.html)
 10. [Support Vector Machines](./pages/Wk10.html)
+11. [Ensemble methods - Bagging and Boosting (Adaboost)](./pages/Wk11.html)

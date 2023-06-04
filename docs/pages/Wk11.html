@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MLT Notes - Unsupervised Learning - Clustering - K-means/Kernel K-means</title>
+<title>MLT Notes - Ensemble methods - Bagging and Boosting (Adaboost)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,7 +75,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Wk01.html">Notes</a></li><li class="breadcrumb-item"><a href="../pages/Wk03.html">Week-03</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      MLT Notes
+      </li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -150,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Wk03.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/Wk03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week-03</span></a>
   </div>
 </li>
@@ -208,19 +210,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-clustering" id="toc-introduction-to-clustering" class="nav-link active" data-scroll-target="#introduction-to-clustering">Introduction to Clustering</a></li>
-  <li><a href="#k-means-clustering-lloyds-algorithm" id="toc-k-means-clustering-lloyds-algorithm" class="nav-link" data-scroll-target="#k-means-clustering-lloyds-algorithm">K-means Clustering (Lloyd’s Algorithm)</a>
+  <li><a href="#dual-formulation-for-soft-margin-svm" id="toc-dual-formulation-for-soft-margin-svm" class="nav-link active" data-scroll-target="#dual-formulation-for-soft-margin-svm">Dual Formulation for Soft-Margin SVM</a>
   <ul class="collapse">
-  <li><a href="#the-algorithm" id="toc-the-algorithm" class="nav-link" data-scroll-target="#the-algorithm">The Algorithm</a></li>
-  <li><a href="#fact-regarding-lloyds-algorithm" id="toc-fact-regarding-lloyds-algorithm" class="nav-link" data-scroll-target="#fact-regarding-lloyds-algorithm">Fact regarding Lloyd’s Algorithm</a></li>
+  <li><a href="#dual-formulation" id="toc-dual-formulation" class="nav-link" data-scroll-target="#dual-formulation">Dual Formulation</a></li>
   </ul></li>
-  <li><a href="#convergence-of-k-means-algorithm" id="toc-convergence-of-k-means-algorithm" class="nav-link" data-scroll-target="#convergence-of-k-means-algorithm">Convergence of K-means Algorithm</a></li>
-  <li><a href="#nature-of-clusters-produced-by-k-means" id="toc-nature-of-clusters-produced-by-k-means" class="nav-link" data-scroll-target="#nature-of-clusters-produced-by-k-means">Nature of Clusters Produced by K-means</a></li>
-  <li><a href="#initialization-of-centroids-and-k-means" id="toc-initialization-of-centroids-and-k-means" class="nav-link" data-scroll-target="#initialization-of-centroids-and-k-means">Initialization of Centroids and K-means++</a>
-  <ul class="collapse">
-  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means">K-means++</a></li>
-  </ul></li>
-  <li><a href="#choice-of-k" id="toc-choice-of-k" class="nav-link" data-scroll-target="#choice-of-k">Choice of K</a></li>
   <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
@@ -230,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Unsupervised Learning - Clustering - K-means/Kernel K-means</h1>
+<h1 class="title">Ensemble methods - Bagging and Boosting (Adaboost)</h1>
 </div>
 
 
@@ -245,104 +238,62 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>PDF Link: <a href="../notes/Wk03.pdf">notes</a></p>
-<section id="introduction-to-clustering" class="level1">
-<h1>Introduction to Clustering</h1>
-<p>Clustering is a method of unsupervised machine learning that groups similar objects into clusters, discovering structure in data for exploratory analysis or as a pre-processing step for other algorithms.</p>
-<p>Our objective is to group <span class="math inline">\(n\)</span> datapoints into <span class="math inline">\(k\)</span> clusters.</p>
-<p>Notation: <span class="math display">\[
-\{x_1, x_2, \dots, x_n \} \hspace{6em} x_i \in \mathbb{R}^d
+<p>PDF Link: <a href="../notes/Wk11.pdf">notes</a></p>
+<section id="dual-formulation-for-soft-margin-svm" class="level1">
+<h1>Dual Formulation for Soft-Margin SVM</h1>
+<p>The primal formulation for Soft-Margin SVM is given by, <span class="math display">\[
+\min_{w, \epsilon}  \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i \quad s.t. \quad (w^Tx_i)y_i + \epsilon_i \ge 1;\quad \epsilon_i \ge 0\quad \forall i
+\]</span> where <span class="math inline">\(C\)</span> is the hyperparameter that is used to balance the trade-off between maximizing the margin and minimizing the number of misclassifications, and <span class="math inline">\(\epsilon_i\)</span> is the additional value required to satisy the constraints.</p>
+<p>The Lagrangian function <span class="math inline">\(\mathcal{L}(w, \epsilon, \alpha, \beta)\)</span> for our above function is defined as follows: <span class="math display">\[
+\mathcal{L}(w, \epsilon, \alpha, \beta) = \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i(1-(w^Tx_i)y_i - \epsilon_i) + \sum _{i=1} ^n \beta(-\epsilon_i)
+\]</span> where <span class="math inline">\(\alpha_i \ge 0\)</span> and <span class="math inline">\(\beta_i \ge 0\)</span> <span class="math inline">\(\forall i\)</span>.</p>
+<section id="dual-formulation" class="level2">
+<h2 class="anchored" data-anchor-id="dual-formulation">Dual Formulation</h2>
+<p>Maximizing the Lagrangian function w.r.t. <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, and minimizing it w.r.t. <span class="math inline">\(w\)</span> and <span class="math inline">\(\epsilon\)</span>, we get,</p>
+<p><span class="math display">\[
+\min _{w, \epsilon}\left [\max _{\alpha \ge 0; \beta \ge 0}\frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i(1-(w^Tx_i)y_i - \epsilon_i) + \sum _{i=1} ^n \beta(-\epsilon_i) \right ]
+\]</span></p>
+<p>The dual of this is given by,</p>
+<p><span class="math display">\[
+\max _{\alpha \ge 0; \beta \ge 0}\left [\min _{w, \epsilon}\frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i(1-(w^Tx_i)y_i - \epsilon_i) + \sum _{i=1} ^n \beta(-\epsilon_i) \right ]
+\]</span></p>
+<p><span class="math display">\[
+\max _{\alpha \ge 0; \beta \ge 0}\left [\min _{w, \epsilon}\mathcal{L}(w, \epsilon, \alpha, \beta) \right ] \quad \ldots[1]
+\]</span></p>
+<p>Differentiating the above function<span class="math inline">\([1]\)</span> w.r.t. <span class="math inline">\(w\)</span> while fixing <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, we get, <span class="math display">\[
+\frac{d\mathcal{L}}{dw}  = 0
 \]</span> <span class="math display">\[
-\{z_1, z_2, \dots, z_n\} \hspace{2em} z_i \in \{1, 2, \dots, k\}
-\]</span> <strong>Objective Function</strong>: <span class="math display">\[
-F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}_2 ^2
-\]</span> where <span class="math display">\[
-\mu _k = \frac{\displaystyle \sum _{i = 1} ^{n} {x_i \cdot \mathbf{1}(z_i=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbf{1}(z_i=k)}}
-\]</span> <strong>Goal</strong>: <span class="math display">\[
-\min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2
-\]</span> Unfortunately, finding a solution manually is an NP-Hard problem due to the existence of <span class="math inline">\(k^n\)</span> possibilities. As a result, alternative approaches must be considered to address this challenge.</p>
-</section>
-<section id="k-means-clustering-lloyds-algorithm" class="level1">
-<h1>K-means Clustering (Lloyd’s Algorithm)</h1>
-<p>Lloyd’s Algorithm, also known as the k-means algorithm, is a widely used and straightforward method for clustering that divides a dataset into <span class="math inline">\(K\)</span> pre-determined clusters by iteratively computing the mean distance between the points and their cluster centroids.</p>
-<section id="the-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="the-algorithm">The Algorithm</h2>
-<p>The algorithm is as follows:</p>
-<p><strong>Step 1: Initialization</strong>: Assign <span class="math inline">\(z_1^0, z_2^0, \ldots, z_n^0\)</span> where <span class="math inline">\(z_i^0 \in \{1, 2, \ldots, k\}\)</span>. The approach on how to initialize them is discussed later.</p>
-<p><strong>Step 2: Compute Means</strong>: <span class="math display">\[
-\mu _k ^t = \frac{\displaystyle \sum _{i = 1} ^{n} {x_i \cdot \mathbf{1}(z_i^t=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbf{1}(z_i^t=k)}} \hspace{2em} \forall k
+\frac{d}{dw} \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i(1-(w^Tx_i)y_i - \epsilon_i) + \sum _{i=1} ^n \beta(-\epsilon_i) = 0\\
+\]</span> <span class="math display">\[
+w_{\alpha, \beta}^* - \alpha_ix_iy_i = 0
+\]</span> <span class="math display">\[
+\therefore w_{\alpha, \beta}^* = \alpha_ix_iy_i \quad \ldots [2]
 \]</span></p>
-<p><strong>Step 3: Reassignment Step</strong>: <span class="math display">\[
-z _i ^{t+1} = \underset{k}{\arg \min} {|| x_i - \mu _{k} ^t ||}_2 ^2 \hspace{2em} \forall i
+<p>Differentiating the above function<span class="math inline">\([1]\)</span> w.r.t. <span class="math inline">\(\epsilon_i \forall i\)</span> while fixing <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, we get,</p>
+<p><span class="math display">\[
+\frac{\partial\mathcal{L}}{\partial\epsilon_i}  = 0
+\]</span> <span class="math display">\[
+\frac{\partial}{\partial\epsilon_i} \frac{1}{2}||w||^2_2 + C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i(1-(w^Tx_i)y_i - \epsilon_i) + \sum _{i=1} ^n \beta(-\epsilon_i) = 0
+\]</span> <span class="math display">\[
+C - \alpha_i -\beta_i = 0
+\]</span> <span class="math display">\[
+\therefore C = \alpha_i + \beta_i \quad \ldots [3]
 \]</span></p>
-<p><strong>Step 4: Loop until Convergence</strong>: Repeat steps 2 and 3 until convergence for <span class="math inline">\(t\)</span> iterations.</p>
+<p>Substituting the values of <span class="math inline">\(w\)</span> and <span class="math inline">\(\beta\)</span> from <span class="math inline">\([2]\)</span> and <span class="math inline">\([3]\)</span> in <span class="math inline">\([1]\)</span>, we get,</p>
+<p><span class="math display">\[
+\max _{\alpha \ge 0; \beta \ge 0; C = \alpha_i + \beta_i}\left [\frac{1}{2}||\alpha_ix_iy_i||^2_2 + C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i(1-((\alpha_ix_iy_i)^Tx_i)y_i - \epsilon_i) + \sum _{i=1} ^n (C-\alpha_i)(-\epsilon_i) \right ]
+\]</span> <span class="math display">\[
+\max _{\alpha \ge 0; \beta \ge 0; C = \alpha_i + \beta_i}\left [\frac{1}{2}\alpha_i^Tx_i^Ty_i^Ty_ix_i\alpha_i + C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i-\alpha_i^Tx_i^Ty_i^Ty_ix_i\alpha_i - \sum _{i=1} ^n \alpha_i\epsilon_i - C\sum _{i=1} ^n\epsilon_i + \sum _{i=1} ^n \alpha_i\epsilon_i \right ]
+\]</span> <span class="math display">\[
+\max _{\alpha \ge 0; \beta \ge 0; C = \alpha_i + \beta_i}\left [\sum _{i=1} ^n \alpha_i - \frac{1}{2}\alpha_i^Tx_i^Ty_i^Ty_ix_i\alpha_i\right ]
+\]</span> <span class="math display">\[
+\therefore \max _{0 \le \alpha \le C}\left [\sum _{i=1} ^n \alpha_i - \frac{1}{2}\alpha_i^Tx_i^Ty_i^Ty_ix_i\alpha_i\right ]
+\]</span></p>
 </section>
-<section id="fact-regarding-lloyds-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="fact-regarding-lloyds-algorithm">Fact regarding Lloyd’s Algorithm</h2>
-<p>Lloyd’s Algorithm, also known as K-means, is guaranteed to converge to a solution. While the converged solution may not be the optimal one, it has been observed to produce acceptable clustering results in practice.</p>
-</section>
-</section>
-<section id="convergence-of-k-means-algorithm" class="level1">
-<h1>Convergence of K-means Algorithm</h1>
-<p>The objective function strictly reduces after each reassignment. <span class="math display">\[
-F(z_1^{t+1}, z_2^{t+1}, \ldots, z_n^{t+1}) \le F(z_1^{t}, z_2^{t}, \ldots, z_n^{t})
-\]</span> And as there are only finite number of reassignments possible, the algorithm must converge.</p>
-<p><strong>Alternate Explanation</strong>: K-means algorithm converges because it is an iterative procedure that minimizes the sum of squared distances between points and their cluster centroids, which is a convex function with a global minimum. The algorithm will reach the convergence point, guaranteed to exist, under mild assumptions on the initial cluster means, making it a reliable tool for clustering.</p>
-</section>
-<section id="nature-of-clusters-produced-by-k-means" class="level1">
-<h1>Nature of Clusters Produced by K-means</h1>
-<p>Let <span class="math inline">\(\mu _1\)</span> and <span class="math inline">\(\mu _2\)</span> be the centroids of the clusters <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> respectively.</p>
-<p>For <span class="math inline">\(C_1\)</span>, <span class="math display">\[\begin{gather*}
-    {|| x - \mu _{1} ||}^2 \le {|| x - \mu _{2} ||}^2 \\
-    \therefore x^T(\mu _2 - \mu _1) \le \frac{||\mu _2||^2 - ||\mu _1||^2}{2} \hspace{2em} \forall x
-\end{gather*}\]</span> The cluster regions are known as half-spaces or Voronoi regions.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/clustering.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Voronoi regions for three clusters</figcaption>
-</figure>
-</div>
-<p>But what if the dataset is as follow:</p>
-<p><img src="../images/ccircles.png" class="img-fluid"></p>
-<p>The standard k-means algorithm may not perform well when the underlying clusters in the dataset have a non-linear structure. In such cases, alternative methods such as Kernel K-means or Spectral Clustering can be employed to improve clustering accuracy. However, the intricacies of these methods will not be covered in this session.</p>
-</section>
-<section id="initialization-of-centroids-and-k-means" class="level1">
-<h1>Initialization of Centroids and K-means++</h1>
-<p>One possible way to initialize the centroids is to randomly assign datapoints from the dataset as centroids.</p>
-<p>The other method is K-means++.</p>
-<section id="k-means" class="level2">
-<h2 class="anchored" data-anchor-id="k-means">K-means++</h2>
-<p>The premise is to select centroids that are as far as possible from each other.</p>
-<ul>
-<li>Step 1: Choose <span class="math inline">\(\mu _1 ^0\)</span> randomly from the dataset.</li>
-<li>Step 2: For <span class="math inline">\(l \in \{2, 3, \ldots, k\}\)</span>, choose <span class="math inline">\(\mu _l ^0\)</span> probablistically proportional to score(<span class="math inline">\(S\)</span>) where <span class="math inline">\(S\)</span> is, <span class="math display">\[
-  S(x) = \min _{\{j=1, 2, \ldots, l-1\}} {|| x - \mu _{j} ^0 ||}^2 \hspace{2em} \forall x
-\]</span> The probabilistic aspect of the algorithm provides an expected guarantee of optimal convergence in K-means. The guarantee is given by, <span class="math display">\[
-  \mathbb{E} \left[ \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2 \right ]
-  \le O(\log k) \left [ \min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2 \right ]
-\]</span> where <span class="math inline">\(O(\log k)\)</span> is a constant of order <span class="math inline">\(\log k\)</span>.</li>
-<li>Step 3: Once the centroids are determined, we proceed with Lloyd’s Algorithm.</li>
-</ul>
-</section>
-</section>
-<section id="choice-of-k" class="level1">
-<h1>Choice of K</h1>
-<p>A pre-requisite of K-means is <span class="math inline">\(k\)</span> or the number of clusters. But what if <span class="math inline">\(k\)</span> is unknown? If <span class="math inline">\(k\)</span> is choosen to be equal to <span class="math inline">\(n\)</span>, <span class="math display">\[
-F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||} ^2 = 0
-\]</span> But we don’t want as many clusters as datapoints. Therefore, <span class="math inline">\(k\)</span> needs to be as small as possible. We do this by penalizing large values of k. <span class="math display">\[
-\underset{k}{\arg \min} \left [ \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||} ^2 + \text{Penalty}(k) \right ]
-\]</span> Two common criteria for making the above argument:</p>
-<ul>
-<li>Akaike Information Criterion: <span class="math inline">\(\left [ 2K - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
-<li>Bayesian Information Criterion: <span class="math inline">\(\left [ K\ln(n) - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
-</ul>
-<p>Details for the same will be discussed in future lectures.</p>
 </section>
 <section id="credits" class="level1">
 <h1>Credits</h1>
-<ul>
-<li>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</li>
-</ul>
+<p>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</p>
 
 
 </section>
