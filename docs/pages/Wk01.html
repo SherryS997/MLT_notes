@@ -291,72 +291,70 @@ ul.task-list li input[type="checkbox"] {
 <section id="representation-learning" class="level1">
 <h1>Representation Learning</h1>
 <p>Representation learning is a sub-field of machine learning that focuses on learning meaningful and compact representations of complex data for tasks such as dimensionality reduction, clustering, and classification.</p>
-<p>Given a dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>, we need to find a representation for it with the minimum reconstruction error.</p>
-<p>Let <span class="math inline">\(w\)</span>, where <span class="math inline">\(||w||=1\)</span>, be the best linear representation of the dataset.</p>
+<p>Given a dataset <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^{d}\)</span>, we need to find a representation for it with the minimum reconstruction error.</p>
+<p>Let <span class="math inline">\(\mathbf{w}\)</span>, where <span class="math inline">\(||\mathbf{w}||=1\)</span>, be the best linear representation of the dataset.</p>
 <p>The representation is given by, <span class="math display">\[\begin{align*}
-    \frac{(x_i^Tw)}{w^Tw}&amp;w \\
-    \text{But }||w||&amp;=1\\
-    \therefore \text{ Projection } &amp;= (x_i^Tw)w
+    \frac{(\mathbf{x}_i^T\mathbf{w})}{\mathbf{w}^T\mathbf{w}}&amp;\mathbf{w} \\
+    \text{But }||\mathbf{w}||&amp;=1\\
+    \therefore \text{ Projection } &amp;= (\mathbf{x}_i^T\mathbf{w})\mathbf{w}
 \end{align*}\]</span> The reconstruction error is given by, <span class="math display">\[
-\text{Reconstruction Error}(f(w)) = \frac{1}{n} \sum _{i=1} ^{n} || x_i - (x_i^Tw)w || ^ 2
-\]</span> where <span class="math inline">\(x_i - (x_i^Tw)w\)</span> is the residue and can be given by <span class="math inline">\(x'\)</span>.</p>
+\text{Reconstruction Error}(f(\mathbf{w})) = \frac{1}{n} \sum _{i=1} ^{n} || \mathbf{x}_i - (\mathbf{x}_i^T\mathbf{w})\mathbf{w} || ^ 2
+\]</span> where <span class="math inline">\(\mathbf{x}_i - (\mathbf{x}_i^T\mathbf{w})\mathbf{w}\)</span> is the residue and can be given by <span class="math inline">\(\mathbf{x}'\)</span>.</p>
 <p>Our objective is to minimize the reconstruction error. Minimizing it, we get, <span class="math display">\[\begin{align*}
-    \min _{w \in ||w|| = 1} f(w) &amp;= \frac{1}{n} \sum _{i=1} ^{n} -(x_i^Tw)^2 \\
-    \therefore \max _{w \in ||w|| = 1} f(w) &amp;= \frac{1}{n} \sum _{i=1} ^{n} (x_i^Tw)^2 \\
-    &amp;= w^T(\frac{1}{n} \sum _{i=1} ^{n} x_ix_i^T)w \\
-    \max _{w \in ||w|| = 1} f(w) &amp;= w^TCw
-\end{align*}\]</span> where <span class="math inline">\(C=\displaystyle \frac{1}{n} \displaystyle \sum _{i=1} ^{n} x_ix_i^T\)</span> is the Covariance Matrix and <span class="math inline">\(C \in \mathbb{R}^{d \times d}\)</span>.</p>
-<p>From the above equation we find that <span class="math inline">\(w\)</span> is the eigenvector corresponding to the largest eigenvalue <span class="math inline">\(\lambda\)</span> of <span class="math inline">\(C\)</span>.</p>
-<p><span class="math inline">\(w\)</span> is also called the First Principal Component of the dataset.</p>
+    \min _{\mathbf{w} \in ||\mathbf{w}|| = 1} f(\mathbf{w}) &amp;= \frac{1}{n} \sum _{i=1} ^{n} -(\mathbf{x}_i^T\mathbf{w})^2 \\
+    \therefore \max _{\mathbf{w} \in ||\mathbf{w}|| = 1} f(\mathbf{w}) &amp;= \frac{1}{n} \sum _{i=1} ^{n} (\mathbf{x}_i^T\mathbf{w})^2 \\
+    &amp;= \mathbf{w}^T(\frac{1}{n} \sum _{i=1} ^{n} \mathbf{x}_i\mathbf{x}_i^T)\mathbf{w} \\
+    \max _{\mathbf{w} \in ||\mathbf{w}|| = 1} f(\mathbf{w}) &amp;= \mathbf{w}^T\mathbf{C}\mathbf{w}
+\end{align*}\]</span> where <span class="math inline">\(\mathbf{C}=\displaystyle \frac{1}{n} \displaystyle \sum _{i=1} ^{n} \mathbf{x}_i\mathbf{x}_i^T\)</span> is the Covariance Matrix and <span class="math inline">\(\mathbf{C} \in \mathbb{R}^{d \times d}\)</span>.</p>
+<p>From the above equation we find that <span class="math inline">\(\mathbf{w}\)</span> is the eigenvector corresponding to the largest eigenvalue <span class="math inline">\(\lambda\)</span> of <span class="math inline">\(\mathbf{C}\)</span>.</p>
+<p><span class="math inline">\(\mathbf{w}\)</span> is also called the First Principal Component of the dataset.</p>
 <section id="potential-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="potential-algorithm">Potential Algorithm</h2>
-<p>With this information, we can give the following algorithm:</p>
-<p>Given a dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>,</p>
+<p>With this information, we can give the following algorithm:\ Given a dataset <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^{d}\)</span>,</p>
 <ul>
 <li>Center the dataset <span class="math display">\[
-\mu = \frac{1}{n} \sum _{i=1} ^{n} x_i
+\mathbf{\mu} = \frac{1}{n} \sum _{i=1} ^{n} \mathbf{x}_i
 \]</span> <span class="math display">\[
-x_i = x_i - \mu  \hspace{2em} \forall i
+\mathbf{x}_i = \mathbf{x}_i - \mathbf{\mu}  \hspace{2em} \forall i
 \]</span></li>
-<li>Find the best representation <span class="math inline">\(w \in \mathbb{R}^d\)</span> and <span class="math inline">\(||w|| = 1\)</span>.</li>
-<li>Replace <span class="math inline">\(x_i = x_i - (x_i^Tw)w \hspace{1em} \forall i\)</span></li>
-<li>Repeat the first three steps until residues become zero and we obtain <span class="math inline">\(w_2, w_3, \ldots, w_d\)</span>.</li>
+<li>Find the best representation <span class="math inline">\(\mathbf{w} \in \mathbb{R}^d\)</span> and <span class="math inline">\(||\mathbf{w}|| = 1\)</span>.</li>
+<li>Replace <span class="math inline">\(\mathbf{x}_i = \mathbf{x}_i - (\mathbf{x}_i^T\mathbf{w})\mathbf{w} \hspace{1em} \forall i\)</span></li>
+<li>Repeat the first three steps until residues become zero and we obtain <span class="math inline">\(\mathbf{w}_2, \mathbf{w}_3, \ldots, \mathbf{w}_d\)</span>.</li>
 </ul>
-<p>But is this the best way? How many <span class="math inline">\(w\)</span> do we need for optimal compression?</p>
+<p>But is this the best way? How many <span class="math inline">\(\mathbf{w}\)</span> do we need for optimal compression?</p>
 </section>
 </section>
 <section id="principal-component-analysis" class="level1">
 <h1>Principal Component Analysis</h1>
 <p>Principal Component Analysis (PCA) is a technique used to reduce the dimensionality of a dataset by identifying the most important features, or principal components, that explain the maximum amount of variance in the data. PCA accomplishes this by transforming the original dataset into a new set of variables that are uncorrelated and ordered by their importance in explaining the variance in the data. This can be helpful for visualizing high-dimensional data or for preprocessing data before performing machine learning tasks.</p>
-<p>Following the potential algorithm from above, using the <span class="math inline">\(\{w_1, w_2, \ldots, w_d\}\)</span>, we get, <span class="math display">\[
-\forall i \hspace{1em} x_i - ((x_i^Tw_1)w_1 + (x_i^Tw_2)w_2 + \ldots +(x_i^Tw_d)w_d) = 0
+<p>Following the potential algorithm from above, using the <span class="math inline">\(\{\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_d\}\)</span>, we get, <span class="math display">\[
+\forall i \hspace{1em} \mathbf{x}_i - ((\mathbf{x}_i^T\mathbf{w}_1)\mathbf{w}_1 + (\mathbf{x}_i^T\mathbf{w}_2)\mathbf{w}_2 + \ldots +(\mathbf{x}_i^T\mathbf{w}_d)\mathbf{w}_d) = 0
 \]</span> <span class="math display">\[
-\therefore x_i = (x_i^Tw_1)w_1 + (x_i^Tw_2)w_2 + \ldots +(x_i^Tw_d)w_d
-\]</span> From the above equation, we can say that we can represent the data using <span class="math inline">\(\{x_i^Tw_1, x_i^Tw_2, \ldots, x_i^Tw_d\}\)</span>, which are constants, and <span class="math inline">\(\{w_1, w_2, \ldots, w_d\}\)</span> which are vectors.</p>
+\therefore \mathbf{x}_i = (\mathbf{x}_i^T\mathbf{w}_1)\mathbf{w}_1 + (\mathbf{x}_i^T\mathbf{w}_2)\mathbf{w}_2 + \ldots +(\mathbf{x}_i^T\mathbf{w}_d)\mathbf{w}_d
+\]</span> From the above equation, we can say that we can represent the data using <span class="math inline">\(\{\mathbf{x}_i^T\mathbf{w}_1, \mathbf{x}_i^T\mathbf{w}_2, \ldots, \mathbf{x}_i^T\mathbf{w}_d\}\)</span>, which are constants, and <span class="math inline">\(\{\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_d\}\)</span> which are vectors.</p>
 <p>Therefore, data which was initially <span class="math inline">\(d \times n\)</span> can now be represented with <span class="math inline">\(d (d + n)\)</span> elements which doesn’t seem great at first.</p>
 <p>But if the data lies in a lower sub-space, the residues can be zero without the need for <span class="math inline">\(d\)</span> principal components.</p>
 <p>If the data can be represented using only <span class="math inline">\(k\)</span> principal components, where <span class="math inline">\(k &lt;&lt; d\)</span>, the data now can be compressed from <span class="math inline">\(d \times n\)</span> to <span class="math inline">\(k(d + n)\)</span>.</p>
 <section id="approximate-representation" class="level2">
 <h2 class="anchored" data-anchor-id="approximate-representation">Approximate Representation</h2>
 <p>If the data can be approximately represented by a lower sub-space, is it enough that we use only those <span class="math inline">\(k\)</span> projections? How much variance should be covered?</p>
-<p>Given a centered dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>, let <span class="math inline">\(C\)</span> be its covariance matrix, and let <span class="math inline">\(\{\lambda_1, \lambda_2, \ldots, \lambda_d \}\)</span> be its eigenvalues, which are non-negative because the covariance matrix is a positive semi-definite matrix, placed in descending order, and let <span class="math inline">\(\{w_1, w_2, \ldots, w_d \}\)</span> be its corresponding eigenvectors of unit length.</p>
+<p>Given a centered dataset <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^{d}\)</span>, let <span class="math inline">\(\mathbf{C}\)</span> be its covariance matrix, and let <span class="math inline">\(\{\lambda_1, \lambda_2, \ldots, \lambda_d \}\)</span> be its eigenvalues, which are non-negative because the covariance matrix is a positive semi-definite matrix, placed in descending order, and let <span class="math inline">\(\{\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_d \}\)</span> be its corresponding eigenvectors of unit length.</p>
 <p>The eigen equation for the covariance matrix can be given by, <span class="math display">\[\begin{align*}
-    Cw &amp;= \lambda w \\
-    w^TCw &amp;= w^T\lambda w\\
-    \therefore \lambda &amp;= w^TCw \hspace{2em} \{w^Tw = 1\} \\
-    \lambda &amp;= \frac{1}{n} \sum _{i=1} ^{n} (x_i^Tw)^2 \\
-\end{align*}\]</span> Therefore, as the mean is zero, <span class="math inline">\(\lambda\)</span> gives the variance captured by the eigenvector <span class="math inline">\(w\)</span>.</p>
-<p>A good rule of thumb is that the variance captured by P.C.A. should be at least 95%. If the first <span class="math inline">\(K\)</span> eigenvectors capture the required variance, this is given by, <span class="math display">\[
-\frac{\displaystyle \sum _{k=1} ^{K} \lambda_k}{\displaystyle \sum _{i=1} ^{d} \lambda_i} \ge 0.95
+    \mathbf{C}\mathbf{w} &amp;= \lambda \mathbf{w} \\
+    \mathbf{w}^T\mathbf{C}\mathbf{w} &amp;= \mathbf{w}^T\lambda \mathbf{w}\\
+    \therefore \lambda &amp;= \mathbf{w}^T\mathbf{C}\mathbf{w} \hspace{2em} \{\mathbf{w}^T\mathbf{w} = 1\} \\
+    \lambda &amp;= \frac{1}{n} \sum _{i=1} ^{n} (\mathbf{x}_i^T\mathbf{w})^2 \\
+\end{align*}\]</span> Therefore, as the mean is zero, <span class="math inline">\(\lambda\)</span> gives the variance captured by the eigenvector <span class="math inline">\(\mathbf{w}\)</span>.</p>
+<p>A good rule of thumb is that the variance captured by P.C.A. should be at least 95%. If the first <span class="math inline">\(k\)</span> eigenvectors capture the required variance, this is given by, <span class="math display">\[
+\frac{\displaystyle \sum _{j=1} ^{k} \lambda_j}{\displaystyle \sum _{i=1} ^{d} \lambda_i} \ge 0.95
 \]</span> Hence, the higher the variance captured, the lower is the error obtained.</p>
 </section>
 <section id="p.c.a.-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="p.c.a.-algorithm">P.C.A. Algorithm</h2>
-<p>Given a centered dataset <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^{d}\)</span>, let <span class="math inline">\(C\)</span> be its covariance matrix.</p>
-<p>The algorithm is as follows:</p>
+<p>Given a centered dataset <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^{d}\)</span>, let <span class="math inline">\(\mathbf{C}\)</span> be its covariance matrix.\ The algorithm is as follows:</p>
 <ul>
-<li>Step 1: Find the eigenvalues and eigenvectors of <span class="math inline">\(C\)</span>. Let <span class="math inline">\(\{\lambda_1, \lambda_2, \ldots, \lambda_d \}\)</span> be its eigenvalues placed in the descending order, and let <span class="math inline">\(\{w_1, w_2, \ldots, w_d \}\)</span> be its corresponding eigenvectors of unit length.</li>
-<li>Step 2: Calculate <span class="math inline">\(K\)</span>, where <span class="math inline">\(K\)</span> is the number of required top eigenvalues and eigenvectors, according to the required variance that needs to be covered.</li>
+<li>Step 1: Find the eigenvalues and eigenvectors of <span class="math inline">\(\mathbf{C}\)</span>. Let <span class="math inline">\(\{\lambda_1, \lambda_2, \ldots, \lambda_d \}\)</span> be its eigenvalues placed in the descending order, and let <span class="math inline">\(\{\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_d \}\)</span> be its corresponding eigenvectors of unit length.</li>
+<li>Step 2: Calculate <span class="math inline">\(k\)</span>, where <span class="math inline">\(k\)</span> is the number of required top eigenvalues and eigenvectors, according to the required variance that needs to be covered.</li>
 <li>Step 3: Project the data onto the eigenvectors, and obtain the required representation as a linear combination of those projections.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
