@@ -54,7 +54,7 @@ $$
 $$
 \text{When }k=n\text{, the classification is too smooth.}
 $$
-![k=k^*](../images/k*.png)
+![k=k^*](../images/k_star.png)
 $$
 \text{When }k=k^*\text{, the classification is just right.}
 $$
