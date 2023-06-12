@@ -127,7 +127,7 @@ $$
     K^C=K-IK-KI+IKI
     $$
     where $K^C$ is the centered kernel, and $I \in \mathbb{R}^{n \times n}$ where all the elements are $\frac{1}{n}$.
-* Step 3: Compute the eigenvalues $\{\beta _1, \beta _2, \ldots, \beta _l\}$ and eigenvectors $\{n\lambda _1, n\lambda _2, \ldots, n\lambda _l\}$ of $K^C$ and normalize to get
+* Step 3: Compute the eigenvectors $\{\beta _1, \beta _2, \ldots, \beta _l\}$ and eigenvalues $\{n\lambda _1, n\lambda _2, \ldots, n\lambda _l\}$ of $K^C$ and normalize to get
     $$
     \forall u \hspace{2em} \alpha _u = \frac{\beta _u}{\sqrt{n \lambda _u}}
     $$

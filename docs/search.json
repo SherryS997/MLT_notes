@@ -7,27 +7,6 @@
     "text": "About this site"
   },
   {
-    "objectID": "pages/Wk02.html",
-    "href": "pages/Wk02.html",
-    "title": "Unsupervised Learning - Representation learning - Kernel PCA",
-    "section": "",
-    "text": "PDF Link: notes"
-  },
-  {
-    "objectID": "pages/Wk02.html#transforming-features",
-    "href": "pages/Wk02.html#transforming-features",
-    "title": "Unsupervised Learning - Representation learning - Kernel PCA",
-    "section": "Transforming Features",
-    "text": "Transforming Features\nWe solve the problem of non-linear relationships by mapping them to higher dimensions. \\[\nx \\to \\phi(x) \\hspace{2em} \\mathbb{R} ^d \\to \\mathbb{R} ^D \\hspace{2em} \\text{where } [D &gt;&gt; d]\n\\] To compute \\(D\\):\nLet \\(x=\\left [ \\begin{array} {cc}  f_1 & f_2 \\end{array} \\right ]\\) be features of a dataset containing datapoints lying on a curve of degree two in a two-dimensional space.\nTo make it linear from quadratic, we map the features to \\(\\phi(x)=\\left [ \\begin{array} {cccccc}  1 & f_1^2 & f_2^2 & f_1f_2 & f_1 & f_2 \\end{array} \\right ]\\)\nMapping \\(d\\) features to the polygonial power \\(p\\) gives \\(^{d+p} C_d\\) new features.\nIssue: Finding \\(\\phi(x)\\) may be very hard.\nSolution for this issue is in the next point."
-  },
-  {
-    "objectID": "pages/Wk02.html#kernel-functions",
-    "href": "pages/Wk02.html#kernel-functions",
-    "title": "Unsupervised Learning - Representation learning - Kernel PCA",
-    "section": "Kernel Functions",
-    "text": "Kernel Functions\nA function that maps \\(k: \\mathbb{R}^d \\times \\mathbb{R}^d \\to \\mathbb{R}\\), and is a “valid”, is called a Kernel Function.\nProof of a “Valid” Kernel:\n\nMethod 1: Exhibit the map to \\(\\phi\\) explicitly. [may be hard]\nMethod 2: Using Mercer’s Theorem:\n\n\\(k: \\mathbb{R}^d \\times \\mathbb{R}^d \\to \\mathbb{R}\\) is a “valid” kernel if and only if:\n\n\\(k\\) is symmetric i.e \\(k(x,x') = k(x',x)\\)\nFor any dataset \\(\\{x_1,x_2,\\ldots,x_n \\}\\), the matrix \\(K \\in \\mathbb{R}^{n \\times n}\\), where \\(K_{ij} = k(i,j)\\), is Positive Semi-Definite.\n\n\n\nTwo Popular Kernel Functions:\n\nPolynomial Kernel: \\(k(x,x') = (x^Tx + 1)^p\\)\nRadial Basis Function Kernel or Gaussian Kernel: \\(exp(-\\frac{||x-x'||^2}{2\\sigma^2})\\)"
-  },
-  {
     "objectID": "pages/Wk03.html",
     "href": "pages/Wk03.html",
     "title": "Unsupervised Learning - Clustering - K-means/Kernel K-means",
@@ -278,6 +257,27 @@
     "title": "Introduction; Unsupervised Learning - Representation learning - PCA",
     "section": "P.C.A. Algorithm",
     "text": "P.C.A. Algorithm\nGiven a centered dataset \\(\\{\\mathbf{x}_1, \\mathbf{x}_2, \\ldots, \\mathbf{x}_n\\}\\) where \\(\\mathbf{x}_i \\in \\mathbb{R}^{d}\\), let \\(\\mathbf{C}\\) be its covariance matrix.\\ The algorithm is as follows:\n\nStep 1: Find the eigenvalues and eigenvectors of \\(\\mathbf{C}\\). Let \\(\\{\\lambda_1, \\lambda_2, \\ldots, \\lambda_d \\}\\) be its eigenvalues placed in the descending order, and let \\(\\{\\mathbf{w}_1, \\mathbf{w}_2, \\ldots, \\mathbf{w}_d \\}\\) be its corresponding eigenvectors of unit length.\nStep 2: Calculate \\(k\\), where \\(k\\) is the number of required top eigenvalues and eigenvectors, according to the required variance that needs to be covered.\nStep 3: Project the data onto the eigenvectors, and obtain the required representation as a linear combination of those projections.\n\n\n\n\nThe dataset depicted in the diagram has two principal components: the green vector represents the first PC, whereas the red vector corresponds to the second PC.\n\n\nIn short, we can say that P.C.A. is a dimensionality reduction technique that finds combination of features that are de-correlated (independent of each other)."
+  },
+  {
+    "objectID": "pages/Wk02.html",
+    "href": "pages/Wk02.html",
+    "title": "Unsupervised Learning - Representation learning - Kernel PCA",
+    "section": "",
+    "text": "PDF Link: notes"
+  },
+  {
+    "objectID": "pages/Wk02.html#transforming-features",
+    "href": "pages/Wk02.html#transforming-features",
+    "title": "Unsupervised Learning - Representation learning - Kernel PCA",
+    "section": "Transforming Features",
+    "text": "Transforming Features\nWe solve the problem of non-linear relationships by mapping them to higher dimensions. \\[\nx \\to \\phi(x) \\hspace{2em} \\mathbb{R} ^d \\to \\mathbb{R} ^D \\hspace{2em} \\text{where } [D &gt;&gt; d]\n\\] To compute \\(D\\):\nLet \\(x=\\left [ \\begin{array} {cc}  f_1 & f_2 \\end{array} \\right ]\\) be features of a dataset containing datapoints lying on a curve of degree two in a two-dimensional space.\nTo make it linear from quadratic, we map the features to \\(\\phi(x)=\\left [ \\begin{array} {cccccc}  1 & f_1^2 & f_2^2 & f_1f_2 & f_1 & f_2 \\end{array} \\right ]\\)\nMapping \\(d\\) features to the polygonial power \\(p\\) gives \\(^{d+p} C_d\\) new features.\nIssue: Finding \\(\\phi(x)\\) may be very hard.\nSolution for this issue is in the next point."
+  },
+  {
+    "objectID": "pages/Wk02.html#kernel-functions",
+    "href": "pages/Wk02.html#kernel-functions",
+    "title": "Unsupervised Learning - Representation learning - Kernel PCA",
+    "section": "Kernel Functions",
+    "text": "Kernel Functions\nA function that maps \\(k: \\mathbb{R}^d \\times \\mathbb{R}^d \\to \\mathbb{R}\\), and is a “valid”, is called a Kernel Function.\nProof of a “Valid” Kernel:\n\nMethod 1: Exhibit the map to \\(\\phi\\) explicitly. [may be hard]\nMethod 2: Using Mercer’s Theorem:\n\n\\(k: \\mathbb{R}^d \\times \\mathbb{R}^d \\to \\mathbb{R}\\) is a “valid” kernel if and only if:\n\n\\(k\\) is symmetric i.e \\(k(x,x') = k(x',x)\\)\nFor any dataset \\(\\{x_1,x_2,\\ldots,x_n \\}\\), the matrix \\(K \\in \\mathbb{R}^{n \\times n}\\), where \\(K_{ij} = k(i,j)\\), is Positive Semi-Definite.\n\n\n\nTwo Popular Kernel Functions:\n\nPolynomial Kernel: \\(k(x,x') = (x^Tx + 1)^p\\)\nRadial Basis Function Kernel or Gaussian Kernel: \\(exp(-\\frac{||x-x'||^2}{2\\sigma^2})\\)"
   },
   {
     "objectID": "index.html",
