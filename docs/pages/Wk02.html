@@ -219,7 +219,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#kernel-functions" id="toc-kernel-functions" class="nav-link" data-scroll-target="#kernel-functions">Kernel Functions</a></li>
   </ul></li>
   <li><a href="#kernel-pca" id="toc-kernel-pca" class="nav-link" data-scroll-target="#kernel-pca">Kernel PCA</a></li>
-  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -246,117 +245,111 @@ ul.task-list li input[type="checkbox"] {
 <p>PDF Link: <a href="../notes/Wk02.pdf">notes</a></p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>For a given dataset <span class="math inline">\(D \in \mathbb{R} ^{d \times n}\)</span>, the covariance matrix is <span class="math inline">\(C \in \mathbb{R} ^{d \times d}\)</span>. PCA for this dataset can have the following two problems:</p>
+<p>For a given dataset <span class="math inline">\(\mathbf{X} \in \mathbb{R} ^{d \times n}\)</span>, the covariance matrix is <span class="math inline">\(\mathbf{C} \in \mathbb{R} ^{d \times d}\)</span>. PCA for this dataset can have the following two problems:</p>
 <ul>
-<li>Time Complexity: The algorithimic complexity of finding the eigenvalues and eigenvectors of <span class="math inline">\(C\)</span> is <span class="math inline">\(O(d ^3)\)</span>. Hence, as <span class="math inline">\(d\)</span> grows, the time taken becomes very large.</li>
-<li>Non-Linear Dataset: The dataset may lie in a non-linear subspace. As PCA tries to get linear combination of Principal Components, non-linear datasets may result in non-optimal outputs.</li>
+<li><strong>Time Complexity</strong>: The algorithimic complexity of finding the eigenvalues and eigenvectors of <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(O(d ^3)\)</span>. Hence, as <span class="math inline">\(d\)</span> grows, the time taken becomes very large.</li>
+<li><strong>Non-Linear Dataset</strong>: The dataset may lie in a non-linear subspace. As PCA tries to get linear combination of Principal Components, non-linear datasets may result in non-optimal outputs. </li>
 </ul>
 </section>
 <section id="reducing-the-time-complexity-to-find-eigenvalues-and-eigenvectors" class="level1">
 <h1>Reducing the Time Complexity to find Eigenvalues and Eigenvectors</h1>
-<p>Let’s take a dataset <span class="math inline">\(X\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where</p>
+<p>Let’s take a dataset <span class="math inline">\(\mathbf{X}\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where</p>
 <ul>
 <li><span class="math inline">\(d\)</span>: no. of features</li>
-<li><span class="math inline">\(n\)</span>: no. of datapoints</li>
-</ul>
-<p><span class="math display">\[
-X=\left [
+<li><span class="math inline">\(n\)</span>: no. of datapoints <span class="math display">\[
+\mathbf{X}=\left [
 \begin{array}{ccccc}
-    | &amp; | &amp; | &amp; &amp; | \\
-    x_1 &amp; x_2 &amp; x_3 &amp; \ldots &amp; x_n \\
-    | &amp; | &amp; | &amp; &amp; |
+  | &amp; | &amp; | &amp; &amp; | \\
+  \mathbf{x}_1 &amp; \mathbf{x}_2 &amp; \mathbf{x}_3 &amp; \ldots &amp; \mathbf{x}_n \\
+  | &amp; | &amp; | &amp; &amp; |
 \end{array}
 \right ]
-X \in \mathbb{R} ^{d \times n}
-\]</span> The covariance matrix <span class="math inline">\(C\)</span> of <span class="math inline">\(X\)</span> is given by, <span class="math display">\[
-C=\frac{1}{n}(X  X ^T) \text{\hspace{2em}where } C \in \mathbb{R}^{d \times d} \hspace{2em} \ldots[1]
-\]</span> Let <span class="math inline">\(w_k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(\lambda _k\)</span> of <span class="math inline">\(C\)</span>.</p>
+\quad \mathbf{X} \in \mathbb{R} ^{d \times n}
+\]</span></li>
+</ul>
+<p>The covariance matrix <span class="math inline">\(\mathbf{C}\)</span> of <span class="math inline">\(\mathbf{X}\)</span> is given by, <span class="math display">\[
+\mathbf{C}=\frac{1}{n}(\mathbf{X}  \mathbf{X} ^T) \text{\quad where } \mathbf{C} \in \mathbb{R}^{d \times d} \quad \ldots[1]
+\]</span> Let <span class="math inline">\(\mathbf{w}_k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(\lambda _k\)</span> of <span class="math inline">\(\mathbf{C}\)</span>.</p>
 <p>We know <span class="math display">\[
-Cw_k=\lambda _k w_k
-\]</span> Substituting <span class="math inline">\(C\)</span> from <span class="math inline">\([1]\)</span> in the above equation, and solving for <span class="math inline">\(w_k\)</span>, we get <span class="math display">\[
-w_k = \sum _{i=1} ^n (\frac{x_i ^T w_k}{n \lambda _k})\cdot{x_i}
-\]</span> <span class="math inline">\(\therefore\)</span> <span class="math inline">\(w_k\)</span> is a linear combination of datapoints! Hence, we can say <span class="math display">\[
-w_k= X \alpha _k \text{\hspace{2em} for some } \alpha _k \hspace{2em} \ldots [2]
-\]</span> Let <span class="math inline">\(X ^T X = K\)</span> where <span class="math inline">\(K \in \mathbb{R} ^{n \times n}\)</span>. We shall use this to solve for <span class="math inline">\(\alpha _k\)</span>. After some algebra (Refer to lectures), we get: <span class="math display">\[
-K \alpha _k = (n \lambda _k) \alpha _k
-\]</span> We know that the non-zero eigenvalues of <span class="math inline">\(XX^T\)</span> and <span class="math inline">\(X^T X\)</span> are the same according to the Spectral Theorm.</p>
-<p><strong>Explanation for the above</strong>: If <span class="math inline">\(\lambda \ne 0\)</span> is an eigenvalue of <span class="math inline">\(XX^T\)</span> with eigenvector <span class="math inline">\(w\)</span>, then <span class="math inline">\(XX^Tw=\lambda w\)</span>.</p>
-<p>Multiply both sides by <span class="math inline">\(X^T\)</span> to get <span class="math display">\[X^TX(X^Tw)=\lambda X^Tw\]</span> But then we see that <span class="math inline">\(\lambda\)</span> is still an eigenvalue for <span class="math inline">\(X^TX\)</span> and the corresponding eigenvector is simply <span class="math inline">\(X^Tw\)</span>.</p>
-<p>Let <span class="math inline">\(\beta _k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(n \lambda _k\)</span> of <span class="math inline">\(K\)</span>.</p>
-<p>On solving the eigen equation for <span class="math inline">\(K\)</span>, we get <span class="math display">\[
-\alpha _k= \frac{\beta _k}{\sqrt{n \lambda _k}} \hspace{2em} \ldots [3]
-\]</span> Using equations [2] and [3], we can get the eigenvalues and eigenvectors of <span class="math inline">\(C\)</span> using <span class="math inline">\(K\)</span> and hence, bringing the time complexity from <span class="math inline">\(O(d ^3)\)</span> to <span class="math inline">\(O(n^3)\)</span>.</p>
+\mathbf{C}\mathbf{w}_k=\lambda _k \mathbf{w}_k
+\]</span> Substituting <span class="math inline">\(\mathbf{C}\)</span> from <span class="math inline">\([1]\)</span> in the above equation, and solving for <span class="math inline">\(\mathbf{w}_k\)</span>, we get <span class="math display">\[
+\mathbf{w}_k = \sum _{i=1} ^n (\frac{\mathbf{x}_i ^T \mathbf{w}_k}{n \lambda _k})\cdot{\mathbf{x}_i}
+\]</span> <span class="math inline">\(\therefore\)</span> <span class="math inline">\(\mathbf{w}_k\)</span> is a linear combination of datapoints! Hence, we can say <span class="math display">\[
+\mathbf{w}_k= \mathbf{X} \alpha _k \text{\quad for some } \alpha _k \quad \ldots [2]
+\]</span> Let <span class="math inline">\(\mathbf{X} ^T \mathbf{X} = \mathbf{K}\)</span> where <span class="math inline">\(\mathbf{K} \in \mathbb{R} ^{n \times n}\)</span>. We shall use this to solve for <span class="math inline">\(\alpha _k\)</span>. After some algebra (Refer to lectures), we get: <span class="math display">\[
+\mathbf{K} \alpha _k = (n \lambda _k) \alpha _k
+\]</span> We know that the non-zero eigenvalues of <span class="math inline">\(\mathbf{X}\mathbf{X}^T\)</span> and <span class="math inline">\(\mathbf{X}^T \mathbf{X}\)</span> are the same according to the Spectral Theorem.</p>
+<p><strong>Explanation for the above</strong>: If <span class="math inline">\(\lambda \ne 0\)</span> is an eigenvalue of <span class="math inline">\(\mathbf{X}\mathbf{X}^T\)</span> with eigenvector <span class="math inline">\(\mathbf{w}\)</span>, then <span class="math inline">\(\mathbf{X}\mathbf{X}^T\mathbf{w}=\lambda \mathbf{w}\)</span>.</p>
+<p>Multiply both sides by <span class="math inline">\(\mathbf{X}^T\)</span> to get <span class="math display">\[\mathbf{X}^T \mathbf{X}(\mathbf{X}^T\mathbf{w})=\lambda \mathbf{X}^T\mathbf{w}\]</span> But then we see that <span class="math inline">\(\lambda\)</span> is still an eigenvalue for <span class="math inline">\(\mathbf{X}^T\mathbf{X}\)</span> and the corresponding eigenvector is simply <span class="math inline">\(\mathbf{X}^T\mathbf{w}\)</span>.</p>
+<p>Let <span class="math inline">\(\beta _k\)</span> be the the eigenvector corresponding to the <span class="math inline">\(k ^{th}\)</span> largest eigenvalue <span class="math inline">\(n \lambda _k\)</span> of <span class="math inline">\(\mathbf{K}\)</span>.</p>
+<p>On solving the eigen equation for <span class="math inline">\(\mathbf{K}\)</span>, we get <span class="math display">\[
+\alpha _k= \frac{\beta _k}{\sqrt{n \lambda _k}} \quad \ldots [3]
+\]</span> Using equations [2] and [3], we can get the eigenvalues and eigenvectors of <span class="math inline">\(\mathbf{C}\)</span> using <span class="math inline">\(\mathbf{K}\)</span> and hence, bringing the time complexity from <span class="math inline">\(O(d ^3)\)</span> to <span class="math inline">\(O(n^3)\)</span>.</p>
 </section>
 <section id="finding-pca-for-non-linear-relationships" class="level1">
 <h1>Finding PCA for Non-Linear Relationships</h1>
 <section id="transforming-features" class="level2">
 <h2 class="anchored" data-anchor-id="transforming-features">Transforming Features</h2>
 <p>We solve the problem of non-linear relationships by mapping them to higher dimensions. <span class="math display">\[
-x \to \phi(x) \hspace{2em} \mathbb{R} ^d \to \mathbb{R} ^D \hspace{2em} \text{where } [D &gt;&gt; d]
+\mathbf{x} \to \phi(\mathbf{x}) \quad \mathbb{R} ^d \to \mathbb{R} ^D \quad \text{where } [D &gt;&gt; d]
 \]</span> To compute <span class="math inline">\(D\)</span>:</p>
-<p>Let <span class="math inline">\(x=\left [ \begin{array} {cc}  f_1 &amp; f_2 \end{array} \right ]\)</span> be features of a dataset containing datapoints lying on a curve of degree two in a two-dimensional space.</p>
-<p>To make it linear from quadratic, we map the features to <span class="math inline">\(\phi(x)=\left [ \begin{array} {cccccc}  1 &amp; f_1^2 &amp; f_2^2 &amp; f_1f_2 &amp; f_1 &amp; f_2 \end{array} \right ]\)</span></p>
+<p>Let <span class="math inline">\(\mathbf{x}=\left [ \begin{array} {cc}  f_1 &amp; f_2 \end{array} \right ]\)</span> be features of a dataset containing datapoints lying on a curve of degree two in a two-dimensional space.</p>
+<p>To make it linear from quadratic, we map the features to <span class="math inline">\(\phi(\mathbf{x})=\left [ \begin{array} {cccccc}  1 &amp; f_1^2 &amp; f_2^2 &amp; f_1f_2 &amp; f_1 &amp; f_2 \end{array} \right ]\)</span></p>
 <p>Mapping <span class="math inline">\(d\)</span> features to the polygonial power <span class="math inline">\(p\)</span> gives <span class="math inline">\(^{d+p} C_d\)</span> new features.</p>
-<p><strong>Issue</strong>: Finding <span class="math inline">\(\phi(x)\)</span> may be very hard.</p>
+<p><strong>Issue</strong>: Finding <span class="math inline">\(\phi(\mathbf{x})\)</span> may be very hard.</p>
 <p>Solution for this issue is in the next point.</p>
 </section>
 <section id="kernel-functions" class="level2">
 <h2 class="anchored" data-anchor-id="kernel-functions">Kernel Functions</h2>
 <p>A function that maps <span class="math inline">\(k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span>, and is a “valid”, is called a Kernel Function.</p>
-<p>Proof of a “Valid” Kernel:</p>
+<p><strong>Proof of a “Valid” Kernel:</strong></p>
 <ul>
-<li>Method 1: Exhibit the map to <span class="math inline">\(\phi\)</span> explicitly. [may be hard]</li>
-<li>Method 2: Using Mercer’s Theorem:
+<li><strong>Method 1</strong>: Exhibit the map to <span class="math inline">\(\phi\)</span> explicitly. [may be hard]</li>
+<li><strong>Method 2</strong>: Using Mercer’s Theorem:
 <ul>
 <li><span class="math inline">\(k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span> is a “valid” kernel if and only if:
 <ul>
-<li><span class="math inline">\(k\)</span> is symmetric i.e <span class="math inline">\(k(x,x') = k(x',x)\)</span></li>
-<li>For any dataset <span class="math inline">\(\{x_1,x_2,\ldots,x_n \}\)</span>, the matrix <span class="math inline">\(K \in \mathbb{R}^{n \times n}\)</span>, where <span class="math inline">\(K_{ij} = k(i,j)\)</span>, is Positive Semi-Definite.</li>
+<li><span class="math inline">\(k\)</span> is symmetric i.e <span class="math inline">\(k(\mathbf{x},\mathbf{x}') = k(\mathbf{x}',\mathbf{x})\)</span></li>
+<li>For any dataset <span class="math inline">\(\{\mathbf{x}_1,\mathbf{x}_2,\ldots,\mathbf{x}_n \}\)</span>, the matrix <span class="math inline">\(\mathbf{K} \in \mathbb{R}^{n \times n}\)</span>, where <span class="math inline">\(\mathbf{K}_{ij} = k(i,j)\)</span>, is Positive Semi-Definite.</li>
 </ul></li>
 </ul></li>
 </ul>
-<p>Two Popular Kernel Functions:</p>
+<p><strong>Two Popular Kernel Functions</strong>:</p>
 <ul>
-<li><strong>Polynomial Kernel</strong>: <span class="math inline">\(k(x,x') = (x^Tx + 1)^p\)</span></li>
-<li><strong>Radial Basis Function Kernel</strong> or <strong>Gaussian Kernel</strong>: <span class="math inline">\(exp(-\frac{||x-x'||^2}{2\sigma^2})\)</span></li>
+<li><strong>Polynomial Kernel</strong>: <span class="math inline">\(k(\mathbf{x},\mathbf{x}') = (\mathbf{x}^T\mathbf{x} + 1)^p\)</span></li>
+<li><strong>Radial Basis Function Kernel or Gaussian Kernel</strong>: <span class="math inline">\(exp(-\displaystyle \frac{||\mathbf{x}-\mathbf{x}'||^2}{2\sigma^2})\)</span></li>
 </ul>
 </section>
 </section>
 <section id="kernel-pca" class="level1">
 <h1>Kernel PCA</h1>
-<p>Let’s take a dataset <span class="math inline">\(X\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where</p>
+<p>Let’s take a dataset <span class="math inline">\(\mathbf{X}\)</span> with a large number of features(<span class="math inline">\(d\)</span>) i.e.&nbsp;<span class="math inline">\([d &gt;&gt; n]\)</span> where</p>
 <ul>
 <li><p><span class="math inline">\(d\)</span>: no. of features</p></li>
 <li><p><span class="math inline">\(n\)</span>: no. of datapoints <span class="math display">\[
-X=\left [
+\mathbf{X}=\left [
 \begin{array}{ccccc}
   | &amp; | &amp; | &amp; &amp; | \\
-  x_1 &amp; x_2 &amp; x_3 &amp; \ldots &amp; x_4 \\
+  \mathbf{x}_1 &amp; \mathbf{x}_2 &amp; \mathbf{x}_3 &amp; \ldots &amp; \mathbf{x}_4 \\
   | &amp; | &amp; | &amp; &amp; |
 \end{array}
 \right ]
 \]</span></p></li>
-<li><p>Step 1: Calculate <span class="math inline">\(K \in \mathbb{R}^{n \times n}\)</span> using a kernel function where <span class="math inline">\(K_{ij}=k(x_i,x_j)\)</span>.</p></li>
-<li><p>Step 2: Center the kernel using the following formula. <span class="math display">\[
-  K^C=K-IK-KI+IKI
-  \]</span> where <span class="math inline">\(K^C\)</span> is the centered kernel, and <span class="math inline">\(I \in \mathbb{R}^{n \times n}\)</span> where all the elements are <span class="math inline">\(\frac{1}{n}\)</span>.</p></li>
-<li><p>Step 3: Compute the eigenvectors <span class="math inline">\(\{\beta _1, \beta _2, \ldots, \beta _l\}\)</span> and eigenvalues <span class="math inline">\(\{n\lambda _1, n\lambda _2, \ldots, n\lambda _l\}\)</span> of <span class="math inline">\(K^C\)</span> and normalize to get <span class="math display">\[
-  \forall u \hspace{2em} \alpha _u = \frac{\beta _u}{\sqrt{n \lambda _u}}
+<li><p><strong>Step 1</strong>: Calculate <span class="math inline">\(\mathbf{K} \in \mathbb{R}^{n \times n}\)</span> using a kernel function where <span class="math inline">\(\mathbf{K}_{ij}=k(\mathbf{x}_i,\mathbf{x}_j)\)</span>.</p></li>
+<li><p><strong>Step 2</strong>: Center the kernel using the following formula. <span class="math display">\[
+  \mathbf{K}^C=\mathbf{K}-\mathbf{I}\mathbf{K}-\mathbf{K}\mathbf{I}+\mathbf{I}\mathbf{K}\mathbf{I}
+  \]</span> where <span class="math inline">\(\mathbf{K}^C\)</span> is the centered kernel, and <span class="math inline">\(\mathbf{I} \in \mathbb{R}^{n \times n}\)</span> where all the elements are <span class="math inline">\(\frac{1}{n}\)</span>.</p></li>
+<li><p><strong>Step 3</strong>: Compute the eigenvectors <span class="math inline">\(\{\beta _1, \beta _2, \ldots, \beta _l\}\)</span> and eigenvalues <span class="math inline">\(\{n\lambda _1, n\lambda _2, \ldots, n\lambda _l\}\)</span> of <span class="math inline">\(\mathbf{K}^C\)</span> and normalize to get <span class="math display">\[
+  \forall u \quad \alpha _u = \frac{\beta _u}{\sqrt{n \lambda _u}}
   \]</span></p></li>
-<li><p>Step 4: Compute <span class="math inline">\(\sum _{j=1} ^{n} \alpha _{kj} K^C_{ij} \hspace{1em} \forall k\)</span> <span class="math display">\[
-  x_i \in \mathbb{R}^{d} \to
+<li><p><strong>Step 4</strong>: Compute <span class="math inline">\(\sum _{j=1} ^{n} \alpha _{kj} \mathbf{K}^C_{ij} \hspace{1em} \forall k\)</span> <span class="math display">\[
+  \mathbf{x}_i \in \mathbb{R}^{d} \to
   \left [
 \begin{array}{cccc}
-  \sum _{j=1} ^{n} \alpha _{1j} K^C_{ij} &amp; \sum _{j=1} ^{n} \alpha _{2j} K^C_{ij} &amp; \ldots &amp; \sum _{j=1} ^{n} \alpha _{nj} K^C_{ij}
+  \sum _{j=1} ^{n} \alpha _{1j} \mathbf{K}^C_{ij} &amp; \sum _{j=1} ^{n} \alpha _{2j} \mathbf{K}^C_{ij} &amp; \ldots &amp; \sum _{j=1} ^{n} \alpha _{nj} \mathbf{K}^C_{ij}
 \end{array}
 \right ]
   \]</span></p></li>
-</ul>
-</section>
-<section id="credits" class="level1">
-<h1>Credits</h1>
-<ul>
-<li>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</li>
 </ul>
 
 

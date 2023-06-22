@@ -60,7 +60,7 @@ Setting the above equation to zero, we get
 \end{align*}
 where $(XX^T)^+$ is the pseudo-inverse of $XX^T$.
 
-On further analysis of the above equation, we can say that $X^Tw$	 is the projection of the labels onto the subspace spanned by the features.
+On further analysis of the above equation, we can say that $X^Tw$ is the projection of the labels onto the subspace spanned by the features.
 
 # Gradient Descent
 The normal equation for linear regression, as seen before, needs the calculation of $(XX^T)^+$ which can computationally be of $O(d^3)$ complexity. 
@@ -88,7 +88,7 @@ This has a certain guarantee to have optimal convergence partly because of the r
 # Kernel Regression
 What if the data points lie in a non-linear sub-space? Just like in the case of clustering non-linear data, we will use kernel functions here too.
 
-Let $w^* = X\alpha^*$ for some $\alpha^* \in \mathbb{R}^d$.
+Let $w^* = X\alpha^*$ for some $\alpha^* \in \mathbb{R}^n$.
 \begin{align*}
 X\alpha^*&=w^*\\
 \therefore X\alpha^* &=(XX^T)^+Xy \\
