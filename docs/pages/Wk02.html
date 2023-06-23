@@ -219,6 +219,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#kernel-functions" id="toc-kernel-functions" class="nav-link" data-scroll-target="#kernel-functions">Kernel Functions</a></li>
   </ul></li>
   <li><a href="#kernel-pca" id="toc-kernel-pca" class="nav-link" data-scroll-target="#kernel-pca">Kernel PCA</a></li>
+  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -248,7 +249,7 @@ ul.task-list li input[type="checkbox"] {
 <p>For a given dataset <span class="math inline">\(\mathbf{X} \in \mathbb{R} ^{d \times n}\)</span>, the covariance matrix is <span class="math inline">\(\mathbf{C} \in \mathbb{R} ^{d \times d}\)</span>. PCA for this dataset can have the following two problems:</p>
 <ul>
 <li><strong>Time Complexity</strong>: The algorithimic complexity of finding the eigenvalues and eigenvectors of <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(O(d ^3)\)</span>. Hence, as <span class="math inline">\(d\)</span> grows, the time taken becomes very large.</li>
-<li><strong>Non-Linear Dataset</strong>: The dataset may lie in a non-linear subspace. As PCA tries to get linear combination of Principal Components, non-linear datasets may result in non-optimal outputs. </li>
+<li><strong>Non-Linear Dataset</strong>: The dataset may lie in a non-linear subspace. As PCA tries to get linear combination of Principal Components, non-linear datasets may result in non-optimal outputs.</li>
 </ul>
 </section>
 <section id="reducing-the-time-complexity-to-find-eigenvalues-and-eigenvectors" class="level1">
@@ -342,14 +343,20 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Step 3</strong>: Compute the eigenvectors <span class="math inline">\(\{\beta _1, \beta _2, \ldots, \beta _l\}\)</span> and eigenvalues <span class="math inline">\(\{n\lambda _1, n\lambda _2, \ldots, n\lambda _l\}\)</span> of <span class="math inline">\(\mathbf{K}^C\)</span> and normalize to get <span class="math display">\[
   \forall u \quad \alpha _u = \frac{\beta _u}{\sqrt{n \lambda _u}}
   \]</span></p></li>
-<li><p><strong>Step 4</strong>: Compute <span class="math inline">\(\sum _{j=1} ^{n} \alpha _{kj} \mathbf{K}^C_{ij} \hspace{1em} \forall k\)</span> <span class="math display">\[
-  \mathbf{x}_i \in \mathbb{R}^{d} \to
+<li><p><strong>Step 4</strong>: Compute <span class="math inline">\(\displaystyle \sum _{j=1} ^{n} \alpha _{kj} \mathbf{K}^C_{ij} \hspace{1em} \forall k\)</span> <span class="math display">\[
+  \phi(\mathbf{x}_i)^T\mathbf{w} \in \mathbb{R}^{d} \to
   \left [
 \begin{array}{cccc}
-  \sum _{j=1} ^{n} \alpha _{1j} \mathbf{K}^C_{ij} &amp; \sum _{j=1} ^{n} \alpha _{2j} \mathbf{K}^C_{ij} &amp; \ldots &amp; \sum _{j=1} ^{n} \alpha _{nj} \mathbf{K}^C_{ij}
+  \displaystyle \sum _{j=1} ^{n} \alpha _{1j} \mathbf{K}^C_{ij} &amp; \displaystyle \sum _{j=1} ^{n} \alpha _{2j} \mathbf{K}^C_{ij} &amp; \ldots &amp; \displaystyle \sum _{j=1} ^{n} \alpha _{nj} \mathbf{K}^C_{ij}
 \end{array}
 \right ]
   \]</span></p></li>
+</ul>
+</section>
+<section id="credits" class="level1">
+<h1>Credits</h1>
+<ul>
+<li>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</li>
 </ul>
 
 

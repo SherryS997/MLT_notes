@@ -9,7 +9,6 @@ For a given dataset $\mathbf{X} \in \mathbb{R} ^{d \times n}$, the covariance ma
 
 * **Time Complexity**: The algorithimic complexity of finding the eigenvalues and eigenvectors of $\mathbf{C}$ is $O(d ^3)$. Hence, as $d$ grows, the time taken becomes very large.
 * **Non-Linear Dataset**: The dataset may lie in a non-linear subspace. As PCA tries to get linear combination of Principal Components, non-linear datasets may result in non-optimal outputs.
-\pagebreak
 
 # Reducing the Time Complexity to find Eigenvalues and Eigenvectors
 Let's take a dataset $\mathbf{X}$ with a large number of features($d$) i.e. $[d >> n]$ where 
@@ -107,8 +106,6 @@ A function that maps $k: \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$, and i
 * **Polynomial Kernel**: $k(\mathbf{x},\mathbf{x}') = (\mathbf{x}^T\mathbf{x} + 1)^p$
 * **Radial Basis Function Kernel or Gaussian Kernel**: $exp(-\displaystyle \frac{||\mathbf{x}-\mathbf{x}'||^2}{2\sigma^2})$
 
-\pagebreak
-
 # Kernel PCA
 Let's take a dataset $\mathbf{X}$ with a large number of features($d$) i.e. $[d >> n]$ where
 
@@ -134,12 +131,15 @@ $$
     $$
     \forall u \quad \alpha _u = \frac{\beta _u}{\sqrt{n \lambda _u}}
     $$
-* **Step 4**: Compute $\sum _{j=1} ^{n} \alpha _{kj} \mathbf{K}^C_{ij} \hspace{1em} \forall k$
+* **Step 4**: Compute $\displaystyle \sum _{j=1} ^{n} \alpha _{kj} \mathbf{K}^C_{ij} \hspace{1em} \forall k$
     $$
-    \mathbf{x}_i \in \mathbb{R}^{d} \to 
+    \phi(\mathbf{x}_i)^T\mathbf{w} \in \mathbb{R}^{d} \to 
     \left [
 \begin{array}{cccc}
-    \sum _{j=1} ^{n} \alpha _{1j} \mathbf{K}^C_{ij} & \sum _{j=1} ^{n} \alpha _{2j} \mathbf{K}^C_{ij} & \ldots & \sum _{j=1} ^{n} \alpha _{nj} \mathbf{K}^C_{ij}
+    \displaystyle \sum _{j=1} ^{n} \alpha _{1j} \mathbf{K}^C_{ij} & \displaystyle \sum _{j=1} ^{n} \alpha _{2j} \mathbf{K}^C_{ij} & \ldots & \displaystyle \sum _{j=1} ^{n} \alpha _{nj} \mathbf{K}^C_{ij}
 \end{array}
 \right ]
     $$
+
+# Credits
+* Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.
