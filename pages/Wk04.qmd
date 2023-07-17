@@ -5,67 +5,69 @@ title: "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation,
 PDF Link: [notes](../notes/Wk04.pdf)
 
 # Introduction to Estimation
-Estimators in machine learning are algorithms or models used to estimate unknown parameters or predict outcomes based on data. The aim of the method is to find/predict the unknow parameters describing the distribution of the data.
+Estimators in machine learning are algorithms or models used to estimate unknown parameters or predict outcomes based on data. The aim of the method is to find/predict the unknown parameters describing the distribution of the data.
 
-Let $\{x_1, x_2, \ldots, x_n\}$ be a dataset where $x_i \in \{0,1\}$. We assume that the datapoints are independent and identically distributed.
+Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i \in \{0,1\}^d$. We assume that the datapoints are independent and identically distributed.
 
-Independence means $P(x_i|x_j) = P(x_i)$.
-Identically distributed means $P(x_i)=P(x_j)=p$.
+Independence means $P(\mathbf{x}_i|\mathbf{x}_j) = P(\mathbf{x}_i)$.
+Identically distributed means $P(\mathbf{x}_i)=P(\mathbf{x}_j)=p$.
 
 # Maximum Likelihood Estimation
 ## Fisher's Principle of Maximum Likelihood
 Fisher's principle of maximum likelihood is a statistical method used to estimate the parameters of a statistical model by choosing the parameter values that maximize the likelihood function, which measures how well the model fits the observed data.
 
+## Likelihood Estimation on Bernoulli Distributions
 Applying the likelihood function on the above dataset, we get
 \begin{align*}
-\mathcal{L}(p;\{x_1, x_2, \ldots, x_n\}) &= P(x_1, x_2, \ldots, x_n;p)\\
-&=p(x_1;p)p(x_2;p)\ldots p(x_n;p) \\
-&=\prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}}
+\mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}) &= P(\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n;p)\\
+&=p(\mathbf{x}_1;p)p(\mathbf{x}_2;p)\ldots p(\mathbf{x}_n;p) \\
+&=\prod _{i=1} ^n {p^{\mathbf{x}_i}(1-p)^{1-\mathbf{x}_i}}
 \end{align*}
 \begin{align*}
-\therefore \log(\mathcal{L}(p;\{x_1, x_2, \ldots, x_n\})) &=\underset{p} {\arg \max}\log \left ( \prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}} \right ) \\
+\therefore \log(\mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})) &=\underset{p} {\arg \max}\log \left ( \prod _{i=1} ^n {p^{\mathbf{x}_i}(1-p)^{1-\mathbf{x}_i}} \right ) \\
 \text{Differentiating wrt $p$, we get}\\
-\therefore \hat{p}_{ML} &= \frac{1}{n}\sum _{i=1} ^n x_i
+\therefore \hat{p}_{\text{ML}} &= \frac{1}{n}\sum _{i=1} ^n \mathbf{x}_i
 \end{align*}
 
 ## Likelihood Estimation on Gaussian Distributions
-Let $\{x_1, x_2, \ldots, x_n\}$ be a dataset where $x_i \sim \mathcal{N}(\mu,\sigma^2)$. We assume that the datapoints are independent and identically distributed.
+Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\sigma}^2)$. We assume that the datapoints are independent and identically distributed.
 
 \begin{align*}
-\mathcal{L}(\mu, \sigma^2;\{x_1, x_2, \ldots, x_n\}) &= f_{x_1, x_2, \ldots, x_n}(x_1, x_2, \ldots, x_n;\mu, \sigma^2) \\
-&=\prod _{i=1} ^n  f_{x_i}(x_i;\mu, \sigma^2) \\
-&=\prod _{i=1} ^n \left [ \frac{1}{\sqrt{2\pi}\sigma} e^{\frac{-(x_i-\mu)^2}{2\sigma^2}} \right ] \\
-\therefore \log(\mathcal{L}(p;\{x_1, x_2, \ldots, x_n\})) &= \sum _{i=1} ^n \left[ \log \left (\frac{1}{\sqrt{2\pi}\sigma}  \right ) - \frac{(x_i-\mu)^2}{2\sigma^2} \right] \\
+\mathcal{L}(\boldsymbol{\mu}, \boldsymbol{\sigma}^2;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}) &= f_{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n}(\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n;\boldsymbol{\mu}, \boldsymbol{\sigma}^2) \\
+&=\prod _{i=1} ^n  f_{\mathbf{x}_i}(\mathbf{x}_i;\boldsymbol{\mu}, \boldsymbol{\sigma}^2) \\
+&=\prod _{i=1} ^n \left [ \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu})^2}{2\boldsymbol{\sigma}^2}} \right ] \\
+\therefore \log(\mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})) &= \sum _{i=1} ^n \left[ \log \left (\frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}}  \right ) - \frac{(\mathbf{x}_i-\boldsymbol{\mu})^2}{2\boldsymbol{\sigma}^2} \right] \\
 \end{align*}
 $$
-\text{Differentiating wrt $\mu$ and $\sigma$, we get}
+\text{Differentiating wrt $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$, we get}
 $$
 \begin{align*}
-\hat{\mu}_{ML} &= \frac{1}{n}\sum _{i=1} ^n x_i \\
-\hat{\sigma^2}_{ML} &= \frac{1}{n}\sum _{i=1} ^n (x_i-\mu)^2
+\hat{\boldsymbol{\mu}}_{\text{ML}} &= \frac{1}{n}\sum _{i=1} ^n \mathbf{x}_i \\
+\hat{\boldsymbol{\sigma}^2}_{\text{ML}} &= \frac{1}{n}\sum _{i=1} ^n (\mathbf{x}_i-\boldsymbol{\mu})^T(\mathbf{x}_i-\boldsymbol{\mu})
 \end{align*}
 
 # Bayesian Estimation
 Bayesian estimation is a statistical method that updates the estimates of model parameters by combining prior knowledge or beliefs with observed data to calculate the posterior probability distribution of the parameters.
 
-Let $\{x_1, x_2, \ldots, x_n\}$ be a dataset where $x_i$ belongs to a distribution with parameters $\theta$. We assume that the datapoints are independent and identically distributed. We also assume that $\theta$ is also from a probability distribution.
+Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i$ belongs to a distribution with parameters $\boldsymbol{\theta}$. We assume that the datapoints are independent and identically distributed. We also assume that $\boldsymbol{\theta}$ is also from a probability distribution.
 
 Our goal is to update the parameters using the data.
 
-ie.
+i.e.
 $$
-P(\theta)=>P(\theta|\{x_1, x_2, \ldots, x_n\})
+P(\boldsymbol{\theta})\Rightarrow P(\boldsymbol{\theta}|\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})
 $$
-where, using Bayes Law, we get
+where, using Bayes' Law, we get
 $$
-P(\theta|\{x_1, x_2, \ldots, x_n\})=\left ( \frac{P(\{x_1, x_2, \ldots, x_n\}|\theta)}{P(\{x_1, x_2, \ldots, x_n\})} \right )*P(\theta)
+P(\boldsymbol{\theta}|\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})=\left ( \frac{P(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}|\boldsymbol{\theta})}{P(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})} \right )*P(\boldsymbol{\theta})
 $$
 
-Let $\{x_1, x_2, \ldots, x_n\}$ be a dataset where $x_i \in \{0,1\}$ with parameter $\theta$. What distribution can be suited for $P(\theta)$. 
+## Bayesian Estimation for a Bernoulli Distribution
+Let $\{x_1, x_2, \ldots, x_n\}$ be a dataset where $x_i \in \{0,1\}$ with parameter $\theta$. What distribution can be suited for $P(\theta)$?
 
-A commonly used distributions for priors is the Beta Distribution.
+A commonly used distribution for priors is the Beta Distribution.
 $$
-f(p;\alpha,\beta) = \frac{p^{\alpha-1}(1-p)^{\beta-1}}{z} \hspace{2em} \forall p \in [0,1]
+f(p;\alpha,\beta) = \frac{p^{\alpha-1}(1-p)^{\beta-1}}{z} \hspace{2em} \forall p \in [0,1] \\
 $$
 $$
 \text{where $z$ is a normalizing factor}
@@ -82,9 +84,10 @@ $$
 \text{BETA PRIOR }(\alpha, \beta) \xrightarrow[Bernoulli]{\{x_1, x_2, \ldots, x_n\}} \text{BETA POSTERIOR }(\alpha + n_h, \beta + n_t)
 $$
 $$
-\therefore \hat{p_{ML}} = \mathbb{E}[Posterior]=\mathbb{E}[Beta(\alpha +n_h, \beta + n_t)]= \frac{\alpha + n_h}{\alpha + n_h + \beta + n_t}
+\therefore \hat{p_{\text{ML}}} = \mathbb{E}[\text{Posterior}]=\mathbb{E}[\text{Beta}(\alpha +n_h, \beta + n_t)]= \frac{\alpha + n_h}{\alpha + n_h + \beta + n_t}
 $$
 
+\pagebreak
 # Gaussian Mixture Models
 Gaussian Mixture Models are a type of probabilistic model used to represent complex data distributions by combining multiple Gaussian distributions.
 
@@ -94,24 +97,26 @@ The procedure is as follows:
 $$
 P(z_i=k) = \pi_k \hspace{2em} \left [ \sum _{i=1} ^K \pi_i = 1 \hspace{1em} 0 \le \pi_i \le 1 \hspace{1em} \forall i \right ]
 $$
-* Step 2: Generate $x_i \sim \mathcal{N}(\mu_{z_i}, \sigma^2_{z_i})$
+* Step 2: Generate $\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu}_{z_i}, \boldsymbol{\sigma}^2_{z_i})$
 
-Hence, there are $3K$ parameters. Let these parameters be represented by $\theta$.
+Hence, there are $3K$ parameters. Let these parameters be represented by $\boldsymbol{\theta}$.
+
+However, since $\displaystyle \sum _{i=1} ^K \pi_i = 1$, the number of parameters to be estimated becomes $3K-1$ for a GMM with $K$ components.
 
 # Likelihood of GMM's
 \begin{align*}
 \mathcal{L}\left( \begin{array}{cccc}
-\mu_1, \mu_2, \ldots, \mu_K \\
-\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_K\\
+\boldsymbol{\mu}_1, \boldsymbol{\mu}_2, \ldots, \boldsymbol{\mu}_K \\
+\boldsymbol{\sigma}^2_1, \boldsymbol{\sigma}^2_2, \ldots, \boldsymbol{\sigma}^2_K\\
 \pi_1, \pi_2, \ldots, \pi_K
-\end{array}; x_1, x_2, \ldots, x_n \right )
-&= \prod _{i=1} ^n f_{mix} \left( x_i; \begin{array}{cccc}
-\mu_1, \mu_2, \ldots, \mu_K \\
-\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_K\\
+\end{array}; \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n \right )
+&= \prod _{i=1} ^n f_{\text{mix}} \left( \mathbf{x}_i; \begin{array}{cccc}
+\boldsymbol{\mu}_1, \boldsymbol{\mu}_2, \ldots, \boldsymbol{\mu}_K \\
+\boldsymbol{\sigma}^2_1, \boldsymbol{\sigma}^2_2, \ldots, \boldsymbol{\sigma}^2_K\\
 \pi_1, \pi_2, \ldots, \pi_K
 \end{array} \right ) \\
-&= \prod _{i=1} ^n \left [ \sum _{k=1} ^K \pi_k * f_{mix}(x_i; \mu_k, \sigma_k) \right ] \\
-\therefore \log\mathcal{L}(\theta) &= \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \pi_k * \frac{1}{\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} \right ] \\
+&= \prod _{i=1} ^n \left [ \sum _{k=1} ^K \pi_k * f_{\text{mix}}(\mathbf{x}_i; \boldsymbol{\mu}_k, \boldsymbol{\sigma}_k) \right ] \\
+\therefore \log\mathcal{L}(\boldsymbol{\theta}) &= \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \pi_k * \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ] \\
 \end{align*}
 To solve the above equation, we need to understand convexity.
 
@@ -132,50 +137,48 @@ This is also known as **Jensen's Inequality**.
 # Estimating the Parameters
 As log is a concave function, using the above equation, we can also approximate the likelihood function for GMM's as follows,
 $$
-\log\mathcal{L}(\theta) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \pi_k * \frac{1}{\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} \right ]
+\log\mathcal{L}(\boldsymbol{\theta}) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \pi_k * \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ]
 $$
-Introduce for data point $x_i$, the parameters $\{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i\}$ s.t. $\forall i,k \displaystyle \sum _{k=1} ^K \lambda _k^i = 1; 0 \le \lambda _k^i \le 1$.
+Introduce for data point $\mathbf{x}_i$, the parameters $\{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i\}$ s.t. $\forall i,k \displaystyle \sum _{k=1} ^K \lambda _k^i = 1; 0 \le \lambda _k^i \
+
+le 1$.
 $$
-\log\mathcal{L}(\theta) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \lambda _k ^i \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} \right ) \right ]
+\log\mathcal{L}(\boldsymbol{\theta}) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \lambda _k ^i \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) \right ]
 $$
 $$ \text{Using Jensen's Inequality, we get} $$
 $$
-\log\mathcal{L}(\theta) \ge \text{modified\_log}\mathcal{L}(\theta)
+\log\mathcal{L}(\boldsymbol{\theta}) \ge \text{modified\_log}\mathcal{L}(\boldsymbol{\theta})
 $$
 \begin{align}
-\therefore \text{modified\_log}\mathcal{L}(\theta) 
-&= \sum _{i=1} ^n \sum _{i=k} ^K \lambda _k ^i \log \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} \right )
+\therefore \text{modified\_log}\mathcal{L}(\boldsymbol{\theta}) 
+&= \sum _{i=1} ^n \sum _{i=k} ^K \lambda _k ^i \log \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right )
 \end{align} 
-Note that the modified-log likelihood function gives a lower bound for the true log likelihood function at $\theta$.
-Finally, to get the parameters, we do the following,
+Note that the modified-log likelihood function gives a lower bound for the true log likelihood function at $\boldsymbol{\theta}$.
+Finally, to get the parameters, we do the following:
 
-* To get $\theta$: Fix $\lambda$ and maximize over $\theta$.
+* To get $\boldsymbol{\theta}$: Fix $\lambda$ and maximize over $\boldsymbol{\theta}$.
 $$
-\underset{\theta} {\max} \sum _{i=1} ^n \sum _{i=k} ^K \lambda _k ^i \log \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} \right )
+\underset{\boldsymbol{\theta}} {\max} \sum _{i=1} ^n \sum _{i=k} ^K \lambda _k ^i \log \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right )
 $$
 $$
-\text{Differentiate w.r.t. }\mu,\sigma^2,\text{ and }\pi \text{ to get the following}
+\text{Differentiate w.r.t. }\boldsymbol{\mu},\boldsymbol{\sigma}^2,\text{ and }\pi \text{ to get the following}
 $$
 \begin{align*}
-\hat{\mu_k^{\scriptsize{MML}}} &= \frac{\displaystyle\sum _{i=1} ^n \lambda_k^i x_i}{\displaystyle\sum _{i=1} ^n \lambda_k^i} \\
-\hat{\sigma_k^{2^{\scriptsize{MML}}}} &= \frac{\displaystyle\sum _{i=1} ^n \lambda_k^i (x_i-\hat{\mu_k^{\scriptsize{MML}}})^2}{\displaystyle\sum _{i=1} ^n \lambda_k^i} \\
-\hat{\pi_k^{\scriptsize{MML}}} &= \frac{\displaystyle\sum _{i=1} ^n \lambda_k^i}{n} \\
+\hat{\boldsymbol{\mu}}_k^{\text{MML}} &= \frac{\displaystyle \sum _{i=1} ^n \lambda_k^i \mathbf{x}_i}{\displaystyle \sum _{i=1} ^n \lambda_k^i} \\
+\hat{\boldsymbol{\sigma}}_k^{2^{\text{MML}}} &= \frac{\displaystyle \sum _{i=1} ^n \lambda_k^i (\mathbf{x}_i-\hat{\boldsymbol{\mu}}_k^{\text{MML}})^2}{\displaystyle \sum _{i=1} ^n \lambda_k^i} \\
+\hat{\pi}_k^{\text{MML}} &= \frac{\displaystyle \sum _{i=1} ^n \lambda_k^i}{n} \\
 \end{align*}
-* To get $\lambda$: Fix $\theta$ and maximize over $\lambda$. For any $i$:
+* To get $\lambda$: Fix $\boldsymbol{\theta}$ and maximize over $\lambda$. For any $i$:
 $$
 \underset{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i} {\max} 
-\sum _{k=1} ^K \left [ \lambda _k ^i \log \left ( \pi_k * \frac{1}{\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} \right ) -  \lambda _k ^i \log( \lambda _k ^i) \right ] \hspace{1em} s.t. \hspace{1em} \sum _{k=1} ^K \lambda _k ^i = 1;  0 \le \lambda _k ^i \le 1
+\sum _{k=1} ^K \left [ \lambda _k ^i \log \left ( \pi_k * \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) -  \lambda _k ^i \log( \lambda _k ^i) \right ] \hspace{1em} s.t. \hspace{1em} \sum _{k=1} ^K \lambda _k ^i = 1;  0 \le \lambda _k ^i \le 1
 $$
 $$
 \text{Solving the above constrained optimization problem analytically, we get}
 $$
 \begin{align*}
-\hat{\lambda_k^{i^{\scriptsize{MML}}}}
-&= \frac{\left ( \frac{1}{\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} \right ) * \pi_k}{ \displaystyle \sum _{k=1} ^K \left ( \frac{1}{\sqrt{2\pi}\sigma_k} e^{\frac{-(x_i-\mu_k)^2}{2\sigma^2_k}} * \pi_k \right )} \\
-\text{i.e. }\hat{\lambda_k^{i^{\scriptsize{MML}}}}
-&= \frac{f(x_i|z_i=k)*P(z_i=k)}{P(x_i)} \\
-\hat{\lambda_k^{i^{\scriptsize{MML}}}}
-&= \frac{f(x_i|z_i=k)*P(z_i=k)}{\displaystyle \sum _{k=1} ^K f(x_i|z_i=k)*P(z_i=k)} \\
+\hat{\lambda}_k^{i^{\text{MML}}}
+&= \frac{\left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}{\displaystyle \sum _{k=1} ^K \left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}
 \end{align*}
 
 # EM Algorithm
@@ -183,24 +186,21 @@ The EM (Expectation-Maximization) algorithm is a popular method for estimating t
 
 The algorithm is as follows:
 
-* Initialize $\theta^0 =
+* Initialize $\boldsymbol{\theta}^0 =
 \left \{ \begin{array}{cccc}
-\mu_1, \mu_2, \ldots, \mu_K \\
-\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_K\\
+\boldsymbol{\mu}_1, \boldsymbol{\mu}_2, \ldots, \boldsymbol{\mu}_K \\
+\boldsymbol{\sigma}^2_1, \boldsymbol{\sigma}^2_2, \ldots, \boldsymbol{\sigma}^2_K\\
 \pi_1, \pi_2, \ldots, \pi_K
 \end{array} \right \}$ using Lloyd's algorithm.
-* Until convergence ($||\theta^{t+1}-\theta^{t} || \le \epsilon$ where $\epsilon$ is the tolerance parameter) do the following:
+* Until convergence ($||\boldsymbol{\theta}^{t+1}-\boldsymbol{\theta}^{t} || \le \epsilon$ where $\epsilon$ is the tolerance parameter) do the following:
 \begin{align*}
-\lambda^{t+1} &= \underset{\lambda}{\arg \max} \text{ modified\_log}(\theta^t, \textcolor{red}{\lambda}) &\rightarrow \text{ Expectation Step}\\
-\theta^{t+1} &= \underset{\theta}{\arg \max} \text{ modified\_log}(\textcolor{red}{\theta}, \lambda^{t+1}) &\rightarrow \text{ Maximization Step}\\
+\lambda^{t+1} &= \underset{\lambda}{\arg \max} \text{ modified\_log}(\boldsymbol{\theta}^t, \textcolor{red}{\lambda}) &\rightarrow \text{ Expectation Step}\\
+\boldsymbol{\theta}^{t+1} &= \underset{\boldsymbol{\theta}}{\arg \max} \text{ modified\_log}(\textcolor{red}{\boldsymbol{\theta}}, \lambda^{t+1}) &\rightarrow \text{ Maximization Step}\\
 \end{align*}
 
 EM algorithm produces soft clustering. For hard clustering using EM, a further step is involved:
 
-* For a point $x_i$, assign it to a cluster using the following equation:
+* For a point $\mathbf{x}_i$, assign it to a cluster using the following equation:
 $$
 z_i = \underset{k}{\arg\max} \lambda_k^i
 $$
-
-# Credits
-Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.
