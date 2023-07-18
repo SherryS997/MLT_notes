@@ -54,8 +54,9 @@ website:
 
 format:
   html:
+    css: ["styles.css"]
     theme: 
-      light: lux
+      light: [lux, styles.scss]
       dark: [darkly, styles.scss]
     toc: true
 
