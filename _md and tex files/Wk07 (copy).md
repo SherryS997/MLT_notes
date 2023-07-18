@@ -44,7 +44,7 @@ $$
 
 However, employing linear regression for classification poses an issue. Consider the following diagram:
 
-![](../images/lin_class.png)
+![Linear classification and the problem due to outliers](../images/lin_class.png)
 
 Upon closer examination, it becomes evident that linear regression-based classification not only separates the two categories based on their respective sides but also considers their positions. As a consequence, the classification boundary may shift with respect to the outliers in the dataset. Hence, this approach is not suitable for binary classification.
 
@@ -59,22 +59,21 @@ The algorithm follows these steps:
 
 The following diagrams illustrate the impact of the value of $k$ on the classification:
 
-![](../images/k1.png)
+![k=1](../images/k1.png)
 $$
 \text{When }k=1\text{, the classification is highly sensitive to outliers.}
 $$
-![](../images/kn.png)
+![k=1](../images/kn.png)
 $$
 \text{When }k=n\text{, the classification becomes overly smooth.}
 $$
-![](../images/k_star.png)
+![k=k^*](../images/k_star.png)
 $$
 \text{When }k=k^*\text{, the classification achieves a balanced result.}
 $$
 
 The choice of $k$ is typically determined through cross-validation, treating $k$ as a hyperparameter. Smaller values of $k$ lead to more complex classifications.
 
-\pagebreak
 ## Issues with K-NN
 
 The K-NN algorithm suffers from several limitations:
@@ -93,7 +92,7 @@ Prediction: Given a test sample $\mathbf{x}_{\text{test}}$, we traverse the deci
 
 The following diagram depicts a decision tree:
 
-![](../images/decision_tree.png)
+![Decision Tree](../images/decision_tree.png)
 
 Here, a **question** refers to a (feature, value) pair. For example, $height \le 180\text{cm}$?
 
@@ -111,7 +110,7 @@ Here, $\log(0)$ is conventionally treated as $0$.
 
 Pictorial representation of the Entropy function:
 
-![](../images/entropy.png)
+![Entropy Function](../images/entropy.png)
 
 Information Gain is then utilized to measure the quality of a split in the decision tree algorithm.
 
@@ -142,7 +141,7 @@ Different measures, such as the Gini Index, can also be employed to evaluate the
 
 Pictorial depiction of the decision boundary and its decision tree:
 
-![](../images/decision_bound.png)
+![Decision Boundary](../images/decision_bound.png)
 
 # Generative and Discriminative Models
 
@@ -166,8 +165,5 @@ Discriminative models generate labels solely based on the provided data.
 
 It is important to understand the differences between generative and discriminative models when choosing an appropriate modeling approach for a given classification problem.
 
-# Acknowledgments
-
-**Professor Arun Rajkumar**: The content, including the concepts and notations presented in this document, has been sourced from his slides and lectures. His expertise and educational materials have greatly contributed to the development of this document.
-
-**ChatGPT**: The AI language model used in this document has made corrections and improvements to the notations and language, ensuring clarity and accuracy in the presentation of the material. Its capabilities have enhanced the overall quality and readability of this document.
+# Credits
+Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.

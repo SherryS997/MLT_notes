@@ -67,6 +67,7 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked">
@@ -213,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction-to-binary-classification" id="toc-introduction-to-binary-classification" class="nav-link active" data-scroll-target="#introduction-to-binary-classification">Introduction to Binary Classification</a></li>
   <li><a href="#linear-classifier" id="toc-linear-classifier" class="nav-link" data-scroll-target="#linear-classifier">Linear Classifier</a></li>
-  <li><a href="#k-nearest-neighbours-algorithm" id="toc-k-nearest-neighbours-algorithm" class="nav-link" data-scroll-target="#k-nearest-neighbours-algorithm">K-Nearest Neighbours Algorithm</a>
+  <li><a href="#k-nearest-neighbors-algorithm" id="toc-k-nearest-neighbors-algorithm" class="nav-link" data-scroll-target="#k-nearest-neighbors-algorithm">K-Nearest Neighbors Algorithm</a>
   <ul class="collapse">
   <li><a href="#issues-with-k-nn" id="toc-issues-with-k-nn" class="nav-link" data-scroll-target="#issues-with-k-nn">Issues with K-NN</a></li>
   </ul></li>
@@ -223,7 +224,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#decision-tree-algorithm" id="toc-decision-tree-algorithm" class="nav-link" data-scroll-target="#decision-tree-algorithm">Decision Tree Algorithm</a></li>
   </ul></li>
   <li><a href="#generative-and-discriminative-models" id="toc-generative-and-discriminative-models" class="nav-link" data-scroll-target="#generative-and-discriminative-models">Generative and Discriminative Models</a></li>
-  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -250,123 +250,116 @@ ul.task-list li input[type="checkbox"] {
 <p>PDF Link: <a href="../notes/Wk07.pdf">notes</a></p>
 <section id="introduction-to-binary-classification" class="level1">
 <h1>Introduction to Binary Classification</h1>
-<p>Binary classification is a machine learning task where the goal is to classify objects into one of two categories. It is a fundamental problem in various fields, including computer vision, natural language processing, and bioinformatics.</p>
-<p>Given a dataset <span class="math inline">\(\{x_1, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the labels, where <span class="math inline">\(y_i \in \{0, 1\}\)</span>. The goal is given by <span class="math inline">\(h: \mathbb{R}^d \rightarrow \{0, 1\}\)</span>.</p>
-<p>The loss for this function is given by, <span class="math display">\[
-loss(h)=\frac{1}{n}\sum ^n _{i=1}\mathbb{1}\left ( h(x_i) \ne y_i \right )
-\]</span> Let <span class="math inline">\(\mathcal{H}_{\text{linear}}\)</span> represent the solution space for the mapping in the linear space. <span class="math display">\[
-\mathcal{H}_{\text{linear}}=\Biggr \lbrace{h_w: \mathbb{R}^d \rightarrow \{1, 0\} \hspace{0.5em} s.t. \hspace{0.5em} h_w(x)=sign(w^Tx) \hspace{0.5em} \forall w \in \mathbb{R}^d } \Biggr \rbrace
-\]</span> Therefore, the objective function is given by, <span class="math display">\[
-\min _{h \in \mathcal{H}_{\text{linear}}} \sum _{i=1} ^n \mathbb{1}\left ( h(x_i) \ne y_i \right )
-\]</span> This objective function presents an NP-Hard Problem, indicating the challenge in arriving at optimal and sufficient parameters. Therefore, improved implementations are necessary to address this complexity and achieve satisfactory results.</p>
+<p>Binary classification is a fundamental task in machine learning, commonly employed in various domains such as computer vision, natural language processing, and bioinformatics. Its objective is to assign objects into one of two categories based on their features.</p>
+<p>Consider a dataset <span class="math inline">\(\{\mathbf{x}_1, \ldots, \mathbf{x}_n\}\)</span>, where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^d\)</span>, and let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the corresponding labels, where <span class="math inline">\(y_i \in \{0, 1\}\)</span>. The goal is to find a function <span class="math inline">\(h: \mathbb{R}^d \rightarrow \{0, 1\}\)</span> that accurately predicts the labels.</p>
+<p>To assess the performance of the classification function, a loss measure is employed. The loss function is defined as follows:</p>
+<p><span class="math display">\[
+\text{loss}(h) = \frac{1}{n} \sum ^n _{i=1}\mathbb{1}\left ( h(\mathbf{x}_i) \ne y_i \right )
+\]</span></p>
+<p>Let <span class="math inline">\(\mathcal{H}_{\text{linear}}\)</span> denote the solution space for the linear mapping:</p>
+<p><span class="math display">\[
+\mathcal{H}_{\text{linear}}=\left\{\mathbf{h}_w: \mathbb{R}^d \rightarrow \{1, 0\} \hspace{0.5em} \text{s.t.} \hspace{0.5em} \mathbf{h}_w(\mathbf{x}) = \text{sign}(\mathbf{w}^T\mathbf{x}) \hspace{0.5em} \forall \mathbf{w} \in \mathbb{R}^d \right\}
+\]</span></p>
+<p>Hence, the objective function can be expressed as:</p>
+<p><span class="math display">\[
+\min_{h \in \mathcal{H}_{\text{linear}}} \sum_{i=1}^n \mathbb{1}\left ( h(\mathbf{x}_i) \ne y_i \right )
+\]</span></p>
+<p>However, it is important to note that this objective function presents an NP-Hard problem, making it challenging to find optimal and sufficient parameters. Therefore, improved implementations are required to address this complexity and achieve satisfactory results.</p>
 </section>
 <section id="linear-classifier" class="level1">
 <h1>Linear Classifier</h1>
-<p>Can we use linear regression to solve this classification problem?</p>
-<p>The proposed algorithm would be as follows: <span class="math display">\[
-\{(x_1, y_1), \ldots, (x_n,y_n)\} \xrightarrow[Regression]{Linear} w \in \mathbb{R}^d\rightarrow h_w: \mathbb{R}^d \rightarrow \{1, 0\}
-\]</span> But this poses an issue in classification. Look at the diagram below:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/lin_class.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Linear classification and the problem due to outliers</figcaption>
-</figure>
-</div>
-<p>Upon a detailed examination of the above diagram, it is evident that classification based on Linear Regression not only partitions the two categories of data based on their respective sides but also their positions. Consequently, this approach may cause the classification boundary to shift w.r.t. the outliers in the dataset. Therefore, this approach is not feasible.</p>
+<p>Can linear regression be used to solve the binary classification problem? Let’s examine the proposed algorithm:</p>
+<p><span class="math display">\[
+\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\} \xrightarrow[Regression]{Linear} \mathbf{w} \in \mathbb{R}^d \rightarrow \mathbf{h}_\mathbf{w}: \mathbb{R}^d \rightarrow \{1, 0\}
+\]</span></p>
+<p>However, employing linear regression for classification poses an issue. Consider the following diagram:</p>
+<p><img src="../images/lin_class.png" class="img-fluid"></p>
+<p>Upon closer examination, it becomes evident that linear regression-based classification not only separates the two categories based on their respective sides but also considers their positions. As a consequence, the classification boundary may shift with respect to the outliers in the dataset. Hence, this approach is not suitable for binary classification.</p>
 </section>
-<section id="k-nearest-neighbours-algorithm" class="level1">
-<h1>K-Nearest Neighbours Algorithm</h1>
-<p>The K-Nearest Neighbor (K-NN) algorithm is a popular non-parametric method used for classification and regression tasks in machine learning. It operates by identifying the K-nearest data points to the target object, classifying or regressing the target object based on the majority of its nearest neighbors.</p>
-<p>The algorithm is as follows:</p>
-<ul>
-<li>Given <span class="math inline">\(x_{test}\)</span> find the <span class="math inline">\(k\)</span>-closest points in the training set - <span class="math inline">\(\{x_1^*, x_2^*, \ldots, x_k^*\}\)</span>.</li>
-<li>Predict <span class="math inline">\(y_{test} = \text{majority}(y_1^*, y_2^*, \ldots, y_k^*)\)</span></li>
-</ul>
-<p>Look at the following diagrams to the see the effect of the value of <span class="math inline">\(k\)</span> on the classification:</p>
-<p><img src="../images/k1.png" class="img-fluid" alt="k=1"> <span class="math display">\[
-\text{When }k=1\text{, the classification is too sensitive to the outliers.}
-\]</span> <img src="../images/kn.png" class="img-fluid" alt="k=1"> <span class="math display">\[
-\text{When }k=n\text{, the classification is too smooth.}
-\]</span> <img src="../images/k_star.png" class="img-fluid" alt="k=k^*"> <span class="math display">\[
-\text{When }k=k^*\text{, the classification is just right.}
-\]</span> The choice of <span class="math inline">\(k\)</span> is usually done by cross-validation, where <span class="math inline">\(k\)</span> is treated as a hyper-parameter. The smaller <span class="math inline">\(k\)</span> is, the more complex the classification will be.</p>
+<section id="k-nearest-neighbors-algorithm" class="level1">
+<h1>K-Nearest Neighbors Algorithm</h1>
+<p>The K-Nearest Neighbors (K-NN) algorithm is a widely-used non-parametric method utilized for both classification and regression tasks in machine learning. It operates by identifying the K-nearest data points to the target object and classifying or regressing the target object based on the majority of its nearest neighbors.</p>
+<p>The algorithm follows these steps:</p>
+<ol type="1">
+<li>Given a test sample <span class="math inline">\(\mathbf{x}_{\text{test}}\)</span>, find the <span class="math inline">\(k\)</span> closest points in the training set, denoted as <span class="math inline">\(\{\mathbf{x}_1^*, \mathbf{x}_2^*, \ldots, \mathbf{x}_k^*\}\)</span>.</li>
+<li>Predict the label of the test sample as <span class="math inline">\(y_{\text{test}} = \text{majority}(y_1^*, y_2^*, \ldots, y_k^*)\)</span>.</li>
+</ol>
+<p>The following diagrams illustrate the impact of the value of <span class="math inline">\(k\)</span> on the classification:</p>
+<p><img src="../images/k1.png" class="img-fluid"> <span class="math display">\[
+\text{When }k=1\text{, the classification is highly sensitive to outliers.}
+\]</span> <img src="../images/kn.png" class="img-fluid"> <span class="math display">\[
+\text{When }k=n\text{, the classification becomes overly smooth.}
+\]</span> <img src="../images/k_star.png" class="img-fluid"> <span class="math display">\[
+\text{When }k=k^*\text{, the classification achieves a balanced result.}
+\]</span></p>
+<p>The choice of <span class="math inline">\(k\)</span> is typically determined through cross-validation, treating <span class="math inline">\(k\)</span> as a hyperparameter. Smaller values of <span class="math inline">\(k\)</span> lead to more complex classifications.</p>
 <section id="issues-with-k-nn" class="level2">
 <h2 class="anchored" data-anchor-id="issues-with-k-nn">Issues with K-NN</h2>
-<p>Following are the issues with the algorithm:</p>
-<ul>
-<li>The choice of distance function itself can give different results. The Euclidean distance might not always be the best fit!</li>
-<li>It can be computationally demanding. When making a prediction for a single test datapoint, the distances between that datapoint and all training points must be calculated and sorted. As a result, the algorithm has a complexity of <span class="math inline">\(O(nlog(n))\)</span>, where <span class="math inline">\(n\)</span> represents the size of the dataset.</li>
-<li>No model is learned by this algorithm. It always needs the training dataset to make proper predictions.</li>
-</ul>
+<p>The K-NN algorithm suffers from several limitations:</p>
+<ol type="1">
+<li>The choice of distance function can yield different results. The Euclidean distance, commonly used, might not always be the best fit for all scenarios.</li>
+<li>Computationally, the algorithm can be demanding. When making predictions for a single test data point, the distances between that data point and all training points must be calculated and sorted. Consequently, the algorithm has a complexity of <span class="math inline">\(O(n \log(n))\)</span>, where <span class="math inline">\(n\)</span> represents the size of the dataset.</li>
+<li>The algorithm does not learn a model but instead relies on the training dataset for making predictions.</li>
+</ol>
 </section>
 </section>
 <section id="introduction-to-decision-trees" class="level1">
 <h1>Introduction to Decision Trees</h1>
-<p>Decision trees are a popular machine learning algorithm that operates by recursively splitting the data based on the most informative features until a stopping criterion is met. They are widely used for classification and regression tasks and can be visualized as a tree-like structure.</p>
-<p>Given a dataset <span class="math inline">\(\{x_1, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the labels where <span class="math inline">\(y_i \in \{0, 1\}\)</span>. The output of the algorithm will be a decision tree.</p>
-<p>Prediction: Given <span class="math inline">\(x_{test}\)</span>, traverse through the tree to reach a leaf node. <span class="math inline">\(y_{test} = \text{value in the leaf node}\)</span>.</p>
-<p>Pictorial depiction of the decision tree:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/decision_tree.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Decision Tree</figcaption>
-</figure>
-</div>
-<p>where a <strong>question</strong> is a (feature, value) pair. Example: <span class="math inline">\(height\le180cm\)</span>?</p>
+<p>Decision trees are widely used in machine learning for classification and regression tasks. They operate by recursively partitioning the data based on the most informative features until a stopping criterion is met. Decision trees can be visualized as tree-like structures.</p>
+<p>Consider a dataset <span class="math inline">\(\{\mathbf{x}_1, \ldots, \mathbf{x}_n\}\)</span>, where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^d\)</span>, and let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the corresponding labels, where <span class="math inline">\(y_i \in \{0, 1\}\)</span>. The output of the decision tree algorithm is a constructed decision tree.</p>
+<p>Prediction: Given a test sample <span class="math inline">\(\mathbf{x}_{\text{test}}\)</span>, we traverse the decision tree to reach a leaf node, and the label assigned to the leaf node is considered as <span class="math inline">\(y_{\text{test}}\)</span>.</p>
+<p>The following diagram depicts a decision tree:</p>
+<p><img src="../images/decision_tree.png" class="img-fluid"></p>
+<p>Here, a <strong>question</strong> refers to a (feature, value) pair. For example, <span class="math inline">\(height \le 180\text{cm}\)</span>?</p>
 <section id="goodness-of-a-question" class="level2">
 <h2 class="anchored" data-anchor-id="goodness-of-a-question">Goodness of a Question</h2>
-<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset. We partition it using a question into <span class="math inline">\(D_{yes}\)</span> and <span class="math inline">\(D_{no}\)</span>.</p>
-<p>What we need is a measure of “Impurity” for a set of labels <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span>. This measure can be given by various ways, but we will use the <strong>Entropy</strong> Function.</p>
-<p>The Entropy function is given by, <span class="math display">\[
-Entropy(\{y_1, \ldots, y_n\}) = Entropy(p) = -\left( p\log(p)+(1-p)\log(1-p) \right )
-\]</span> where conventionally <span class="math inline">\(\log(0)\)</span> is treated as <span class="math inline">\(0\)</span>.</p>
-<p>Pictorial Representation of the Entropy function:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/entropy.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Entropy Function</figcaption>
-</figure>
-</div>
-<p>Then, we use Information Gain to measure the goodness of the split.</p>
-<p><strong>Information gain</strong> is a commonly used criterion in decision tree algorithms that measures the reduction in entropy or impurity of a dataset after splitting based on a given feature. By selecting features with high information gain, decision trees can effectively differentiate between the different classes of data and make accurate predictions.</p>
-<p>Information gain is given by, <span class="math display">\[
-\text{Information Gain}(feature,value)=Entropy(D) - \left [ \gamma Entropy(D_{yes})+(1-\gamma)Entropy(D_{no}) \right ]
-\]</span> where <span class="math inline">\(\gamma\)</span> is given by, <span class="math display">\[
-\gamma=\frac{|D_{yes}|}{|D|}
+<p>To evaluate the quality of a question, we need a measure of “impurity” for a set of labels <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span>. Various measures can be employed, but we will use the <strong>Entropy</strong> function.</p>
+<p>The Entropy function is defined as:</p>
+<p><span class="math display">\[
+\text{Entropy}(\{y_1, \ldots, y_n\}) = \text{Entropy}(p) = -\left( p\log(p)+(1-p)\log(1-p) \right )
+\]</span></p>
+<p>Here, <span class="math inline">\(\log(0)\)</span> is conventionally treated as <span class="math inline">\(0\)</span>.</p>
+<p>Pictorial representation of the Entropy function:</p>
+<p><img src="../images/entropy.png" class="img-fluid"></p>
+<p>Information Gain is then utilized to measure the quality of a split in the decision tree algorithm.</p>
+<p><strong>Information gain</strong> is a commonly used criterion in decision tree algorithms that quantifies the reduction in entropy or impurity of a dataset after splitting based on a given feature. High information gain signifies features that effectively differentiate between the different classes of data and lead to accurate predictions.</p>
+<p>Information gain is calculated as:</p>
+<p><span class="math display">\[
+\text{Information Gain}(\text{feature}, \text{value}) = \text{Entropy}(D) - \left[\gamma \cdot \text{Entropy}(D_{\text{yes}}) + (1-\gamma) \cdot \text{Entropy}(D_{\text{no}}) \right]
+\]</span></p>
+<p>where <span class="math inline">\(\gamma\)</span> is defined as:</p>
+<p><span class="math display">\[
+\gamma = \frac{|D_{\text{yes}}|}{|D|}
 \]</span></p>
 </section>
 <section id="decision-tree-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="decision-tree-algorithm">Decision Tree Algorithm</h2>
-<p>The algorithm is as follows:</p>
-<ul>
-<li>Discretize each feature in [min,max] range.</li>
-<li>Pick the question that has the largest information gain.</li>
-<li>Repeat the procedure for <span class="math inline">\(D_{yes}\)</span> and <span class="math inline">\(D_{no}\)</span>.</li>
-<li>Stop growing the tree if a node becomes sufficiently “pure”.</li>
-</ul>
-<p>The goodness of a question can also be measured using different methods like the Gini Index, etc.</p>
-<p>Pictorial Depiction of decision boundary and its decision tree:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/decision_bound.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Decision Boundary</figcaption>
-</figure>
-</div>
+<p>The decision tree algorithm follows these steps:</p>
+<ol type="1">
+<li>Discretize each feature within the range [min, max].</li>
+<li>Select the question that provides the highest information gain.</li>
+<li>Repeat the procedure for subsets <span class="math inline">\(D_{\text{yes}}\)</span> and <span class="math inline">\(D_{\text{no}}\)</span>.</li>
+<li>Stop growing the tree when a node becomes sufficiently “pure” according to a predefined criterion.</li>
+</ol>
+<p>Different measures, such as the Gini Index, can also be employed to evaluate the quality of a question.</p>
+<p>Pictorial depiction of the decision boundary and its decision tree:</p>
+<p><img src="../images/decision_bound.png" class="img-fluid"></p>
 </section>
 </section>
 <section id="generative-and-discriminative-models" class="level1">
 <h1>Generative and Discriminative Models</h1>
-<p>For the classical Classification problem, there are two types of modeling: Generative and Discriminative Models.</p>
-<p>Generative Models are given by, <span class="math display">\[
-P(x,y)
-\]</span> This primarily tries to model the feature generation.</p>
-<p>Discriminative Models are given by, <span class="math display">\[
-P(y|x)
-\]</span> This only generates labels based on the data.</p>
-</section>
-<section id="credits" class="level1">
-<h1>Credits</h1>
-<p>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</p>
+<p>In classical classification problems, two types of models are commonly employed: generative models and discriminative models.</p>
+<p>Generative models capture the joint distribution between features and labels and are represented as:</p>
+<p><span class="math display">\[
+P(\mathbf{x},y)
+\]</span></p>
+<p>These models focus on modeling the feature generation process.</p>
+<p>On the other hand, discriminative models directly model the conditional probability of labels given the features and are represented as:</p>
+<p><span class="math display">\[
+P(y|\mathbf{x})
+\]</span></p>
+<p>Discriminative models generate labels solely based on the provided data.</p>
+<p>It is important to understand the differences between generative and discriminative models when choosing an appropriate modeling approach for a given classification problem.</p>
 
 
 </section>
