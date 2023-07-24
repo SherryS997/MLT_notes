@@ -5,9 +5,10 @@ title: "Unsupervised Learning - Clustering - K-means/Kernel K-means"
 PDF Link: [notes](../notes/Wk03.pdf)
 
 # Introduction to Clustering
-Clustering is a method of unsupervised machine learning that groups similar objects into clusters, discovering structure in data for exploratory analysis or as a pre-processing step for other algorithms.
 
-Our objective is to group $n$ datapoints into $k$ clusters.
+Clustering represents an essential method in unsupervised machine learning aimed at grouping similar objects into clusters, thereby revealing inherent structures within the data for exploratory analysis or serving as a preprocessing step for subsequent algorithms.
+
+Our primary objective is to partition a set of $n$ datapoints into $k$ clusters.
 
 Notation:
 $$
@@ -22,25 +23,28 @@ $$
 
 Where:
 
-- $\mathbf{x}_i$ denotes the $i^{th}$ datapoint
-- $z_i$ denotes the cluster indicator of $\mathbf{x}_i$
-- $\boldsymbol{\mu}_{z_i}$ denotes the mean of the cluster with indicator $z_i$
-- $S$ denotes the set of all possible cluster assignments. Note that S is **finite** ($k^n$).
+- $\mathbf{x}_i$ denotes the $i^{th}$ datapoint.
+- $z_i$ denotes the cluster indicator of $\mathbf{x}_i$.
+- $\boldsymbol{\mu}_{z_i}$ denotes the mean of the cluster with indicator $z_i$.
+- $S$ represents the set of all possible cluster assignments. It is important to note that $S$ is **finite** ($k^n$).
 
 **Goal**:
 $$
 \min _{\mathbf{z} \in S} \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||}^2
 $$
-Unfortunately, finding a solution manually is an [NP-Hard](https://en.wikipedia.org/wiki/NP-hardness) problem, and can be solved by iterating through all the $k^n$ possibilities. Due to computational constraints, alternative approaches to approximate the solution to the NP-Hard problem, must be considered.
+
+However, the manual solution to this optimization problem is classified as an [NP-Hard](https://en.wikipedia.org/wiki/NP-hardness) problem, which necessitates considering alternative approaches to approximate its solution due to computational constraints.
 
 # K-means Clustering (Lloyd's Algorithm)
-Lloyd's Algorithm, also known as the k-means algorithm, is a widely used and straightforward method for clustering that divides a dataset into $K$ pre-determined clusters by iteratively computing the mean distance between the points and their cluster centroids.
+
+Lloyd's Algorithm, popularly known as the k-means algorithm, offers a widely utilized and straightforward clustering method that segregates a dataset into $K$ predetermined clusters by iteratively computing the mean distance between the points and their cluster centroids.
 
 ## The Algorithm
-The algorithm is as follows:
 
-**Step 1: Initialization**: Assign *random* datapoints from the dataset as the cluster centers
-    
+The algorithm proceeds as follows:
+
+**Step 1: Initialization**: Randomly assign datapoints from the dataset as the initial cluster centers.
+
 **Step 2: Reassignment Step**:
 $$
 z _i ^{t} = \underset{k}{\arg \min} {|| \mathbf{x}_i - \boldsymbol{\mu} _{k} ^t ||}_2 ^2 \hspace{2em} \forall i
@@ -54,28 +58,25 @@ $$
 **Step 4: Loop until Convergence**:
 Repeat steps 2 and 3 until the cluster assignments do not change.
 
-\pagebreak
 # Convergence of K-means Algorithm
-**Convergence** in accordance to the objective is established, since the following can be shown:
+
+The convergence of K-means algorithm with respect to the objective is established by considering the following points:
 
 - The set of all possible cluster assignments $S$ is **finite**.
-- The objective function value strictly decreases after every iteration of Lloyd's.
+- The objective function value strictly decreases after each iteration of Lloyd's Algorithm.
 $$
 F(z_1^{t+1}, z_2^{t+1}, \ldots, z_n^{t+1}) < F(z_1^{t}, z_2^{t}, \ldots, z_n^{t})
 $$
 
-The initialization for K-Means can be done in *smarter* ways than a random initialization - which improve the chance of Lloyd's converging to a good cluster assignment; with a lesser number of iterations.
+Moreover, a smarter initialization of K-means can improve the likelihood of converging to a good cluster assignment with a reduced number of iterations. Although the final assignment may not necessarily represent the global optima of the objective function, it is practically satisfactory as the objective function strictly decreases with each reassignment.
 
-It is important to note that the final assignment need not necessarily be the best answer (global optima) to the objective function, but it is good enough in practice.
-The objective function strictly reduces after each reassignment.
+Considering the finiteness of the number of possible assignments ($k^n$), convergence of the algorithm is guaranteed.
 
-And as there are only finite number of possibilities of assignments ($k^n$), the algorithm must converge.
+**Alternate Explanation**: The convergence of the K-means algorithm is ascertained by its iterative nature, which minimizes the sum of squared distances between points and their cluster centroids—a convex function possessing a global minimum. The algorithm, under mild assumptions regarding the initial cluster means, reaches its convergence point, making it a dependable tool for clustering.
 
-**Alternate Explanation**: K-means algorithm converges because it is an iterative procedure that minimizes the sum of squared distances between points and their cluster centroids, which is a convex function with a global minimum. The algorithm will reach the convergence point, guaranteed to exist, under mild assumptions on the initial cluster means, making it a reliable tool for clustering.
-
-\pagebreak
 # Nature of Clusters Produced by K-means
-Let $\boldsymbol{\mu}_1$ and $\boldsymbol{\mu}_2$ be the centroids of the clusters $C_1$ and $C_2$ respectively.
+
+Let $\boldsymbol{\mu}_1$ and $\boldsymbol{\mu}_2$ denote the centroids of the clusters $C_1$ and $C_2$, respectively.
 
 For $C_1$,
 \begin{align*}
@@ -83,49 +84,48 @@ For $C_1$,
     \therefore \mathbf{x}^T(\boldsymbol{\mu} _2 - \boldsymbol{\mu} _1) &\le \frac{||\boldsymbol{\mu} _2||^2 - ||\boldsymbol{\mu} _1||^2}{2} \hspace{2em} \forall \mathbf{x}
 \end{align*}
 
-Note that the above equation is of the form $\mathbf{x}^T(w)<c$ -  which indicates a linear seperator - or a half-space. Therefore, our resulting partition of the region is an intersection of multiple half-spaces - also called a Voronoi Partition.
+The above equation takes the form of $\mathbf{x}^T(w)<c$, indicating a linear separator or half-space. As a result, our resulting partition of the region represents an intersection of multiple half-spaces, commonly known as a Voronoi Partition.
 
-![](../images/clustering.png)
+![Voronoi Partition](../images/clustering.png)
 
-\pagebreak
-But what if the dataset is as follows:
-
-![](../images/ccircles.png)
-
-The standard k-means algorithm may not perform well when the underlying clusters in the dataset have a non-linear structure. In such cases, alternative methods such as Kernel K-means or Spectral Clustering can be employed to improve clustering accuracy. However, the intricacies of these methods will not be covered in this course.
+However, the standard k-means algorithm may not perform effectively when the underlying clusters in the dataset possess a non-linear structure. In such cases, alternative methods like Kernel K-means or Spectral Clustering can be employed to enhance clustering accuracy. Nonetheless, a detailed exploration of these methods is beyond the scope of this course.
 
 \pagebreak
 # Smart Initialization - K-means++
 
-The premise is to select centroids that are as far as possible from each other.
+The concept of K-means++ involves selecting centroids that are maximally distant from each other.
 
-* Step 1: Choose $\boldsymbol{\mu} _1 ^0$ randomly from the dataset.
-* Step 2: For $l \in \{2, 3, \ldots, k\}$, choose $\boldsymbol{\mu} _l ^0$ probablistically proportional to score($S$) where $S$ is,
+* Step 1: Randomly select $\boldsymbol{\mu} _1 ^0$ from the dataset.
+* Step 2: For $l \in \{2, 3, \ldots, k\}$, choose $\boldsymbol{\mu} _l ^0$ probabilistically proportional to the score($S$), where $S$ is defined as follows:
 $$
     S(\mathbf{x}_i) = \min _{\{j=1, 2, \ldots, l-1\}} {|| \mathbf{x}_i - \boldsymbol{\mu} _{j} ^0 ||}^2 \quad \forall \mathbf{x}_i \in \mathbf{X}
 $$
-    The probabilistic aspect of the algorithm provides an expected guarantee of optimal convergence in K-means. The guarantee is given by,
+    The probabilistic aspect of the algorithm provides an expected guarantee of optimal convergence in K-means. The guarantee is given by:
 $$
     \mathbb{E} \left[ \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||}^2 \right ]
     \le O(\log k) \left [ \min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||}^2 \right ]
 $$
     where $O(\log k)$ is a constant of order $\log k$.
+
 * Step 3: Once the centroids are determined, we proceed with our usual Lloyd's Algorithm.
 
+\pagebreak
 # Choice of K
-A pre-requisite of K-means is $k$ or the number of clusters. But what if $k$ is unknown? 
 
-If $k$ is chosen to be $n$,
+A prerequisite for K-means is determining the number of clusters, denoted as $k$. However, what if the value of $k$ is unknown?
+
+If we were to choose $k$ to be equal to $n$:
 $$
 F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||} ^2 = 0
 $$
-But we don't want as many clusters as datapoints. Therefore, $k$ needs to be as small as possible. We do this by penalizing large values of $k$.
+However, as having as many clusters as datapoints is undesirable, we aim to minimize $k$ while penalizing large values of $k$.
 $$
 \underset{k}{\arg \min} \left [ \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||} ^2 + \text{Penalty}(k) \right ]
 $$
-Two common criteria for making the above argument:
+Two common criteria for making the above argument are:
 
 * [$\text{\textcolor{blue}{Akaike Information Criterion}}$](https://en.wikipedia.org/wiki/Akaike_information_criterion): $\left [ 2K - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]$
 * [$\text{\textcolor{blue}{Bayesian Information Criterion}}$](https://en.wikipedia.org/wiki/Bayesian_information_criterion): $\left [ K\ln(n) - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]$
 
-Details for the same are not covered in this course.
+However, detailed elaboration of these criteria is beyond the scope of this course.
+

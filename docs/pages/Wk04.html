@@ -212,12 +212,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-estimation" id="toc-introduction-to-estimation" class="nav-link active" data-scroll-target="#introduction-to-estimation">Introduction to Estimation</a></li>
+  <li><a href="#introduction-to-estimation-in-machine-learning" id="toc-introduction-to-estimation-in-machine-learning" class="nav-link active" data-scroll-target="#introduction-to-estimation-in-machine-learning">Introduction to Estimation in Machine Learning</a></li>
   <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">Maximum Likelihood Estimation</a>
   <ul class="collapse">
   <li><a href="#fishers-principle-of-maximum-likelihood" id="toc-fishers-principle-of-maximum-likelihood" class="nav-link" data-scroll-target="#fishers-principle-of-maximum-likelihood">Fisher’s Principle of Maximum Likelihood</a></li>
-  <li><a href="#likelihood-estimation-on-bernoulli-distributions" id="toc-likelihood-estimation-on-bernoulli-distributions" class="nav-link" data-scroll-target="#likelihood-estimation-on-bernoulli-distributions">Likelihood Estimation on Bernoulli Distributions</a></li>
-  <li><a href="#likelihood-estimation-on-gaussian-distributions" id="toc-likelihood-estimation-on-gaussian-distributions" class="nav-link" data-scroll-target="#likelihood-estimation-on-gaussian-distributions">Likelihood Estimation on Gaussian Distributions</a></li>
+  <li><a href="#likelihood-estimation-for-bernoulli-distributions" id="toc-likelihood-estimation-for-bernoulli-distributions" class="nav-link" data-scroll-target="#likelihood-estimation-for-bernoulli-distributions">Likelihood Estimation for Bernoulli Distributions</a></li>
+  <li><a href="#likelihood-estimation-for-gaussian-distributions" id="toc-likelihood-estimation-for-gaussian-distributions" class="nav-link" data-scroll-target="#likelihood-estimation-for-gaussian-distributions">Likelihood Estimation for Gaussian Distributions</a></li>
   </ul></li>
   <li><a href="#bayesian-estimation" id="toc-bayesian-estimation" class="nav-link" data-scroll-target="#bayesian-estimation">Bayesian Estimation</a>
   <ul class="collapse">
@@ -254,23 +254,23 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>PDF Link: <a href="../notes/Wk04.pdf">notes</a></p>
-<section id="introduction-to-estimation" class="level1">
-<h1>Introduction to Estimation</h1>
-<p>Estimators in machine learning are algorithms or models used to estimate unknown parameters or predict outcomes based on data. The aim of the method is to find/predict the unknown parameters describing the distribution of the data.</p>
-<p>Let <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> be a dataset where <span class="math inline">\(\mathbf{x}_i \in \{0,1\}^d\)</span>. We assume that the datapoints are independent and identically distributed.</p>
-<p>Independence means <span class="math inline">\(P(\mathbf{x}_i|\mathbf{x}_j) = P(\mathbf{x}_i)\)</span>. Identically distributed means <span class="math inline">\(P(\mathbf{x}_i)=P(\mathbf{x}_j)=p\)</span>.</p>
+<section id="introduction-to-estimation-in-machine-learning" class="level1">
+<h1>Introduction to Estimation in Machine Learning</h1>
+<p>Estimation in machine learning involves inferring unknown parameters or predicting outcomes from observed data. Estimators, often algorithms or models, are used for these tasks and to characterize the data’s underlying distribution.</p>
+<p>Let <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> represent a dataset, where each data point <span class="math inline">\(\mathbf{x}_i\)</span> is in the <span class="math inline">\(d\)</span>-dimensional binary space <span class="math inline">\(\{0,1\}^d\)</span>. It is assumed that the data points are independent and identically distributed (i.i.d).</p>
+<p>Independence is denoted as <span class="math inline">\(P(\mathbf{x}_i|\mathbf{x}_j) = P(\mathbf{x}_i)\)</span>. Identically distributed means <span class="math inline">\(P(\mathbf{x}_i)=P(\mathbf{x}_j)=p\)</span>.</p>
 </section>
 <section id="maximum-likelihood-estimation" class="level1">
 <h1>Maximum Likelihood Estimation</h1>
 <section id="fishers-principle-of-maximum-likelihood" class="level2">
 <h2 class="anchored" data-anchor-id="fishers-principle-of-maximum-likelihood">Fisher’s Principle of Maximum Likelihood</h2>
-<p>Fisher’s principle of maximum likelihood is a statistical method used to estimate the parameters of a statistical model by choosing the parameter values that maximize the likelihood function, which measures how well the model fits the observed data.</p>
+<p>Fisher’s principle of maximum likelihood is a statistical method used to estimate parameters of a statistical model by selecting values that maximize the likelihood function. This function quantifies how well the model fits the observed data.</p>
 </section>
-<section id="likelihood-estimation-on-bernoulli-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-estimation-on-bernoulli-distributions">Likelihood Estimation on Bernoulli Distributions</h2>
-<p>Applying the likelihood function on the above dataset, we get <span class="math display">\[\begin{align*}
+<section id="likelihood-estimation-for-bernoulli-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-estimation-for-bernoulli-distributions">Likelihood Estimation for Bernoulli Distributions</h2>
+<p>Applying the likelihood function on the aforementioned dataset, we obtain: <span class="math display">\[\begin{align*}
 \mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}) &amp;= P(\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n;p)\\
-&amp;=p(\mathbf{x}_1;p)p(\mathbf{x}_2;p)\ldots p(\mathbf{x}_n;p) \\
+&amp;= p(\mathbf{x}_1;p)p(\mathbf{x}_2;p)\ldots p(\mathbf{x}_n;p) \\
 &amp;=\prod _{i=1} ^n {p^{\mathbf{x}_i}(1-p)^{1-\mathbf{x}_i}}
 \end{align*}\]</span> <span class="math display">\[\begin{align*}
 \therefore \log(\mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})) &amp;=\underset{p} {\arg \max}\log \left ( \prod _{i=1} ^n {p^{\mathbf{x}_i}(1-p)^{1-\mathbf{x}_i}} \right ) \\
@@ -278,16 +278,16 @@ ul.task-list li input[type="checkbox"] {
 \therefore \hat{p}_{\text{ML}} &amp;= \frac{1}{n}\sum _{i=1} ^n \mathbf{x}_i
 \end{align*}\]</span></p>
 </section>
-<section id="likelihood-estimation-on-gaussian-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-estimation-on-gaussian-distributions">Likelihood Estimation on Gaussian Distributions</h2>
-<p>Let <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> be a dataset where <span class="math inline">\(\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\sigma}^2)\)</span>. We assume that the datapoints are independent and identically distributed.</p>
+<section id="likelihood-estimation-for-gaussian-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-estimation-for-gaussian-distributions">Likelihood Estimation for Gaussian Distributions</h2>
+<p>Let <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> be a dataset where <span class="math inline">\(\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\sigma}^2)\)</span>. We assume that the data points are independent and identically distributed.</p>
 <p><span class="math display">\[\begin{align*}
 \mathcal{L}(\boldsymbol{\mu}, \boldsymbol{\sigma}^2;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}) &amp;= f_{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n}(\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n;\boldsymbol{\mu}, \boldsymbol{\sigma}^2) \\
 &amp;=\prod _{i=1} ^n  f_{\mathbf{x}_i}(\mathbf{x}_i;\boldsymbol{\mu}, \boldsymbol{\sigma}^2) \\
 &amp;=\prod _{i=1} ^n \left [ \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu})^2}{2\boldsymbol{\sigma}^2}} \right ] \\
 \therefore \log(\mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})) &amp;= \sum _{i=1} ^n \left[ \log \left (\frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}}  \right ) - \frac{(\mathbf{x}_i-\boldsymbol{\mu})^2}{2\boldsymbol{\sigma}^2} \right] \\
 \end{align*}\]</span> <span class="math display">\[
-\text{Differentiating wrt $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$, we get}
+\text{By differentiating with respect to $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$, we get}
 \]</span> <span class="math display">\[\begin{align*}
 \hat{\boldsymbol{\mu}}_{\text{ML}} &amp;= \frac{1}{n}\sum _{i=1} ^n \mathbf{x}_i \\
 \hat{\boldsymbol{\sigma}^2}_{\text{ML}} &amp;= \frac{1}{n}\sum _{i=1} ^n (\mathbf{x}_i-\boldsymbol{\mu})^T(\mathbf{x}_i-\boldsymbol{\mu})
@@ -296,27 +296,27 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="bayesian-estimation" class="level1">
 <h1>Bayesian Estimation</h1>
-<p>Bayesian estimation is a statistical method that updates the estimates of model parameters by combining prior knowledge or beliefs with observed data to calculate the posterior probability distribution of the parameters.</p>
-<p>Let <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> be a dataset where <span class="math inline">\(\mathbf{x}_i\)</span> belongs to a distribution with parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>. We assume that the datapoints are independent and identically distributed. We also assume that <span class="math inline">\(\boldsymbol{\theta}\)</span> is also from a probability distribution.</p>
-<p>Our goal is to update the parameters using the data.</p>
+<p>Bayesian estimation is a statistical method that updates parameter estimates by incorporating prior knowledge or beliefs along with observed data to calculate the posterior probability distribution of the parameters.</p>
+<p>Let <span class="math inline">\(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}\)</span> be a dataset where <span class="math inline">\(\mathbf{x}_i\)</span> follows a distribution with parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>. We assume that the data points are independent and identically distributed, and we also consider <span class="math inline">\(\boldsymbol{\theta}\)</span> as a random variable with its own probability distribution.</p>
+<p>Our objective is to update the parameters using the available data.</p>
 <p>i.e. <span class="math display">\[
 P(\boldsymbol{\theta})\Rightarrow P(\boldsymbol{\theta}|\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})
-\]</span> where, using Bayes’ Law, we get <span class="math display">\[
+\]</span> where, employing Bayes’ Law, we find <span class="math display">\[
 P(\boldsymbol{\theta}|\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})=\left ( \frac{P(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}|\boldsymbol{\theta})}{P(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})} \right )*P(\boldsymbol{\theta})
 \]</span></p>
 <section id="bayesian-estimation-for-a-bernoulli-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="bayesian-estimation-for-a-bernoulli-distribution">Bayesian Estimation for a Bernoulli Distribution</h2>
-<p>Let <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> be a dataset where <span class="math inline">\(x_i \in \{0,1\}\)</span> with parameter <span class="math inline">\(\theta\)</span>. What distribution can be suited for <span class="math inline">\(P(\theta)\)</span>?</p>
+<p>Let <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> be a dataset where <span class="math inline">\(x_i \in \{0,1\}\)</span> with parameter <span class="math inline">\(\theta\)</span>. What distribution can be suitable for <span class="math inline">\(P(\theta)\)</span>?</p>
 <p>A commonly used distribution for priors is the Beta Distribution. <span class="math display">\[
 f(p;\alpha,\beta) = \frac{p^{\alpha-1}(1-p)^{\beta-1}}{z} \hspace{2em} \forall p \in [0,1] \\
 \]</span> <span class="math display">\[
 \text{where $z$ is a normalizing factor}
 \]</span></p>
-<p>Hence, using the Beta Distribution as the Prior, we get, <span class="math display">\[\begin{align*}
+<p>Hence, utilizing the Beta Distribution as the Prior, we obtain, <span class="math display">\[\begin{align*}
 P(\theta|\{x_1, x_2, \ldots, x_n\}) &amp;\propto P(\theta|\{x_1, x_2, \ldots, x_n\})*P(\theta) \\
 f_{\theta|\{x_1, x_2, \ldots, x_n\}}(p) &amp;\propto \left [ \prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}} \right ]*\left [ p^{\alpha-1}(1-p)^{\beta-1} \right ] \\
 f_{\theta|\{x_1, x_2, \ldots, x_n\}}(p) &amp;\propto p^{\sum _{i=1} ^n x_i + \alpha - 1}(1-p)^{\sum _{i=1} ^n(1-x_i) + \beta - 1}
-\end{align*}\]</span> i.e.&nbsp;we get, <span class="math display">\[
+\end{align*}\]</span> i.e.&nbsp;we obtain, <span class="math display">\[
 \text{BETA PRIOR }(\alpha, \beta) \xrightarrow[Bernoulli]{\{x_1, x_2, \ldots, x_n\}} \text{BETA POSTERIOR }(\alpha + n_h, \beta + n_t)
 \]</span> <span class="math display">\[
 \therefore \hat{p_{\text{ML}}} = \mathbb{E}[\text{Posterior}]=\mathbb{E}[\text{Beta}(\alpha +n_h, \beta + n_t)]= \frac{\alpha + n_h}{\alpha + n_h + \beta + n_t}
@@ -328,13 +328,12 @@ f_{\theta|\{x_1, x_2, \ldots, x_n\}}(p) &amp;\propto p^{\sum _{i=1} ^n x_i + \al
 <p>Gaussian Mixture Models are a type of probabilistic model used to represent complex data distributions by combining multiple Gaussian distributions.</p>
 <p>The procedure is as follows:</p>
 <ul>
-<li>Step 1: Generate a mixture component among <span class="math inline">\(\{1, 2, \ldots, K\}\)</span> where <span class="math inline">\(z_i \in \{1, 2, \ldots, K\}\)</span>. We get, <span class="math display">\[
+<li>Step 1: Generate a mixture component among <span class="math inline">\(\{1, 2, \ldots, K\}\)</span> where <span class="math inline">\(z_i \in \{1, 2, \ldots, K\}\)</span>. We obtain, <span class="math display">\[
 P(z_i=k) = \pi_k \hspace{2em} \left [ \sum _{i=1} ^K \pi_i = 1 \hspace{1em} 0 \le \pi_i \le 1 \hspace{1em} \forall i \right ]
 \]</span></li>
 <li>Step 2: Generate <span class="math inline">\(\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu}_{z_i}, \boldsymbol{\sigma}^2_{z_i})\)</span></li>
 </ul>
-<p>Hence, there are <span class="math inline">\(3K\)</span> parameters. Let these parameters be represented by <span class="math inline">\(\boldsymbol{\theta}\)</span>.</p>
-<p>However, since <span class="math inline">\(\displaystyle \sum _{i=1} ^K \pi_i = 1\)</span>, the number of parameters to be estimated becomes <span class="math inline">\(3K-1\)</span> for a GMM with <span class="math inline">\(K\)</span> components.</p>
+<p>Hence, there are <span class="math inline">\(3K\)</span> parameters. However, since <span class="math inline">\(\displaystyle \sum _{i=1} ^K \pi_i = 1\)</span>, the number of parameters to be estimated becomes <span class="math inline">\(3K-1\)</span> for a GMM with <span class="math inline">\(K\)</span> components.</p>
 </section>
 <section id="likelihood-of-gmms" class="level1">
 <h1>Likelihood of GMM’s</h1>
@@ -365,12 +364,11 @@ a_k \text{ are points of the function}
 </section>
 <section id="estimating-the-parameters" class="level1">
 <h1>Estimating the Parameters</h1>
-<p>As log is a concave function, using the above equation, we can also approximate the likelihood function for GMM’s as follows, <span class="math display">\[
+<p>Since log is a concave function, we can approximate the likelihood function for GMM’s as follows, <span class="math display">\[
 \log\mathcal{L}(\boldsymbol{\theta}) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \pi_k * \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ]
-\]</span> Introduce for data point <span class="math inline">\(\mathbf{x}_i\)</span>, the parameters <span class="math inline">\(\{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i\}\)</span> s.t. <span class="math inline">\(\forall i,k \displaystyle \sum _{k=1} ^K \lambda _k^i = 1; 0 \le \lambda _k^i \
-le 1\)</span>. <span class="math display">\[
+\]</span> By introducing parameters <span class="math inline">\(\{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i\}\)</span> for data point <span class="math inline">\(\mathbf{x}_i\)</span> such that <span class="math inline">\(\forall i,k \displaystyle \sum _{k=1} ^K \lambda _k ^i = 1; 0 \le \lambda _k ^i \le 1\)</span>, we obtain: <span class="math display">\[
 \log\mathcal{L}(\boldsymbol{\theta}) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \lambda _k ^i \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) \right ]
-\]</span> <span class="math display">\[ \text{Using Jensen's Inequality, we get} \]</span> <span class="math display">\[
+\]</span> Using Jensen’s Inequality, we get: <span class="math display">\[
 \log\mathcal{L}(\boldsymbol{\theta}) \ge \text{modified\_log}\mathcal{L}(\boldsymbol{\theta})
 \]</span> <span class="math display">\[\begin{align}
 \therefore \text{modified\_log}\mathcal{L}(\boldsymbol{\theta})
@@ -389,12 +387,9 @@ le 1\)</span>. <span class="math display">\[
 <li>To get <span class="math inline">\(\lambda\)</span>: Fix <span class="math inline">\(\boldsymbol{\theta}\)</span> and maximize over <span class="math inline">\(\lambda\)</span>. For any <span class="math inline">\(i\)</span>: <span class="math display">\[
 \underset{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i} {\max}
 \sum _{k=1} ^K \left [ \lambda _k ^i \log \left ( \pi_k * \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) -  \lambda _k ^i \log( \lambda _k ^i) \right ] \hspace{1em} s.t. \hspace{1em} \sum _{k=1} ^K \lambda _k ^i = 1;  0 \le \lambda _k ^i \le 1
-\]</span> <span class="math display">\[
-\text{Solving the above constrained optimization problem analytically, we get}
-\]</span> <span class="math display">\[\begin{align*}
-\hat{\lambda}_k^{i^{\text{MML}}}
-&amp;= \frac{\left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}{\displaystyle \sum _{k=1} ^K \left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}
-\end{align*}\]</span></li>
+\]</span> Solving the above constrained optimization problem analytically, we get: <span class="math display">\[
+\hat{\lambda}_k^{i^{\text{MML}}} = \frac{\left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}{\displaystyle \sum _{k=1} ^K \left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}
+\]</span></li>
 </ul>
 </section>
 <section id="em-algorithm" class="level1">

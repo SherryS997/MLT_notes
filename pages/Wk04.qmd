@@ -4,23 +4,23 @@ title: "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation,
 
 PDF Link: [notes](../notes/Wk04.pdf)
 
-# Introduction to Estimation
-Estimators in machine learning are algorithms or models used to estimate unknown parameters or predict outcomes based on data. The aim of the method is to find/predict the unknown parameters describing the distribution of the data.
+# Introduction to Estimation in Machine Learning
+Estimation in machine learning involves inferring unknown parameters or predicting outcomes from observed data. Estimators, often algorithms or models, are used for these tasks and to characterize the data's underlying distribution.
 
-Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i \in \{0,1\}^d$. We assume that the datapoints are independent and identically distributed.
+Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ represent a dataset, where each data point $\mathbf{x}_i$ is in the $d$-dimensional binary space $\{0,1\}^d$. It is assumed that the data points are independent and identically distributed (i.i.d).
 
-Independence means $P(\mathbf{x}_i|\mathbf{x}_j) = P(\mathbf{x}_i)$.
+Independence is denoted as $P(\mathbf{x}_i|\mathbf{x}_j) = P(\mathbf{x}_i)$.
 Identically distributed means $P(\mathbf{x}_i)=P(\mathbf{x}_j)=p$.
 
 # Maximum Likelihood Estimation
 ## Fisher's Principle of Maximum Likelihood
-Fisher's principle of maximum likelihood is a statistical method used to estimate the parameters of a statistical model by choosing the parameter values that maximize the likelihood function, which measures how well the model fits the observed data.
+Fisher's principle of maximum likelihood is a statistical method used to estimate parameters of a statistical model by selecting values that maximize the likelihood function. This function quantifies how well the model fits the observed data.
 
-## Likelihood Estimation on Bernoulli Distributions
-Applying the likelihood function on the above dataset, we get
+## Likelihood Estimation for Bernoulli Distributions
+Applying the likelihood function on the aforementioned dataset, we obtain:
 \begin{align*}
 \mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}) &= P(\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n;p)\\
-&=p(\mathbf{x}_1;p)p(\mathbf{x}_2;p)\ldots p(\mathbf{x}_n;p) \\
+&= p(\mathbf{x}_1;p)p(\mathbf{x}_2;p)\ldots p(\mathbf{x}_n;p) \\
 &=\prod _{i=1} ^n {p^{\mathbf{x}_i}(1-p)^{1-\mathbf{x}_i}}
 \end{align*}
 \begin{align*}
@@ -29,8 +29,8 @@ Applying the likelihood function on the above dataset, we get
 \therefore \hat{p}_{\text{ML}} &= \frac{1}{n}\sum _{i=1} ^n \mathbf{x}_i
 \end{align*}
 
-## Likelihood Estimation on Gaussian Distributions
-Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\sigma}^2)$. We assume that the datapoints are independent and identically distributed.
+## Likelihood Estimation for Gaussian Distributions
+Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\sigma}^2)$. We assume that the data points are independent and identically distributed.
 
 \begin{align*}
 \mathcal{L}(\boldsymbol{\mu}, \boldsymbol{\sigma}^2;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}) &= f_{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n}(\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n;\boldsymbol{\mu}, \boldsymbol{\sigma}^2) \\
@@ -39,7 +39,7 @@ Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\
 \therefore \log(\mathcal{L}(p;\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})) &= \sum _{i=1} ^n \left[ \log \left (\frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}}  \right ) - \frac{(\mathbf{x}_i-\boldsymbol{\mu})^2}{2\boldsymbol{\sigma}^2} \right] \\
 \end{align*}
 $$
-\text{Differentiating wrt $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$, we get}
+\text{By differentiating with respect to $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$, we get}
 $$
 \begin{align*}
 \hat{\boldsymbol{\mu}}_{\text{ML}} &= \frac{1}{n}\sum _{i=1} ^n \mathbf{x}_i \\
@@ -47,23 +47,23 @@ $$
 \end{align*}
 
 # Bayesian Estimation
-Bayesian estimation is a statistical method that updates the estimates of model parameters by combining prior knowledge or beliefs with observed data to calculate the posterior probability distribution of the parameters.
+Bayesian estimation is a statistical method that updates parameter estimates by incorporating prior knowledge or beliefs along with observed data to calculate the posterior probability distribution of the parameters.
 
-Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i$ belongs to a distribution with parameters $\boldsymbol{\theta}$. We assume that the datapoints are independent and identically distributed. We also assume that $\boldsymbol{\theta}$ is also from a probability distribution.
+Let $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}$ be a dataset where $\mathbf{x}_i$ follows a distribution with parameters $\boldsymbol{\theta}$. We assume that the data points are independent and identically distributed, and we also consider $\boldsymbol{\theta}$ as a random variable with its own probability distribution.
 
-Our goal is to update the parameters using the data.
+Our objective is to update the parameters using the available data.
 
 i.e.
 $$
 P(\boldsymbol{\theta})\Rightarrow P(\boldsymbol{\theta}|\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})
 $$
-where, using Bayes' Law, we get
+where, employing Bayes' Law, we find
 $$
 P(\boldsymbol{\theta}|\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})=\left ( \frac{P(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\}|\boldsymbol{\theta})}{P(\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\})} \right )*P(\boldsymbol{\theta})
 $$
 
 ## Bayesian Estimation for a Bernoulli Distribution
-Let $\{x_1, x_2, \ldots, x_n\}$ be a dataset where $x_i \in \{0,1\}$ with parameter $\theta$. What distribution can be suited for $P(\theta)$?
+Let $\{x_1, x_2, \ldots, x_n\}$ be a dataset where $x_i \in \{0,1\}$ with parameter $\theta$. What distribution can be suitable for $P(\theta)$?
 
 A commonly used distribution for priors is the Beta Distribution.
 $$
@@ -73,13 +73,13 @@ $$
 \text{where $z$ is a normalizing factor}
 $$
 
-Hence, using the Beta Distribution as the Prior, we get,
+Hence, utilizing the Beta Distribution as the Prior, we obtain,
 \begin{align*}
 P(\theta|\{x_1, x_2, \ldots, x_n\}) &\propto P(\theta|\{x_1, x_2, \ldots, x_n\})*P(\theta) \\
 f_{\theta|\{x_1, x_2, \ldots, x_n\}}(p) &\propto \left [ \prod _{i=1} ^n {p^{x_i}(1-p)^{1-x_i}} \right ]*\left [ p^{\alpha-1}(1-p)^{\beta-1} \right ] \\
 f_{\theta|\{x_1, x_2, \ldots, x_n\}}(p) &\propto p^{\sum _{i=1} ^n x_i + \alpha - 1}(1-p)^{\sum _{i=1} ^n(1-x_i) + \beta - 1}
 \end{align*}
-i.e. we get,
+i.e. we obtain,
 $$
 \text{BETA PRIOR }(\alpha, \beta) \xrightarrow[Bernoulli]{\{x_1, x_2, \ldots, x_n\}} \text{BETA POSTERIOR }(\alpha + n_h, \beta + n_t)
 $$
@@ -93,15 +93,13 @@ Gaussian Mixture Models are a type of probabilistic model used to represent comp
 
 The procedure is as follows:
 
-* Step 1: Generate a mixture component among $\{1, 2, \ldots, K\}$ where $z_i \in \{1, 2, \ldots, K\}$. We get,
+* Step 1: Generate a mixture component among $\{1, 2, \ldots, K\}$ where $z_i \in \{1, 2, \ldots, K\}$. We obtain,
 $$
 P(z_i=k) = \pi_k \hspace{2em} \left [ \sum _{i=1} ^K \pi_i = 1 \hspace{1em} 0 \le \pi_i \le 1 \hspace{1em} \forall i \right ]
 $$
 * Step 2: Generate $\mathbf{x}_i \sim \mathcal{N}(\boldsymbol{\mu}_{z_i}, \boldsymbol{\sigma}^2_{z_i})$
 
-Hence, there are $3K$ parameters. Let these parameters be represented by $\boldsymbol{\theta}$.
-
-However, since $\displaystyle \sum _{i=1} ^K \pi_i = 1$, the number of parameters to be estimated becomes $3K-1$ for a GMM with $K$ components.
+Hence, there are $3K$ parameters. However, since $\displaystyle \sum _{i=1} ^K \pi_i = 1$, the number of parameters to be estimated becomes $3K-1$ for a GMM with $K$ components.
 
 # Likelihood of GMM's
 \begin{align*}
@@ -135,17 +133,15 @@ $$
 This is also known as **Jensen's Inequality**.
 
 # Estimating the Parameters
-As log is a concave function, using the above equation, we can also approximate the likelihood function for GMM's as follows,
+Since log is a concave function, we can approximate the likelihood function for GMM's as follows,
 $$
 \log\mathcal{L}(\boldsymbol{\theta}) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \pi_k * \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ]
 $$
-Introduce for data point $\mathbf{x}_i$, the parameters $\{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i\}$ s.t. $\forall i,k \displaystyle \sum _{k=1} ^K \lambda _k^i = 1; 0 \le \lambda _k^i \
-
-le 1$.
+By introducing parameters $\{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i\}$ for data point $\mathbf{x}_i$ such that $\forall i,k \displaystyle \sum _{k=1} ^K \lambda _k ^i = 1; 0 \le \lambda _k ^i \le 1$, we obtain:
 $$
 \log\mathcal{L}(\boldsymbol{\theta}) = \sum _{i=1} ^n \log \left [ \sum _{k=1} ^K \lambda _k ^i \left ( \pi_k * \frac{1}{\lambda _k ^i\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) \right ]
 $$
-$$ \text{Using Jensen's Inequality, we get} $$
+Using Jensen's Inequality, we get:
 $$
 \log\mathcal{L}(\boldsymbol{\theta}) \ge \text{modified\_log}\mathcal{L}(\boldsymbol{\theta})
 $$
@@ -173,13 +169,10 @@ $$
 \underset{\lambda_1^i, \lambda_2^i, \ldots, \lambda_k^i} {\max} 
 \sum _{k=1} ^K \left [ \lambda _k ^i \log \left ( \pi_k * \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) -  \lambda _k ^i \log( \lambda _k ^i) \right ] \hspace{1em} s.t. \hspace{1em} \sum _{k=1} ^K \lambda _k ^i = 1;  0 \le \lambda _k ^i \le 1
 $$
+Solving the above constrained optimization problem analytically, we get:
 $$
-\text{Solving the above constrained optimization problem analytically, we get}
+\hat{\lambda}_k^{i^{\text{MML}}} = \frac{\left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}{\displaystyle \sum _{k=1} ^K \left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}
 $$
-\begin{align*}
-\hat{\lambda}_k^{i^{\text{MML}}}
-&= \frac{\left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}{\displaystyle \sum _{k=1} ^K \left ( \frac{1}{\sqrt{2\pi}\boldsymbol{\sigma}_k} e^{\frac{-(\mathbf{x}_i-\boldsymbol{\mu}_k)^2}{2\boldsymbol{\sigma}^2_k}} \right ) * \pi_k}
-\end{align*}
 
 # EM Algorithm
 The EM (Expectation-Maximization) algorithm is a popular method for estimating the parameters of statistical models with incomplete data by iteratively alternating between expectation and maximization steps until convergence to a stable solution.
@@ -204,3 +197,4 @@ EM algorithm produces soft clustering. For hard clustering using EM, a further s
 $$
 z_i = \underset{k}{\arg\max} \lambda_k^i
 $$
+
