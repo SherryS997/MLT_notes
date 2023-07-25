@@ -2,7 +2,11 @@
 title: "Support Vector Machines"
 ---
 
-PDF Link: [notes](../notes/Wk10.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk10.pdf)
 
 # Perceptron and Margins
 Let dataset $D=\{(x_1, y_1), \ldots, (x_n,y_n)\}$ be linearly separable with $\gamma$-margin where $x_i \in \mathbb{R}^d$ and $y_i \in \{-1, 1\}$.

@@ -4,6 +4,8 @@ title: "MLT Notes"
 
 :::{.callout-note}
 This site is still under development.
+
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
 :::
 
 ## About the Course
@@ -21,11 +23,14 @@ To introduce the main methods and models used in machine learning problems of re
 
 Assistant Professor, Department of Computer Sciences & Engineering, IIT Madras
 
-## Course Support Team
+## Author
 
-* Karthik Thiagarajan (B. Tech., IIT Madras)
-* Nitin Kumar Jha (M.Sc., IIT Madras)
+* [Sherry](https://discourse.onlinedegree.iitm.ac.in/u/sherry)
 
+### Co-Authors
+
+* [A Aniruddha](https://discourse.onlinedegree.iitm.ac.in/u/alape_aniruddha)
+* [Vivek Sivaramakrishnan](https://discourse.onlinedegree.iitm.ac.in/u/vivekthegreat1)
 
 ## Table of Contents
 

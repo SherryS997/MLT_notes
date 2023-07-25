@@ -2,7 +2,11 @@
 title: "Introduction; Unsupervised Learning - Representation learning - PCA"
 ---
 
-PDF Link: [notes](../notes/Wk01.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk01.pdf)
 
 # Introduction to Machine Learning
 Machine Learning is a sub-field of artificial intelligence concerned with the design of algorithms and statistical models that allow computers to learn from and make predictions or decisions based on data, without being explicitly programmed. It utilizes mathematical optimization, algorithms, and computational models to analyze and understand patterns in data and make predictions about future outcomes.

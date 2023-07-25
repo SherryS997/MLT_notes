@@ -2,7 +2,11 @@
 title: "Supervised Learning - Classification - K-NN, Decision tree"
 ---
 
-PDF Link: [notes](../notes/Wk07.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk07.pdf)
 
 # Introduction to Binary Classification
 

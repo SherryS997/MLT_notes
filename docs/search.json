@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "MLT Notes",
     "section": "",
-    "text": "Note\n\n\n\nThis site is still under development."
+    "text": "Note\n\n\n\nThis site is still under development.\nFeedback/Correction: Click here!."
   },
   {
     "objectID": "index.html#about-the-course",
@@ -53,7 +53,7 @@
     "href": "pages/Wk06.html",
     "title": "Supervised Learning - Regression - Ridge/LASSO",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk06.html#introduction",
@@ -67,7 +67,7 @@
     "href": "pages/Wk03.html",
     "title": "Unsupervised Learning - Clustering - K-means/Kernel K-means",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk03.html#the-algorithm",
@@ -81,7 +81,7 @@
     "href": "pages/Wk02.html",
     "title": "Unsupervised Learning - Representation learning - Kernel PCA",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk02.html#transforming-features",
@@ -102,7 +102,7 @@
     "href": "pages/Wk11.html",
     "title": "Ensemble methods - Bagging and Boosting (Adaboost)",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk11.html#dual-formulation",
@@ -116,7 +116,7 @@
     "href": "pages/Wk09.html",
     "title": "Discriminative Models - Perceptron; Logistic Regression",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk09.html#analysis-of-the-update-rule",
@@ -158,7 +158,7 @@
     "href": "pages/Wk08.html",
     "title": "Supervised Learning - Classification - Generative Models - Naive Bayes",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk08.html#alternate-generative-model",
@@ -200,7 +200,7 @@
     "href": "pages/Wk10.html",
     "title": "Support Vector Machines",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk10.html#margin-maximization",
@@ -221,7 +221,7 @@
     "href": "pages/Wk01.html",
     "title": "Introduction; Unsupervised Learning - Representation learning - PCA",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk01.html#broad-paradigms-of-machine-learning",
@@ -256,7 +256,7 @@
     "href": "pages/Wk04.html",
     "title": "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk04.html#fishers-principle-of-maximum-likelihood",
@@ -298,7 +298,7 @@
     "href": "pages/Wk05.html",
     "title": "Supervised Learning - Regression - Least Squares; Bayesian view",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk05.html#stochastic-gradient-descent",
@@ -312,7 +312,7 @@
     "href": "pages/Wk07.html",
     "title": "Supervised Learning - Classification - K-NN, Decision tree",
     "section": "",
-    "text": "PDF Link: notes"
+    "text": "Note\n\n\n\nFeedback/Correction: Click here!.\nPDF Link: Click here!"
   },
   {
     "objectID": "pages/Wk07.html#issues-with-k-nn",
@@ -355,5 +355,12 @@
     "title": "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm",
     "section": "Likelihood Estimation for Gaussian Distributions",
     "text": "Likelihood Estimation for Gaussian Distributions\nLet \\(\\{\\mathbf{x}_1, \\mathbf{x}_2, \\ldots, \\mathbf{x}_n\\}\\) be a dataset where \\(\\mathbf{x}_i \\sim \\mathcal{N}(\\boldsymbol{\\mu},\\boldsymbol{\\sigma}^2)\\). We assume that the data points are independent and identically distributed.\n\\[\\begin{align*}\n\\mathcal{L}(\\boldsymbol{\\mu}, \\boldsymbol{\\sigma}^2;\\{\\mathbf{x}_1, \\mathbf{x}_2, \\ldots, \\mathbf{x}_n\\}) &= f_{\\mathbf{x}_1, \\mathbf{x}_2, \\ldots, \\mathbf{x}_n}(\\mathbf{x}_1, \\mathbf{x}_2, \\ldots, \\mathbf{x}_n;\\boldsymbol{\\mu}, \\boldsymbol{\\sigma}^2) \\\\\n&=\\prod _{i=1} ^n  f_{\\mathbf{x}_i}(\\mathbf{x}_i;\\boldsymbol{\\mu}, \\boldsymbol{\\sigma}^2) \\\\\n&=\\prod _{i=1} ^n \\left [ \\frac{1}{\\sqrt{2\\pi}\\boldsymbol{\\sigma}} e^{\\frac{-(\\mathbf{x}_i-\\boldsymbol{\\mu})^2}{2\\boldsymbol{\\sigma}^2}} \\right ] \\\\\n\\therefore \\log(\\mathcal{L}(p;\\{\\mathbf{x}_1, \\mathbf{x}_2, \\ldots, \\mathbf{x}_n\\})) &= \\sum _{i=1} ^n \\left[ \\log \\left (\\frac{1}{\\sqrt{2\\pi}\\boldsymbol{\\sigma}}  \\right ) - \\frac{(\\mathbf{x}_i-\\boldsymbol{\\mu})^2}{2\\boldsymbol{\\sigma}^2} \\right] \\\\\n\\end{align*}\\] \\[\n\\text{By differentiating with respect to $\\boldsymbol{\\mu}$ and $\\boldsymbol{\\sigma}$, we get}\n\\] \\[\\begin{align*}\n\\hat{\\boldsymbol{\\mu}}_{\\text{ML}} &= \\frac{1}{n}\\sum _{i=1} ^n \\mathbf{x}_i \\\\\n\\hat{\\boldsymbol{\\sigma}^2}_{\\text{ML}} &= \\frac{1}{n}\\sum _{i=1} ^n (\\mathbf{x}_i-\\boldsymbol{\\mu})^T(\\mathbf{x}_i-\\boldsymbol{\\mu})\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "index.html#author",
+    "href": "index.html#author",
+    "title": "MLT Notes",
+    "section": "Author",
+    "text": "Author\n\nSherry\n\n\nCo-Authors\n\nA Aniruddha\nVivek Sivaramakrishnan"
   }
 ]

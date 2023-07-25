@@ -2,7 +2,11 @@
 title: "Unsupervised Learning - Clustering - K-means/Kernel K-means"
 ---
 
-PDF Link: [notes](../notes/Wk03.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk03.pdf)
 
 # Introduction to Clustering
 

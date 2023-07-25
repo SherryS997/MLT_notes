@@ -2,7 +2,11 @@
 title: "Unsupervised Learning - Representation learning - Kernel PCA"
 ---
 
-PDF Link: [notes](../notes/Wk02.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk02.pdf)
 
 # Introduction
 In the context of a given dataset $\mathbf{X} \in \mathbb{R}^{d \times n}$, where $\mathbf{C} \in \mathbb{R}^{d \times d}$ represents the covariance matrix, Principal Component Analysis (PCA) encounters two critical challenges:

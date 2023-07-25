@@ -2,7 +2,11 @@
 title: "Ensemble methods - Bagging and Boosting (Adaboost)"
 ---
 
-PDF Link: [notes](../notes/Wk11.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk11.pdf)
 
 # Dual Formulation for Soft-Margin SVM
 

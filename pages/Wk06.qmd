@@ -2,7 +2,11 @@
 title: "Supervised Learning - Regression - Ridge/LASSO"
 ---
 
-PDF Link: [notes](../notes/Wk06.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk06.pdf)
 
 # Evaluation of the Maximum Likelihood Estimator for Linear Regression
 

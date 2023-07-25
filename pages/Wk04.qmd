@@ -2,7 +2,11 @@
 title: "Unsupervised Learning - Estimation - Recap of MLE + Bayesian estimation, Gaussian Mixture Model - EM algorithm"
 ---
 
-PDF Link: [notes](../notes/Wk04.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk04.pdf)
 
 # Introduction to Estimation in Machine Learning
 Estimation in machine learning involves inferring unknown parameters or predicting outcomes from observed data. Estimators, often algorithms or models, are used for these tasks and to characterize the data's underlying distribution.

@@ -2,7 +2,11 @@
 title: "Discriminative Models - Perceptron; Logistic Regression"
 ---
 
-PDF Link: [notes](../notes/Wk09.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk09.pdf)
 
 # Perceptron Learning Algorithm
 The Perceptron Learning Algorithm (PLA) is a supervised learning algorithm widely employed for binary classification tasks. Its primary objective is to determine a decision boundary that effectively separates the two classes in the dataset. This algorithm belongs to the class of discriminative classification methods as it focuses on modeling the boundary between classes instead of characterizing the underlying probability distribution of each class.
