@@ -130,7 +130,7 @@ $$
 \mathbf{X} = \left[
 \begin{array}{ccccc}
     | & | & | & & | \\
-    \mathbf{x}_1 & \mathbf{x}_2 & \mathbf{x}_3 & \ldots & \mathbf{x}_4 \\
+    \mathbf{x}_1 & \mathbf{x}_2 & \mathbf{x}_3 & \ldots & \mathbf{x}_n \\
     | & | & | & & |
 \end{array}
 \right]
