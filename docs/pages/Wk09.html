@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,15 +30,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../pages/Wk10.html" rel="next">
+<link href="../pages/Wk08.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,8 +96,8 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">MLT Notes</a> 
         <div class="sidebar-tools-main">
-    <a href="https://www.linkedin.com/in/sherry-thomassp/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
-    <a href="https://github.com/SherryS997/MLT_notes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bsc-iitm/MLT_notes" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -222,7 +226,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#kernel-and-regularized-versions" id="toc-kernel-and-regularized-versions" class="nav-link" data-scroll-target="#kernel-and-regularized-versions">Kernel and Regularized Versions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -246,51 +249,66 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>PDF Link: <a href="../notes/Wk09.pdf">notes</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Feedback/Correction: <a href="https://forms.gle/LehGfBWFX3yWFDBH6">Click here!</a>.</p>
+</div>
+</div>
+<p>PDF Link: <a href="../notes/Wk09.pdf">Click here!</a></p>
 <section id="perceptron-learning-algorithm" class="level1">
 <h1>Perceptron Learning Algorithm</h1>
-<p>The <strong>Perceptron Learning Algorithm</strong> is a type of supervised learning algorithm used for binary classification tasks. It involves iteratively adjusting the weights of a linear combination of input features until a decision boundary that separates the two classes is found. The algorithm is a type of discriminative classification as it directly models the boundary between classes rather than modeling the underlying probability distribution of each class.</p>
-<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
-<p>Assumptions made in the algorithm:</p>
+<p>The Perceptron Learning Algorithm (PLA) is a supervised learning algorithm widely employed for binary classification tasks. Its primary objective is to determine a decision boundary that effectively separates the two classes in the dataset. This algorithm belongs to the class of discriminative classification methods as it focuses on modeling the boundary between classes instead of characterizing the underlying probability distribution of each class.</p>
+<p>Let <span class="math inline">\(D=\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\}\)</span> represent the dataset, where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
+<p>The algorithm is founded on the following assumptions:</p>
 <ol type="1">
-<li><span class="math inline">\(P(y=1|x) = 1\)</span> if <span class="math inline">\(w^Tx\ge0\)</span>, <span class="math inline">\(0\)</span> otherwise.</li>
-<li><strong>Linear Separability Assumption</strong>: The Linear Separability Assumption is the assumption made in some machine learning algorithms, including the Perceptron Learning Algorithm, that the classes to be classified can be separated by a linear decision boundary. This means that there exists a hyperplane in the feature space that can separate the data points of the two classes.</li>
+<li><span class="math inline">\(P(y=1|\mathbf{x}) = 1\)</span> if <span class="math inline">\(\mathbf{w}^\mathbf{T}\mathbf{x}\geq0\)</span>, otherwise <span class="math inline">\(P(y=1|\mathbf{x}) = 0\)</span>.</li>
+<li><strong>Linear Separability Assumption</strong>: The Linear Separability Assumption is a fundamental assumption made in various machine learning algorithms, including the Perceptron Learning Algorithm. It posits that the classes to be classified can be accurately separated by a linear decision boundary. In other words, there exists a hyperplane in the feature space that can effectively segregate the data points of the two classes.</li>
 </ol>
-<p>The objective function is given by, <span class="math display">\[
-\min _{h \in \mathcal{H}} \sum _{i=1} ^n \mathbb{1}\left ( h(x_i) \ne y_i \right )
-\]</span> In general, this is an NP-Hard Problem even if <span class="math inline">\(\mathcal{H}\)</span> only accounts for the Linear Hypotheses.</p>
-<p>Under the Linear Separability Assumption, let <span class="math inline">\(\exists w \in \mathbb{R}^d\)</span> s.t. <span class="math inline">\(\text{sign}(w^Tx_i)=y_i\)</span> <span class="math inline">\(\forall i \in [n]\)</span>.</p>
-<p>We solve this problem of convergence using an iterative algorithm. The algorithm is as follows:</p>
+<p>The objective function is defined as follows:</p>
+<p><span class="math display">\[
+\min _{h \in \mathcal{H}} \sum _{i=1} ^n \mathbb{1}\left ( h(\mathbf{x}_i) \neq y_i \right )
+\]</span></p>
+<p>Even if <span class="math inline">\(\mathcal{H}\)</span> accounts only for the Linear Hypotheses, this problem is generally considered NP-Hard.</p>
+<p>Under the Linear Separability Assumption, assuming the existence of <span class="math inline">\(\mathbf{w} \in \mathbb{R}^d\)</span> such that <span class="math inline">\(\text{sign}(\mathbf{w}^\mathbf{T}\mathbf{x}_i)=y_i\)</span> holds for all <span class="math inline">\(i \in \{1, 2, \ldots, n\}\)</span>, the PLA solves the convergence problem using an iterative algorithm. The algorithm proceeds as follows:</p>
 <ul>
-<li>Assign <span class="math inline">\(w^0 = 0 \in \mathbb{R}^d\)</span></li>
+<li>Initialize <span class="math inline">\(\mathbf{w}^0 = \mathbf{0} \in \mathbb{R}^d\)</span></li>
 <li>Until Convergence:
 <ul>
-<li>Pick <span class="math inline">\((x_i, y_i)\)</span> pair from the dataset</li>
-<li>if <span class="math inline">\(\text{sign}(w^Tx_i)==y_i\)</span>
+<li>Select a <span class="math inline">\((\mathbf{x}_i, y_i)\)</span> pair from the dataset</li>
+<li>If <span class="math inline">\(\text{sign}(\mathbf{w}^\mathbf{T}\mathbf{x}_i)==y_i\)</span>
 <ul>
-<li>do nothing</li>
+<li>Do nothing</li>
 </ul></li>
-<li>else
+<li>Else
 <ul>
-<li><span class="math inline">\(w^{(t+1)} = w^t + x_iy_i \hspace{2em} \leftarrow\)</span> update rule.</li>
+<li>Update the weight vector: <span class="math inline">\(\mathbf{w}^{(t+1)} = \mathbf{w}^t + \mathbf{x}_iy_i\)</span></li>
 </ul></li>
-<li>end</li>
+<li>End</li>
 </ul></li>
 </ul>
 <section id="analysis-of-the-update-rule" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-of-the-update-rule">Analysis of the Update Rule</h2>
-<p>For a training example <span class="math inline">\((x, y)\)</span>, where <span class="math inline">\(x\)</span> is the input and <span class="math inline">\(y\)</span> is the correct output (either <span class="math inline">\(1\)</span> or <span class="math inline">\(-1\)</span>), the perceptron algorithm updates its weight vector <span class="math inline">\(w\)</span> as follows:</p>
+<p>For a given training example <span class="math inline">\((\mathbf{x}, y)\)</span>, where <span class="math inline">\(\mathbf{x}\)</span> represents the input and <span class="math inline">\(y\)</span> represents the correct output (either <span class="math inline">\(1\)</span> or <span class="math inline">\(-1\)</span>), the perceptron algorithm updates the weight vector <span class="math inline">\(\mathbf{w}\)</span> according to the following rules:</p>
 <ul>
-<li>If the prediction of the perceptron on <span class="math inline">\(x\)</span> is correct (i.e., <span class="math inline">\(\text{sign}(w^Tx_i)==y_i\)</span>), then no update is performed.</li>
-<li>If the prediction of the perceptron on <span class="math inline">\(x\)</span> is incorrect (i.e., <span class="math inline">\(\text{sign}(w^Tx_i)\ne y_i\)</span>), then the weights are updated by adding the product of the input vector and the correct output to the current weight vector: <span class="math inline">\(w^{(t+1)} = w^t + x_iy_i\)</span>.</li>
+<li>If the perceptron’s prediction on <span class="math inline">\(\mathbf{x}\)</span> is correct (i.e., <span class="math inline">\(\text{sign}(\mathbf{w}^\mathbf{T}\mathbf{x}_i)==y_i\)</span>), no update is performed.</li>
+<li>If the perceptron’s prediction on <span class="math inline">\(\mathbf{x}\)</span> is incorrect (i.e., <span class="math inline">\(\text{sign}(\mathbf{w}^\mathbf{T}\mathbf{x}_i)\neq y_i\)</span>), the weights are updated by adding the product of the input vector and the correct output to the current weight vector: <span class="math inline">\(\mathbf{w}^{(t+1)} = \mathbf{w}^t + \mathbf{x}_iy_i\)</span>.</li>
+<li>It is important to note that the update occurs solely in response to the current data point. Consequently, data points that were previously classified correctly may not be classified similarly in future iterations.</li>
 </ul>
-<p>This update rule effectively moves the decision boundary in the direction of the correct classification for the misclassified example. It is guaranteed to converge to a linearly separable solution if the data is linearly separable. However, if the data is not linearly separable, the perceptron algorithm may not converge to a solution.</p>
+<p>This update rule effectively adjusts the decision boundary in the direction of correct classification for the misclassified example. The algorithm is guaranteed to converge to a linearly separable solution if the data is indeed linearly separable. However, if the data is not linearly separable, the perceptron algorithm may not converge to a solution.</p>
 </section>
 <section id="further-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="further-assumptions">Further Assumptions</h2>
-<p>We make three further assumptions:</p>
+<p>We introduce three additional assumptions:</p>
 <ol type="1">
-<li><strong>Linear Separability with <span class="math inline">\(\gamma\)</span>-Margin</strong>: A dataset <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> is linearly separable with <span class="math inline">\(\gamma\)</span>-margin if <span class="math inline">\(\exists w^* \in \mathbb{R}^d\)</span> s.t. <span class="math inline">\((w^{*T}x_i)y_i\ge\gamma\)</span> <span class="math inline">\(\forall i\)</span> for some <span class="math inline">\(\gamma&gt;0\)</span>.</li>
+<li><strong>Linear Separability with <span class="math inline">\(\gamma\)</span>-Margin</strong>: A dataset <span class="math inline">\(D=\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\}\)</span> is considered linearly separable with a <span class="math inline">\(\gamma\)</span>-margin if there exists <span class="math inline">\(\mathbf{w}^* \in \mathbb{R}^d\)</span> such that <span class="math inline">\((\mathbf{w}^{*T}\mathbf{x}_i)y_i\geq\gamma\)</span> holds for all <span class="math inline">\(i\)</span>, where <span class="math inline">\(\gamma&gt;0\)</span>.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -299,46 +317,52 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <ol start="2" type="1">
-<li><strong>Radius Assumption</strong>: Let some <span class="math inline">\(R&gt;0 \in \mathbb{R}\)</span>, <span class="math inline">\(\forall i \in D\)</span> <span class="math inline">\(||x_i||\le R\)</span>. In short, let <span class="math inline">\(R\)</span> be the length of the datapoint furthest from the center.</li>
-<li><strong>Normal Length for <span class="math inline">\(w^*\)</span></strong>: Let <span class="math inline">\(w^*\)</span> be of unit length.</li>
+<li><strong>Radius Assumption</strong>: Let <span class="math inline">\(R&gt;0 \in \mathbb{R}\)</span> be a constant such that <span class="math inline">\(\forall i \in D\)</span>, <span class="math inline">\(||\mathbf{x}_i||\leq R\)</span>. In other words, <span class="math inline">\(R\)</span> denotes the length of the data point farthest from the center.</li>
+<li><strong>Normal Length for <span class="math inline">\(\mathbf{w}^*\)</span></strong>: Assume that <span class="math inline">\(\mathbf{w}^*\)</span> has unit length.</li>
 </ol>
 </section>
 </section>
 <section id="proof-of-convergence-of-perceptron-algorithm" class="level1">
 <h1>Proof of Convergence of Perceptron Algorithm</h1>
-<p>Let <span class="math inline">\(l\)</span> denote the current mistake number. Using everything upto now, we can see, <span class="math display">\[\begin{align*}
-w^{l+1} &amp;= w^l + xy \\
-||w^{l+1}||^2&amp;=||w^l + xy||^2 \\
-&amp;=(w^l + xy)^T(w^l + xy) \\
-&amp;=||w^l||^2 + 2(w^{lT}x)y+ ||x||^2y^2 \\
-\therefore ||w^{l+1}||^2&amp;\le ||w^l||^2 + R^2 \\
-&amp;\le (||w^{l-1}||^2 + R^2)  + R^2 \\
-&amp;\le ||w^0||^2 + lR^2 \\
-\therefore ||w^{l+1}||^2&amp;\le lR^2 \hspace{6em} \ldots[1]
-\end{align*}\]</span> We can also see, <span class="math display">\[\begin{align*}
-w^{l+1} &amp;= w^l + xy \\
-(w^{l+1})^Tw^* &amp;= (w^l + xy)^Tw^* \\
-&amp;= w^{lT}w^* + (w^{*T}x)y \\
-\therefore (w^{l+1})^Tw^* &amp;\ge w^{lT}w^* + \gamma \\
-&amp;\ge (w^{l-1T}w^* + \gamma) + \gamma \\
-&amp;\ge w^{0T}w^* + l\gamma \\
-\therefore (w^{l+1})^Tw^* &amp;\ge l\gamma \\
-((w^{l+1})^Tw^*)^2 &amp;\ge l^2\gamma^2 \\
-||w^{l+1}||^2||w^*||^2 &amp;\ge l^2\gamma^2 \hspace{0.5em}\ldots\text{Using Cauchy-Schwartz}\\
-\therefore ||w^{l+1}||^2 &amp;\ge l^2\gamma^2 \hspace{6em} \ldots[2]
-\end{align*}\]</span> Therefore, from <span class="math inline">\([1]\)</span> and <span class="math inline">\([2]\)</span>, we get, <span class="math display">\[\begin{align*}
-l^2\gamma^2 &amp;\le ||w^{l+1}||^2 \le lR^2 \\
-l^2\gamma^2 &amp;\le  lR^2 \\
-\therefore l &amp;\le \frac{R^2}{\gamma^2}
-\end{align*}\]</span> Hence, from the above equation, we can conclude that for a dataset that follows Linear Separability with <span class="math inline">\(\gamma\)</span>-Margin, and has a finite Radius <span class="math inline">\(R\)</span>, the perceptron algorithm has an upper bound for the number of mistakes.</p>
-<p>Therefore, perceptron converges.</p>
+<p>We denote the current mistake number as <span class="math inline">\(l\)</span>. Based on our previous findings, we can observe the following:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{w}^{l+1} &amp;= \mathbf{w}^l + \mathbf{x}y \\
+||\mathbf{w}^{l+1}||^2&amp;=||\mathbf{w}^l + \mathbf{x}y||^2 \\
+&amp;=(\mathbf{w}^l + \mathbf{x}y)^T(\mathbf{w}^l + \mathbf{x}y) \\
+&amp;=||\mathbf{w}^l||^2 + 2(\mathbf{w}^{lT}\mathbf{x})y+ ||\mathbf{x}||^2y^2 \\
+\therefore ||\mathbf{w}^{l+1}||^2&amp;\leq ||\mathbf{w}^l||^2 + R^2 \\
+&amp;\leq (||\mathbf{w}^{l-1}||^2 + R^2)  + R^2 \\
+&amp;\leq ||\mathbf{w}^0||^2 + lR^2 \\
+\therefore ||\mathbf{w}^{l+1}||^2&amp;\leq lR^2 \hspace{6em} \ldots[1]
+\end{align*}\]</span></p>
+<p>Furthermore, we have:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{w}^{l+1} &amp;= \mathbf{w}^l + \mathbf{x}y \\
+(\mathbf{w}^{l+1})^T\mathbf{w}^* &amp;= (\mathbf{w}^l + \mathbf{x}y)^T\mathbf{w}^* \\
+&amp;= \mathbf{w}^{lT}\mathbf{w}^* + (\mathbf{w}^{*T}\mathbf{x})y \\
+\therefore (\mathbf{w}^{l+1})^T\mathbf{w}^* &amp;\geq \mathbf{w}^{lT}\mathbf{w}^* + \gamma \\
+&amp;\geq (\mathbf{w}^{l-1T}\mathbf{w}^* + \gamma) + \gamma \\
+&amp;\geq \mathbf{w}^{0T}\mathbf{w}^* + l\gamma \\
+\therefore (\mathbf{w}^{l+1})^T\mathbf{w}^* &amp;\geq l\gamma \\
+((\mathbf{w}^{l+1})^T\mathbf{w}^*)^2 &amp;\geq l^2\gamma^2 \\
+||\mathbf{w}^{l+1}||^2||\mathbf{w}^*||^2 &amp;\geq l^2\gamma^2 \hspace{0.5em}\ldots\text{Using the Cauchy-Schwarz inequality}\\
+\therefore ||\mathbf{w}^{l+1}||^2 &amp;\geq l^2\gamma^2 \hspace{6em} \ldots[2]
+\end{align*}\]</span></p>
+<p>Combining equations <span class="math inline">\([1]\)</span> and <span class="math inline">\([2]\)</span>, we obtain:</p>
+<p><span class="math display">\[\begin{align*}
+l^2\gamma^2 &amp;\leq ||\mathbf{w}^{l+1}||^2 \leq lR^2 \\
+l^2\gamma^2 &amp;\leq  lR^2 \\
+\therefore l &amp;\leq \frac{R^2}{\gamma^2}
+\end{align*}\]</span></p>
+<p>Consequently, the above equation establishes an upper bound on the number of mistakes for datasets conforming to the Linear Separability with <span class="math inline">\(\gamma\)</span>-Margin property and having a finite radius <span class="math inline">\(R\)</span>. This result demonstrates the convergence of the perceptron algorithm.</p>
 </section>
 <section id="logistic-regression" class="level1">
 <h1>Logistic Regression</h1>
 <section id="sigmoid-function" class="level2">
 <h2 class="anchored" data-anchor-id="sigmoid-function">Sigmoid Function</h2>
-<p>Until now, we used the <span class="math inline">\(\text{sign}\)</span> function to get the class for the output. But can we also provide the probabilities for these outputs?</p>
-<p>Let <span class="math inline">\(z=w^Tx\)</span> and <span class="math inline">\(z \in \mathbb{R}\)</span>. How can we map <span class="math inline">\([-\infty, \infty]\rightarrow[0,1]\)</span>? For this, we use the <strong>Sigmoid Function</strong>. It is given by, <span class="math display">\[
+<p>Until now, we have utilized the <span class="math inline">\(\text{sign}\)</span> function to determine the class for the output. However, what if we also wish to obtain the probabilities associated with these outputs?</p>
+<p>Let <span class="math inline">\(z=\mathbf{w}^\mathbf{T}\mathbf{x}\)</span>, where <span class="math inline">\(z \in \mathbb{R}\)</span>. How can we map <span class="math inline">\([-\infty, \infty]\rightarrow[0,1]\)</span>? To address this, we introduce the <strong>Sigmoid Function</strong>, defined as follows:</p>
+<p><span class="math display">\[
 g(z) = \frac{1}{1+e^{-z}}
 \]</span></p>
 <div class="quarto-figure quarto-figure-center">
@@ -347,48 +371,55 @@ g(z) = \frac{1}{1+e^{-z}}
 <figcaption class="figure-caption">Sigmoid Function</figcaption>
 </figure>
 </div>
-<p>The sigmoid function is often used in machine learning as an activation function for neural networks. It has a characteristic S-shaped curve, which makes it useful for modeling processes that have a threshold or saturation point, such as logistic growth or binary classification problems.</p>
-<p>When the input value is large and positive, the sigmoid function output approaches 1, and when the input value is large and negative, the sigmoid function output approaches 0. When the input value is 0, the sigmoid function output is exactly 0.5.</p>
-<p>The term “sigmoid” comes from the Greek word “sigmoides,” which means “shaped like the letter sigma” (<span class="math inline">\(\Sigma\)</span>). The letter sigma has a similar shape to the sigmoid function’s characteristic S-shaped curve, which is likely the reason for the function’s name.</p>
+<p>The sigmoid function is commonly employed in machine learning as an activation function for neural networks. It exhibits an S-shaped curve, making it well-suited for modeling processes with a threshold or saturation point, such as logistic growth or binary classification problems.</p>
+<p>For large positive input values, the sigmoid function approaches 1, while for large negative input values, it approaches 0. When the input value is 0, the sigmoid function output is exactly 0.5.</p>
+<p>The term “sigmoid” is derived from the Greek word “sigmoides,” meaning “shaped like the letter sigma” (<span class="math inline">\(\Sigma\)</span>). The sigmoid function’s characteristic S-shaped curve resembles the shape of the letter sigma, which likely influenced the function’s name.</p>
 </section>
 <section id="logistic-regression-1" class="level2">
 <h2 class="anchored" data-anchor-id="logistic-regression-1">Logistic Regression</h2>
-<p>Logistic regression is a statistical method used to analyze and model the relationship between a binary (two-valued) dependent variable and one or more independent variables, which can be either continuous or categorical. The goal of logistic regression is to estimate the probability that the dependent variable is one of the two possible values, given the values of the independent variables.</p>
-<p>In logistic regression, the dependent variable is modeled as a function of the independent variables using a logistic(sigmoid) function, which produces an S-shaped curve that ranges between 0 and 1. The logistic function transforms the output of a linear combination of the independent variables into a probability estimate, which can then be used to classify new observations.</p>
-<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
-<p>We know, <span class="math display">\[
-P(y=1|x) = g(w^Tx_i) = \frac{1}{1+e^{-w^Tx}}
-\]</span> Using Maximum Likelihood, we get <span class="math display">\[\begin{align*}
-\mathcal{L}(w;\text{Data}) &amp;= \prod _{i=1} ^{n} (g(w^Tx_i))^{y_i}(1- g(w^Tx_i))^{1-y_i} \\
-\log(\mathcal{L}(w;\text{Data})) &amp;= \sum _{i=1} ^{n} y_i\log(g(w^Tx_i))+(1-y_i)\log(1- g(w^Tx_i)) \\
-&amp;= \sum _{i=1} ^{n} y_i\log\left(\frac{1}{1+e^{-w^Tx_i}}\right)+(1-y_i)\log\left(\frac{e^{-w^Tx_i}}{1+e^{-w^Tx_i}}\right) \\
-&amp;= \sum _{i=1} ^{n} \left [ (1-y_i)(-w^Tx_i) - \log(1+e^{-w^Tx_i}) \right ]
-\end{align*}\]</span> Therefore, our objective, which is maximizing the log-likelihood function, is given by, <span class="math display">\[
-\max _{w}\sum _{i=1} ^{n} \left [ (1-y_i)(-w^Tx_i) - \log(1+e^{-w^Tx_i}) \right ]
-\]</span> But, there is no closed form solution for this. And hence, we use gradient descent for convergence.</p>
-<p>The gradient is given by, <span class="math display">\[\begin{align*}
-\nabla \log(\mathcal{L}(w;\text{Data})) &amp;= \sum _{i=1} ^{n} \left [ (1-y_i)(-x_i) - \left( \frac{e^{-w^Tx_i}}{1+e^{-w^Tx_i}} \right ) (-x_i) \right ] \\
-&amp;= \sum _{i=1} ^{n} \left [ -x_i + x_iy_i + x_i \left( \frac{e^{-w^Tx_i}}{1+e^{-w^Tx_i}} \right ) \right ] \\
-&amp;= \sum _{i=1} ^{n} \left [ x_iy_i - x_i \left( \frac{1}{1+e^{-w^Tx_i}} \right ) \right ] \\
-\nabla \log(\mathcal{L}(w;\text{Data})) &amp;= \sum _{i=1} ^{n} \left [ x_i \left(y_i - \frac{1}{1+e^{-w^Tx_i}} \right ) \right ]
-\end{align*}\]</span> Using the Gradient Descent update rule, we get, <span class="math display">\[\begin{align*}
-w_{t+1} &amp;= w_t + \eta_t\nabla \log(\mathcal{L}(w;\text{Data})) \\
-&amp;= w_t + \eta_t  \left ( \sum _{i=1} ^{n} x_i \left(y_i - \frac{1}{1+e^{-w^Tx_i}} \right ) \right )
+<p>Logistic regression is a statistical method used to analyze and model the relationship between a binary (two-valued) dependent variable and one or more independent variables. The independent variables can be either continuous or categorical. The main objective of logistic regression is to estimate the probability that the dependent variable belongs to one of the two possible values, given the independent variable values.</p>
+<p>In logistic regression, the dependent variable is modeled as a function of the independent variables using a logistic (sigmoid) function. This function generates an S-shaped curve ranging between 0 and 1. By transforming the output of a linear combination of the independent variables using the logistic function, logistic regression provides a probability estimate that can be used for classifying new observations.</p>
+<p>Let <span class="math inline">\(D=\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\}\)</span> denote the dataset, where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
+<p>We know that:</p>
+<p><span class="math display">\[
+P(y=1|\mathbf{x}) = g(\mathbf{w}^\mathbf{T}\mathbf{x}_i) = \frac{1}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}}}
+\]</span></p>
+<p>Using the maximum likelihood approach, we can derive the following expression:</p>
+<p><span class="math display">\[\begin{align*}
+\mathcal{L}(\mathbf{w};\text{Data}) &amp;= \prod _{i=1} ^{n} (g(\mathbf{w}^\mathbf{T}\mathbf{x}_i))^{y_i}(1- g(\mathbf{w}^\mathbf{T}\mathbf{x}_i))^{1-y_i} \\
+\log(\mathcal{L}(\mathbf{w};\text{Data})) &amp;= \sum _{i=1} ^{n} y_i\log(g(\mathbf{w}^\mathbf{T}\mathbf{x}_i))+(1-y_i)\log(1- g(\mathbf{w}^\mathbf{T}\mathbf{x}_i)) \\
+&amp;= \sum _{i=1} ^{n} y_i\log\left(\frac{1}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}}\right)+(1-y_i)\log\left(\frac{e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}}\right) \\
+&amp;= \sum _{i=1} ^{n} \left [ (1-y_i)(-\mathbf{w}^\mathbf{T}\mathbf{x}_i) - \log(1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}) \right ]
+\end{align*}\]</span></p>
+<p>Therefore, our objective, which involves maximizing the log-likelihood function, can be formulated as follows:</p>
+<p><span class="math display">\[
+\max _{\mathbf{w}}\sum _{i=1} ^{n} \left [ (1-y_i)(-\mathbf{w}^\mathbf{T}\mathbf{x}_i) - \log(1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}) \right ]
+\]</span></p>
+<p>However, a closed-form solution for this problem does not exist. Therefore, we resort to using gradient descent for convergence.</p>
+<p>The gradient of the log-likelihood function is computed as follows:</p>
+<p><span class="math display">\[\begin{align*}
+\nabla \log(\mathcal{L}(\mathbf{w};\text{Data})) &amp;= \sum _{i=1} ^{n} \left [ (1-y_i)(-\mathbf{x}_i) - \left( \frac{e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}} \right ) (-\mathbf{x}_i) \right ] \\
+&amp;= \sum _{i=1} ^{n} \left [ -\mathbf{x}_i + \mathbf{x}_iy_i + \mathbf{x}_i \left( \frac{e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}} \right ) \right ] \\
+&amp;= \sum _{i=1} ^{n} \left [ \mathbf{x}_iy_i - \mathbf{x}_i \left( \frac{1}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}} \right ) \right ] \\
+\nabla \log(\mathcal{L}(\mathbf{w};\text{Data})) &amp;= \sum _{i=1} ^{n} \left [ \mathbf{x}_i \left(y_i - \frac{1}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}} \right ) \right ]
+\end{align*}\]</span></p>
+<p>Utilizing the gradient descent update rule, we obtain:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{w}_{t+1} &amp;= \mathbf{w}_t + \eta_t\nabla \log(\mathcal{L}(\mathbf{w};\text{Data})) \\
+&amp;= \mathbf{w}_t + \eta_t  \left ( \sum _{i=1} ^{n} \mathbf{x}_i \left(y_i - \frac{1}{1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}} \right ) \right )
 \end{align*}\]</span></p>
 <section id="kernel-and-regularized-versions" class="level3">
 <h3 class="anchored" data-anchor-id="kernel-and-regularized-versions">Kernel and Regularized Versions</h3>
-<p>We can argue that <span class="math inline">\(w^*=\displaystyle\sum _{i=1} ^{n}\alpha_ix_i\)</span>, and therefore, can be Kernelized. For further details, refer to this <a href="https://cs229.stanford.edu/extra-notes/representer-function.pdf#section.2">link.</a></p>
-<p>The regularized version is given by, <span class="math display">\[
-\min _{w}\sum _{i=1} ^{n} \left [ \log(1+e^{-w^Tx_i}) + w^Tx_i(1-y_i) \right ] + \frac{\lambda}{2}||w||^2
-\]</span> where <span class="math inline">\(\frac{\lambda}{2}||w||^2\)</span> is the regualizer and <span class="math inline">\(\lambda\)</span> is found using cross-validation.</p>
-</section>
-</section>
-</section>
-<section id="credits" class="level1">
-<h1>Credits</h1>
-<p>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</p>
+<p>It is possible to argue that <span class="math inline">\(\mathbf{w}^*=\displaystyle\sum _{i=1} ^{n}\alpha_i\mathbf{x}_i\)</span>, thereby allowing for kernelization. For additional information, please refer to this <a href="https://cs229.stanford.edu/extra-notes/representer-function.pdf#section.2">link</a>.</p>
+<p>The regularized version of logistic regression can be expressed as follows:</p>
+<p><span class="math display">\[
+\min _{\mathbf{w}}\sum _{i=1} ^{n} \left [ \log(1+e^{-\mathbf{w}^\mathbf{T}\mathbf{x}_i}) + \mathbf{w}^\mathbf{T}\mathbf{x}_i(1-y_i) \right ] + \frac{\lambda}{2}||\mathbf{w}||^2
+\]</span></p>
+<p>Here, <span class="math inline">\(\frac{\lambda}{2}||\mathbf{w}||^2\)</span> serves as the regularizer, and <span class="math inline">\(\lambda\)</span> is determined through cross-validation.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -412,6 +443,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -625,6 +771,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../pages/Wk08.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week-08</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../pages/Wk10.html" class="pagination-link">
+        <span class="nav-page-text">Week-10</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

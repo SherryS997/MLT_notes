@@ -5,12 +5,11 @@ project:
 website:
   title: "MLT Notes"
   repo-url: https://github.com/SherryS997/MLT_notes
+  page-navigation: true
   sidebar:
     tools:
-      - icon: linkedin
-        href: https://www.linkedin.com/in/sherry-thomassp/
       - icon: github
-        href: https://github.com/SherryS997/MLT_notes
+        href: https://github.com/bsc-iitm/MLT_notes
     style: "docked"
     search: true
     contents:
@@ -55,8 +54,10 @@ website:
 
 format:
   html:
-    theme: zephyr
-    css: styles.css
+    css: ["styles.css"]
+    theme: 
+      light: [lux, styles.scss]
+      dark: [darkly, styles.scss]
     toc: true
 
 

@@ -2,140 +2,166 @@
 title: "Supervised Learning - Classification - K-NN, Decision tree"
 ---
 
-PDF Link: [notes](../notes/Wk07.pdf)
+:::{.callout-note}
+Feedback/Correction: [Click here!](https://forms.gle/LehGfBWFX3yWFDBH6).
+:::
+
+PDF Link: [Click here!](../notes/Wk07.pdf)
 
 # Introduction to Binary Classification
-Binary classification is a machine learning task where the goal is to classify objects into one of two categories. It is a fundamental problem in various fields, including computer vision, natural language processing, and bioinformatics.
 
-Given a dataset $\{x_1, \ldots, x_n\}$ where $x_i \in \mathbb{R}^d$, let $\{y_1, \ldots, y_n\}$ be the labels, where $y_i \in \{0, 1\}$. The goal is given by $h: \mathbb{R}^d \rightarrow \{0, 1\}$.
+Binary classification is a fundamental task in machine learning, commonly employed in various domains such as computer vision, natural language processing, and bioinformatics. Its objective is to assign objects into one of two categories based on their features.
 
-The loss for this function is given by,
+Consider a dataset $\{\mathbf{x}_1, \ldots, \mathbf{x}_n\}$, where $\mathbf{x}_i \in \mathbb{R}^d$, and let $\{y_1, \ldots, y_n\}$ be the corresponding labels, where $y_i \in \{0, 1\}$. The goal is to find a function $h: \mathbb{R}^d \rightarrow \{0, 1\}$ that accurately predicts the labels.
+
+To assess the performance of the classification function, a loss measure is employed. The loss function is defined as follows:
+
 $$
-loss(h)=\frac{1}{n}\sum ^n _{i=1}\mathbb{1}\left ( h(x_i) \ne y_i \right )
+\text{loss}(h) = \frac{1}{n} \sum ^n _{i=1}\mathbb{1}\left ( h(\mathbf{x}_i) \ne y_i \right )
 $$
-Let $\mathcal{H}_{\text{linear}}$ represent the solution space for the mapping in the linear space.
+
+Let $\mathcal{H}_{\text{linear}}$ denote the solution space for the linear mapping:
+
 $$
-\mathcal{H}_{\text{linear}}=\Biggr \lbrace{h_w: \mathbb{R}^d \rightarrow \{1, 0\} \hspace{0.5em} s.t. \hspace{0.5em} h_w(x)=sign(w^Tx) \hspace{0.5em} \forall w \in \mathbb{R}^d } \Biggr \rbrace
+\mathcal{H}_{\text{linear}}=\left\{\mathbf{h}_w: \mathbb{R}^d \rightarrow \{1, 0\} \hspace{0.5em} \text{s.t.} \hspace{0.5em} \mathbf{h}_w(\mathbf{x}) = \text{sign}(\mathbf{w}^T\mathbf{x}) \hspace{0.5em} \forall \mathbf{w} \in \mathbb{R}^d \right\}
 $$
-Therefore, the objective function is given by,
+
+Hence, the objective function can be expressed as:
+
 $$
-\min _{h \in \mathcal{H}_{\text{linear}}} \sum _{i=1} ^n \mathbb{1}\left ( h(x_i) \ne y_i \right )
+\min_{h \in \mathcal{H}_{\text{linear}}} \sum_{i=1}^n \mathbb{1}\left ( h(\mathbf{x}_i) \ne y_i \right )
 $$
-This objective function presents an NP-Hard Problem, indicating the challenge in arriving at optimal and sufficient parameters. Therefore, improved implementations are necessary to address this complexity and achieve satisfactory results.
+
+However, it is important to note that this objective function presents an NP-Hard problem, making it challenging to find optimal and sufficient parameters. Therefore, improved implementations are required to address this complexity and achieve satisfactory results.
 
 # Linear Classifier
-Can we use linear regression to solve this classification problem?
 
-The proposed algorithm would be as follows:
+Can linear regression be used to solve the binary classification problem? Let's examine the proposed algorithm:
+
 $$
-\{(x_1, y_1), \ldots, (x_n,y_n)\} \xrightarrow[Regression]{Linear} w \in \mathbb{R}^d\rightarrow h_w: \mathbb{R}^d \rightarrow \{1, 0\}
+\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\} \xrightarrow[Regression]{Linear} \mathbf{w} \in \mathbb{R}^d \rightarrow \mathbf{h}_\mathbf{w}: \mathbb{R}^d \rightarrow \{1, 0\}
 $$
-But this poses an issue in classification. Look at the diagram below:
 
-![Linear classification and the problem due to outliers](../images/lin_class.png)
+However, employing linear regression for classification poses an issue. Consider the following diagram:
 
-Upon a detailed examination of the above diagram, it is evident that classification based on Linear Regression not only partitions the two categories of data based on their respective sides but also their positions. Consequently, this approach may cause the classification boundary to shift w.r.t. the outliers in the dataset. Therefore, this approach is not feasible.
+![](../images/lin_class.png)
 
-# K-Nearest Neighbours Algorithm
-The K-Nearest Neighbor (K-NN) algorithm is a popular non-parametric method used for classification and regression tasks in machine learning. It operates by identifying the K-nearest data points to the target object, classifying or regressing the target object based on the majority of its nearest neighbors.
+Upon closer examination, it becomes evident that linear regression-based classification not only separates the two categories based on their respective sides but also considers their positions. As a consequence, the classification boundary may shift with respect to the outliers in the dataset. Hence, this approach is not suitable for binary classification.
 
-The algorithm is as follows:
+# K-Nearest Neighbors Algorithm
 
-* Given $x_{test}$ find the $k$-closest points in the training set - $\{x_1^*, x_2^*, \ldots, x_k^*\}$.
-* Predict $y_{test} = \text{majority}(y_1^*, y_2^*, \ldots, y_k^*)$
+The K-Nearest Neighbors (K-NN) algorithm is a widely-used non-parametric method utilized for both classification and regression tasks in machine learning. It operates by identifying the K-nearest data points to the target object and classifying or regressing the target object based on the majority of its nearest neighbors.
 
-Look at the following diagrams to the see the effect of the value of $k$ on the classification:
+The algorithm follows these steps:
 
-![k=1](../images/k1.png)
+1. Given a test sample $\mathbf{x}_{\text{test}}$, find the $k$ closest points in the training set, denoted as $\{\mathbf{x}_1^*, \mathbf{x}_2^*, \ldots, \mathbf{x}_k^*\}$.
+2. Predict the label of the test sample as $y_{\text{test}} = \text{majority}(y_1^*, y_2^*, \ldots, y_k^*)$.
+
+The following diagrams illustrate the impact of the value of $k$ on the classification:
+
+![](../images/k1.png)
 $$
-\text{When }k=1\text{, the classification is too sensitive to the outliers.}
+\text{When }k=1\text{, the classification is highly sensitive to outliers.}
 $$
-![k=1](../images/kn.png)
+![](../images/kn.png)
 $$
-\text{When }k=n\text{, the classification is too smooth.}
+\text{When }k=n\text{, the classification becomes overly smooth.}
 $$
-![k=k^*](../images/k*.png)
+![](../images/k_star.png)
 $$
-\text{When }k=k^*\text{, the classification is just right.}
+\text{When }k=k^*\text{, the classification achieves a balanced result.}
 $$
-The choice of $k$ is usually done by cross-validation, where $k$ is treated as a hyper-parameter. The smaller $k$ is, the more complex the classification will be.
 
+The choice of $k$ is typically determined through cross-validation, treating $k$ as a hyperparameter. Smaller values of $k$ lead to more complex classifications.
+
+\pagebreak
 ## Issues with K-NN
-Following are the issues with the algorithm:
 
-* The choice of distance function itself can give different results. The Euclidean distance might not always be the best fit!
-* It can be computationally demanding. When making a prediction for a single test datapoint, the distances between that datapoint and all training points must be calculated and sorted. As a result, the algorithm has a complexity of $O(nlog(n))$, where $n$ represents the size of the dataset.
-* No model is learned by this algorithm. It always needs the training dataset to make proper predictions.
+The K-NN algorithm suffers from several limitations:
+
+1. The choice of distance function can yield different results. The Euclidean distance, commonly used, might not always be the best fit for all scenarios.
+2. Computationally, the algorithm can be demanding. When making predictions for a single test data point, the distances between that data point and all training points must be calculated and sorted. Consequently, the algorithm has a complexity of $O(n \log(n))$, where $n$ represents the size of the dataset.
+3. The algorithm does not learn a model but instead relies on the training dataset for making predictions.
 
 # Introduction to Decision Trees
-Decision trees are a popular machine learning algorithm that operates by recursively splitting the data based on the most informative features until a stopping criterion is met. They are widely used for classification and regression tasks and can be visualized as a tree-like structure.
 
-Given a dataset $\{x_1, \ldots, x_n\}$ where $x_i \in \mathbb{R}^d$, let $\{y_1, \ldots, y_n\}$ be the labels where $y_i \in \{0, 1\}$. The output of the algorithm will be a decision tree.
+Decision trees are widely used in machine learning for classification and regression tasks. They operate by recursively partitioning the data based on the most informative features until a stopping criterion is met. Decision trees can be visualized as tree-like structures.
 
-Prediction: Given $x_{test}$, traverse through the tree to reach a leaf node. $y_{test} = \text{value in the leaf node}$.
+Consider a dataset $\{\mathbf{x}_1, \ldots, \mathbf{x}_n\}$, where $\mathbf{x}_i \in \mathbb{R}^d$, and let $\{y_1, \ldots, y_n\}$ be the corresponding labels, where $y_i \in \{0, 1\}$. The output of the decision tree algorithm is a constructed decision tree.
 
-Pictorial depiction of the decision tree:
+Prediction: Given a test sample $\mathbf{x}_{\text{test}}$, we traverse the decision tree to reach a leaf node, and the label assigned to the leaf node is considered as $y_{\text{test}}$.
 
-![Decision Tree](../images/decision_tree.png)
+The following diagram depicts a decision tree:
 
-where a **question** is a (feature, value) pair. Example: $height\le180cm$?
+![](../images/decision_tree.png)
+
+Here, a **question** refers to a (feature, value) pair. For example, $height \le 180\text{cm}$?
 
 ## Goodness of a Question
-Let $D=\{(x_1, y_1), \ldots, (x_n,y_n)\}$ be the dataset. We partition it using a question into $D_{yes}$ and $D_{no}$.
 
-What we need is a measure of "Impurity" for a set of labels $\{y_1, \ldots, y_n\}$. This measure can be given by various ways, but we will use the **Entropy** Function.
+To evaluate the quality of a question, we need a measure of "impurity" for a set of labels $\{y_1, \ldots, y_n\}$. Various measures can be employed, but we will use the **Entropy** function.
 
-The Entropy function is given by,
+The Entropy function is defined as:
+
 $$
-Entropy(\{y_1, \ldots, y_n\}) = Entropy(p) = -\left( p\log(p)+(1-p)\log(1-p) \right )
+\text{Entropy}(\{y_1, \ldots, y_n\}) = \text{Entropy}(p) = -\left( p\log(p)+(1-p)\log(1-p) \right )
 $$
-where conventionally $\log(0)$ is treated as $0$.
 
-Pictorial Representation of the Entropy function:
+Here, $\log(0)$ is conventionally treated as $0$.
 
-![Entropy Function](../images/entropy.png)
+Pictorial representation of the Entropy function:
 
-Then, we use Information Gain to measure the goodness of the split. 
+![](../images/entropy.png)
 
-**Information gain** is a commonly used criterion in decision tree algorithms that measures the reduction in entropy or impurity of a dataset after splitting based on a given feature. By selecting features with high information gain, decision trees can effectively differentiate between the different classes of data and make accurate predictions.
+Information Gain is then utilized to measure the quality of a split in the decision tree algorithm.
 
-Information gain is given by,
+**Information gain** is a commonly used criterion in decision tree algorithms that quantifies the reduction in entropy or impurity of a dataset after splitting based on a given feature. High information gain signifies features that effectively differentiate between the different classes of data and lead to accurate predictions.
+
+Information gain is calculated as:
+
 $$
-\text{Information Gain}(feature,value)=Entropy(D) - \left [ \gamma Entropy(D_{yes})+(1-\gamma)Entropy(D_{no}) \right ]
+\text{Information Gain}(\text{feature}, \text{value}) = \text{Entropy}(D) - \left[\gamma \cdot \text{Entropy}(D_{\text{yes}}) + (1-\gamma) \cdot \text{Entropy}(D_{\text{no}}) \right]
 $$
-where $\gamma$ is given by,
+
+where $\gamma$ is defined as:
+
 $$
-\gamma=\frac{|D_{yes}|}{|D|}
+\gamma = \frac{|D_{\text{yes}}|}{|D|}
 $$
 
 ## Decision Tree Algorithm
-The algorithm is as follows:
 
-* Discretize each feature in [min,max] range.
-* Pick the question that has the largest information gain.
-* Repeat the procedure for $D_{yes}$ and $D_{no}$.
-* Stop growing the tree if a node becomes sufficiently "pure".
+The decision tree algorithm follows these steps:
 
-The goodness of a question can also be measured using different methods like the Gini Index, etc.
+1. Discretize each feature within the range [min, max].
+2. Select the question that provides the highest information gain.
+3. Repeat the procedure for subsets $D_{\text{yes}}$ and $D_{\text{no}}$.
+4. Stop growing the tree when a node becomes sufficiently "pure" according to a predefined criterion.
 
-Pictorial Depiction of decision boundary and its decision tree:
+Different measures, such as the Gini Index, can also be employed to evaluate the quality of a question.
 
-![Decision Boundary](../images/decision_bound.png)
+Pictorial depiction of the decision boundary and its decision tree:
+
+![](../images/decision_bound.png)
 
 # Generative and Discriminative Models
-For the classical Classification problem, there are two types of modeling: Generative and Discriminative Models.
 
-Generative Models are given by,
-$$
-P(x,y)
-$$
-This primarily tries to model the feature generation.
+In classical classification problems, two types of models are commonly employed: generative models and discriminative models.
 
-Discriminative Models are given by,
-$$
-P(y|x)
-$$
-This only generates labels based on the data.
+Generative models capture the joint distribution between features and labels and are represented as:
 
-# Credits
-Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.
+$$
+P(\mathbf{x},y)
+$$
+
+These models focus on modeling the feature generation process.
+
+On the other hand, discriminative models directly model the conditional probability of labels given the features and are represented as:
+
+$$
+P(y|\mathbf{x})
+$$
+
+Discriminative models generate labels solely based on the provided data.
+
+It is important to understand the differences between generative and discriminative models when choosing an appropriate modeling approach for a given classification problem.

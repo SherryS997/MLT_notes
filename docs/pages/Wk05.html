@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,15 +30,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../pages/Wk06.html" rel="next">
+<link href="../pages/Wk04.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,8 +96,8 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">MLT Notes</a> 
         <div class="sidebar-tools-main">
-    <a href="https://www.linkedin.com/in/sherry-thomassp/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
-    <a href="https://github.com/SherryS997/MLT_notes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bsc-iitm/MLT_notes" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -217,7 +221,6 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#kernel-regression" id="toc-kernel-regression" class="nav-link" data-scroll-target="#kernel-regression">Kernel Regression</a></li>
   <li><a href="#probabilistic-view-of-linear-regression" id="toc-probabilistic-view-of-linear-regression" class="nav-link" data-scroll-target="#probabilistic-view-of-linear-regression">Probabilistic View of Linear Regression</a></li>
-  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -241,108 +244,158 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>PDF Link: <a href="../notes/Wk05.pdf">notes</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Feedback/Correction: <a href="https://forms.gle/LehGfBWFX3yWFDBH6">Click here!</a>.</p>
+</div>
+</div>
+<p>PDF Link: <a href="../notes/Wk05.pdf">Click here!</a></p>
 <section id="introduction-to-supervised-learning" class="level1">
 <h1>Introduction to Supervised Learning</h1>
-<p>Supervised learning is a machine learning technique in which the algorithm is trained on labeled data, where the target variable or the outcome is known. The goal of supervised learning is to learn a mapping between the input data and the corresponding output variable.</p>
-<p>Given a dataset <span class="math inline">\(\{x_1, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the labels, where <span class="math inline">\(y_i\)</span> could belong to the following:</p>
+<p>Supervised learning, a fundamental machine learning technique, involves training an algorithm on labeled data where the target variable or outcome is known. The primary objective of supervised learning is to establish a mapping between input data and corresponding output variables.</p>
+<p>Given a dataset <span class="math inline">\(\mathbf{x}_1, \ldots, \mathbf{x}_n\)</span>, where each <span class="math inline">\(\mathbf{x}_i\)</span> belongs to <span class="math inline">\(\mathbb{R}^d\)</span>, the corresponding labels <span class="math inline">\(\mathbf{y}_1, \ldots, \mathbf{y}_n\)</span> can fall into the following categories:</p>
 <ul>
-<li>Regression: <span class="math inline">\(y_i \in \mathbb{R}\)</span> Example: Rainfall Prediction</li>
-<li>Binary Classification: <span class="math inline">\(y_i \in \{0, 1\}\)</span> Example: Distinguishing between cats and dogs</li>
-<li>Multi-class Classification: <span class="math inline">\(y_i \in \{0, 1, \ldots, K\}\)</span> Example: Digit classification</li>
+<li>Regression: <span class="math inline">\(\mathbf{y}_i \in \mathbb{R}\)</span> (e.g., Rainfall Prediction)</li>
+<li>Binary Classification: <span class="math inline">\(\mathbf{y}_i \in \{0, 1\}\)</span> (e.g., Distinguishing between cats and dogs)</li>
+<li>Multi-class Classification: <span class="math inline">\(\mathbf{y}_i \in \{0, 1, \ldots, K\}\)</span> (e.g., Digit classification)</li>
 </ul>
 </section>
 <section id="linear-regression" class="level1">
 <h1>Linear Regression</h1>
-<p>Linear regression is a supervised learning algorithm used to predict a continuous output variable based on one or more input features, assuming a linear relationship between the input and output variables. The goal of linear regression is to find the line of best fit that minimizes the sum of squared errors between the predicted and actual output values.</p>
-<p>Given a dataset <span class="math inline">\(\{x_1, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the labels, where <span class="math inline">\(y_i \in \mathbb{R}\)</span>.</p>
-<p>The goal of linear regression is to find the mapping between input and output variables. i.e. <span class="math display">\[
+<p>Linear regression is a supervised learning algorithm employed to predict a continuous output variable based on one or more input features, assuming a linear relationship between the input and output variables. The primary objective of linear regression is to determine the line of best fit that minimizes the sum of squared errors between the predicted and actual output values.</p>
+<p>Given a dataset <span class="math inline">\(\mathbf{x}_1, \ldots, \mathbf{x}_n\)</span> where each <span class="math inline">\(\mathbf{x}_i\)</span> belongs to <span class="math inline">\(\mathbb{R}^d\)</span>, and the corresponding labels <span class="math inline">\(\mathbf{y}_1, \ldots, \mathbf{y}_n\)</span> belong to <span class="math inline">\(\mathbb{R}\)</span>, the goal of linear regression is to find a mapping between the input and output variables, represented as follows:</p>
+<p><span class="math display">\[
 h: \mathbb{R}^d \rightarrow \mathbb{R}
-\]</span> The error for the above mapping function is given by, <span class="math display">\[
-\text{error}(h) = \sum _{i=1} ^n (h(x_i) - y_i) ^2)
-\]</span> This error can be as small as zero, and this is achieved when <span class="math inline">\(h(x_i)=y_i \hspace{0.5em} \forall i\)</span>. But this may not be the desired output as it may represent nothing more than memorizing the data and its outputs.</p>
-<p>The memorization problem can be mitigated by introducing a structure to the mapping. The simplest structure being of the linear kind, we shall use it as the underlying structure for our data.</p>
-<p>Let <span class="math inline">\(\mathcal{H}_{\text{linear}}\)</span> represent the solution space for the mapping in the linear space. <span class="math display">\[
-\mathcal{H}_{\text{linear}}=\Biggr \lbrace{h_w: \mathbb{R}^d \rightarrow \mathbb{R} \hspace{0.5em} s.t. \hspace{0.5em} h_w(x)=w^Tx \hspace{0.5em} \forall w \in \mathbb{R}^d } \Biggr \rbrace
-\]</span> Therefore, our goal is, <span class="math display">\[\begin{align*}
-\min _{h \in \mathcal{H}_{\text{linear}}} \sum _{i=1} ^n (h(x_i) - y_i) ^2 \\
-\text{Equivalently} \\
-\min _{w \in \mathbb{R}^d} \sum _{i=1} ^n (w^Tx_i - y_i) ^2
-\end{align*}\]</span> Optimizing the above is the entire point of the linear regression algorithm.</p>
+\]</span></p>
+<p>The error for this mapping function can be quantified as:</p>
+<p><span class="math display">\[
+\text{error}(h) = \sum_{i=1}^n (h(\mathbf{x}_i) - \mathbf{y}_i)^2
+\]</span></p>
+<p>Ideally, this error should be minimized, which occurs when <span class="math inline">\(h(\mathbf{x}_i) = \mathbf{y}_i\)</span> for all <span class="math inline">\(i\)</span>. However, achieving this may only result in memorizing the data and its outputs, which is not a desired outcome.</p>
+<p>To mitigate the memorization problem, introducing a structure to the mapping becomes necessary. The simplest and commonly used structure is linear, which we will adopt as the underlying structure for our data.</p>
+<p>Let <span class="math inline">\(\mathcal{H}_{\text{linear}}\)</span> denote the solution space for the mapping in the linear domain:</p>
+<p><span class="math display">\[
+\mathcal{H}_{\text{linear}} = \left\lbrace h_w: \mathbb{R}^d \rightarrow \mathbb{R} \ \text{s.t.} \ h_w(\mathbf{x}) = \mathbf{w}^T\mathbf{x} \ \forall \mathbf{w} \in \mathbb{R}^d \right\rbrace
+\]</span></p>
+<p>Thus, our objective is to minimize:</p>
+<p><span class="math display">\[\begin{align*}
+\min_{h \in \mathcal{H}_{\text{linear}}} \sum_{i=1}^n (h(\mathbf{x}_i) - \mathbf{y}_i)^2 \\
+\text{Equivalently,} \\
+\min_{\mathbf{w} \in \mathbb{R}^d} \sum_{i=1}^n (\mathbf{w}^T\mathbf{x}_i - \mathbf{y}_i)^2
+\end{align*}\]</span></p>
+<p>Optimizing the above objective is the main aim of the linear regression algorithm.</p>
 </section>
 <section id="optimizing-the-error-function" class="level1">
 <h1>Optimizing the Error Function</h1>
-<p>The minimization equation can be rewritten in the vectorized form as, <span class="math display">\[
-\min _{w \in \mathbb{R}^d} || X^Tw - y || ^2 _2
-\]</span> Let this be a function of <span class="math inline">\(w\)</span> and as follows: <span class="math display">\[\begin{align*}
-f(w) &amp;= \min _{w \in \mathbb{R}^d} || X^Tw - y || ^2 _2 \\
-f(w) &amp;= (X^Tw - y)^T(X^Tw - y) \\
-\therefore\bigtriangledown f(w) &amp;= 2(XX^T)w - 2(Xy) \\
-\end{align*}\]</span> Setting the above equation to zero, we get <span class="math display">\[\begin{align*}
-(XX^T)w^* &amp;= Xy \\
-\therefore w^* &amp;= (XX^T)^+Xy
-\end{align*}\]</span> where <span class="math inline">\((XX^T)^+\)</span> is the pseudo-inverse of <span class="math inline">\(XX^T\)</span>.</p>
-<p>On further analysis of the above equation, we can say that <span class="math inline">\(X^Tw\)</span> is the projection of the labels onto the subspace spanned by the features.</p>
+<p>The minimization equation can be expressed in vectorized form as:</p>
+<p><span class="math display">\[
+\min_{\mathbf{w} \in \mathbb{R}^d} \|\mathbf{X}^T\mathbf{w} - \mathbf{y}\|_2^2
+\]</span></p>
+<p>Defining a function <span class="math inline">\(f(\mathbf{w})\)</span> that captures this minimization problem, we have:</p>
+<p><span class="math display">\[\begin{align*}
+f(\mathbf{w}) &amp;= \min_{\mathbf{w} \in \mathbb{R}^d} \|\mathbf{X}^T\mathbf{w} - \mathbf{y}\|_2^2 \\
+f(\mathbf{w}) &amp;= (\mathbf{X}^T\mathbf{w} - \mathbf{y})^T(\mathbf{X}^T\mathbf{w} - \mathbf{y}) \\
+\therefore \nabla f(\mathbf{w}) &amp;= 2(\mathbf{X}\mathbf{X}^T)\mathbf{w} - 2(\mathbf{X}\mathbf{y})
+\end{align*}\]</span></p>
+<p>Setting the gradient equation to zero, we obtain:</p>
+<p><span class="math display">\[\begin{align*}
+(\mathbf{X}\mathbf{X}^T)\mathbf{w}^* &amp;= \mathbf{X}\mathbf{y} \\
+\therefore \mathbf{w}^* &amp;= (\mathbf{X}\mathbf{X}^T)^+\mathbf{X}\mathbf{y}
+\end{align*}\]</span></p>
+<p>Here, <span class="math inline">\((\mathbf{X}\mathbf{X}^T)^+\)</span> represents the pseudo-inverse of <span class="math inline">\(\mathbf{X}\mathbf{X}^T\)</span>.</p>
+<p>Further analysis reveals that <span class="math inline">\(\mathbf{X}^T\mathbf{w}\)</span> corresponds to the projection of the labels onto the subspace spanned by the features.</p>
 </section>
 <section id="gradient-descent" class="level1">
 <h1>Gradient Descent</h1>
-<p>The normal equation for linear regression, as seen before, needs the calculation of <span class="math inline">\((XX^T)^+\)</span> which can computationally be of <span class="math inline">\(O(d^3)\)</span> complexity.</p>
-<p>As we know <span class="math inline">\(w^*\)</span> is the solution of an unconstrained optimization problem, we can solve it using gradient descent. It is given by, <span class="math display">\[\begin{align*}
-w^{t+1} &amp;= w^t - \eta^t \bigtriangledown f(w^t) \\
-\therefore w^{t+1} &amp;= w^t - \eta^t \left [ 2(XX^T)w^t - 2(Xy) \right ]
-\end{align*}\]</span> where <span class="math inline">\(\eta\)</span> is a scalar used to control the step-size of the descent and <span class="math inline">\(t\)</span> is the current iteration.</p>
-<p>Even in the above equation, the calculation of <span class="math inline">\(XX^T\)</span> is needed which is a computational expensive task. Is there a way to adapt this further?</p>
+<p>The normal equation for linear regression, as shown above, involves calculating <span class="math inline">\((\mathbf{X}\mathbf{X}^T)^+\)</span>, which can be computationally expensive with a complexity of <span class="math inline">\(O(d^3)\)</span>.</p>
+<p>Since <span class="math inline">\(\mathbf{w}^*\)</span> represents the solution of an unconstrained optimization problem, it can be solved using gradient descent. The iterative formula for gradient descent is:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{w}^{t+1} &amp;= \mathbf{w}^t - \eta^t \nabla f(\mathbf{w}^t) \\
+\therefore \mathbf{w}^{t+1} &amp;= \mathbf{w}^t - \eta^t \left [ 2(\mathbf{X}\mathbf{X}^T)\mathbf{w}^t - 2(\mathbf{X}\mathbf{y}) \right ]
+\end{align*}\]</span></p>
+<p>Here, <span class="math inline">\(\eta\)</span> is a scalar that controls the step-size of the descent, and <span class="math inline">\(t\)</span> represents the current iteration.</p>
+<p>Even in the above equation, the calculation of <span class="math inline">\(\mathbf{X}\mathbf{X}^T\)</span> is required, which remains computationally expensive. Is there a way to further enhance this process?</p>
 <section id="stochastic-gradient-descent" class="level2">
 <h2 class="anchored" data-anchor-id="stochastic-gradient-descent">Stochastic Gradient Descent</h2>
-<p>Stochastic gradient descent (SGD) is an optimization algorithm used in machine learning for finding the parameters that minimize the loss function of a model. In contrast to traditional gradient descent, which updates the model parameters based on the entire dataset, SGD updates the parameters based on a randomly selected subset of the data, known as a batch. This results in faster training times and makes SGD particularly useful for large datasets.</p>
-<p>For every step <span class="math inline">\(t\)</span>, rather than updating <span class="math inline">\(w\)</span> using the entire dataset, we use a small randomly selected (<span class="math inline">\(k\)</span>) data points to update <span class="math inline">\(w\)</span>. Therefore, the new gradient is <span class="math inline">\(2(\tilde{X}\tilde{X}^Tw^t - \tilde{X}\tilde{y})\)</span> where <span class="math inline">\(\tilde{X}\)</span> and <span class="math inline">\(\tilde{y}\)</span> is the small sample randomly selected from the dataset. This is manageable because <span class="math inline">\(\tilde{X} \in \mathbb{R}^{d \times k}\)</span> which is considerably smaller than <span class="math inline">\(X\)</span>.</p>
-<p>After T rounds, we use, <span class="math display">\[
-w ^T _{SGD} = \frac{1}{T}  \sum _{i=1} ^T w^i
-\]</span> This has a certain guarantee to have optimal convergence partly because of the randomness involved in it.</p>
+<p>Stochastic gradient descent (SGD) is an optimization algorithm widely employed in machine learning to minimize the loss function of a model by determining the optimal parameters. Unlike traditional gradient descent, which updates the model parameters based on the entire dataset, SGD updates the parameters using a randomly selected subset of the data, known as a batch. This approach leads to faster training times and makes SGD particularly suitable for handling large datasets.</p>
+<p>Instead of updating <span class="math inline">\(\mathbf{w}\)</span> using the entire dataset at each step <span class="math inline">\(t\)</span>, SGD leverages a small randomly selected subset of <span class="math inline">\(k\)</span> data points to update <span class="math inline">\(\mathbf{w}\)</span>. Consequently, the new gradient becomes <span class="math inline">\(2(\tilde{\mathbf{X}}\tilde{\mathbf{X}}^T\mathbf{w}^t - \tilde{\mathbf{X}}\tilde{\mathbf{y}})\)</span>, where <span class="math inline">\(\tilde{\mathbf{X}}\)</span> and <span class="math inline">\(\tilde{\mathbf{y}}\)</span> represent small samples randomly chosen from the dataset. This strategy is feasible since <span class="math inline">\(\tilde{\mathbf{X}} \in \mathbb{R}^{d \times k}\)</span>, which is considerably smaller compared to <span class="math inline">\(\mathbf{X}\)</span>.</p>
+<p>After <span class="math inline">\(T\)</span> rounds of training, the final estimate is obtained as follows:</p>
+<p><span class="math display">\[
+\mathbf{w}_{\text{SGD}}^T = \frac{1}{T} \sum_{i=1}^T \mathbf{w}^i
+\]</span></p>
+<p>The stochastic nature of SGD contributes to optimal convergence to a certain extent.</p>
 </section>
 </section>
 <section id="kernel-regression" class="level1">
 <h1>Kernel Regression</h1>
-<p>What if the data points lie in a non-linear sub-space? Just like in the case of clustering non-linear data, we will use kernel functions here too.</p>
-<p>Let <span class="math inline">\(w^* = X\alpha^*\)</span> for some <span class="math inline">\(\alpha^* \in \mathbb{R}^d\)</span>. <span class="math display">\[\begin{align*}
-X\alpha^*&amp;=w^*\\
-\therefore X\alpha^* &amp;=(XX^T)^+Xy \\
-(XX^T)X\alpha^* &amp;=(XX^T)(XX^T)^+Xy \\
-(XX^T)X\alpha^* &amp;=Xy \\
-X^T(XX^T)X\alpha^* &amp;=X^TXy \\
-(X^TX)^2\alpha^* &amp;=X^TXy \\
-K^2\alpha^* &amp;=Ky \\
-\therefore \alpha^* &amp;=K^{-1}y
-\end{align*}\]</span> where <span class="math inline">\(K \in \mathbb{R}^{n \times n}\)</span> and <span class="math inline">\(K\)</span> can be obtained using a kernel function like the Polynomial Kernel or RBF Kernel.</p>
-<p>How to predict using alpha and the kernel function? Let <span class="math inline">\(X_{test} \in R^{d \times m}\)</span> be the test dataset. We predict by, <span class="math display">\[\begin{align*}
-w^*\phi(X_{test}) &amp;=  \sum _{i=1} ^n \alpha_i^* k(x_i, x_{test_i})
-\end{align*}\]</span> where <span class="math inline">\(\alpha_i^*\)</span> gives the importance of the <span class="math inline">\(i^{th}\)</span> datapoint towards <span class="math inline">\(w^*\)</span> and <span class="math inline">\(k(x_i, x_{test_i})\)</span> shows how similar <span class="math inline">\(x_{test_i}\)</span> is to <span class="math inline">\(x_i\)</span>.</p>
+<p>What if the data points reside in a non-linear subspace? Similar to dealing with non-linear data clustering, kernel functions are employed in this scenario as well.</p>
+<p>Let <span class="math inline">\(\mathbf{w}^* = \mathbf{X}\boldsymbol{\alpha}^*\)</span>, where <span class="math inline">\(\boldsymbol{\alpha}^* \in \mathbb{R}^n\)</span>. <span class="math display">\[\begin{align*}
+\mathbf{X}\boldsymbol{\alpha}^* &amp;= \mathbf{w}^* \\
+\therefore \mathbf{X}\boldsymbol{\alpha}^* &amp;= (\mathbf{X}\mathbf{X}^T)^+\mathbf{X}\mathbf{y} \\
+(\mathbf{X}\mathbf{X}^T)\mathbf{X}\boldsymbol{\alpha}^* &amp;= (\mathbf{X}\mathbf{X}^T)(\mathbf{X}\mathbf{X}^T)^+\mathbf{X}\mathbf{y} \\
+(\mathbf{X}\mathbf{X}^T)\mathbf{X}\boldsymbol{\alpha}^* &amp;= \mathbf{X}\mathbf{y} \\
+\mathbf{X}^T(\mathbf{X}\mathbf{X}^T)\mathbf{X}\boldsymbol{\alpha}^* &amp;= \mathbf{X}^T\mathbf{X}\mathbf{y} \\
+(\mathbf{X}^T\mathbf{X})^2\boldsymbol{\alpha}^* &amp;= \mathbf{X}^T\mathbf{X}\mathbf{y} \\
+\mathbf{K}^2\boldsymbol{\alpha}^* &amp;= \mathbf{K}\mathbf{y} \\
+\therefore \boldsymbol{\alpha}^* &amp;= \mathbf{K}^{-1}\mathbf{y}
+\end{align*}\]</span></p>
+<p>Here, <span class="math inline">\(\mathbf{K} \in \mathbb{R}^{n \times n}\)</span>, and it can be obtained using a kernel function such as the Polynomial Kernel or RBF Kernel.</p>
+<p>To predict using <span class="math inline">\(\boldsymbol{\alpha}\)</span> and the kernel function, let <span class="math inline">\(\mathbf{X}_{\text{test}} \in \mathbb{R}^{d \times m}\)</span> represent the test dataset. The prediction is made as follows:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{w}^*\phi(\mathbf{X}_{\text{test}}) &amp;= \sum_{i=1}^n \alpha_i^* k(\mathbf{x}_i, \mathbf{x}_{\text{test}_i})
+\end{align*}\]</span></p>
+<p>Here, <span class="math inline">\(\alpha_i^*\)</span> denotes the importance of the <span class="math inline">\(i\)</span>-th data point in relation to <span class="math inline">\(\mathbf{w}^*\)</span>, and <span class="math inline">\(k(\mathbf{x}_i, \mathbf{x}_{\text{test}_i})\)</span> signifies the similarity between <span class="math inline">\(\mathbf{x}_{\text{test}_i}\)</span> and <span class="math inline">\(\mathbf{x}_i\)</span>.</p>
 </section>
 <section id="probabilistic-view-of-linear-regression" class="level1">
 <h1>Probabilistic View of Linear Regression</h1>
-<p>Given a dataset <span class="math inline">\(\{x_1, \ldots, x_n\}\)</span> where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span>, let <span class="math inline">\(\{y_1, \ldots, y_n\}\)</span> be the labels, where <span class="math inline">\(y_i \in \mathbb{R}\)</span>. The probability of <span class="math inline">\(y_i\)</span> given <span class="math inline">\(x_i\)</span> is given by, <span class="math display">\[
-P(y|X) \sim w^TX + \epsilon
-\]</span> where <span class="math inline">\(w \in R^d\)</span> is an unknown but fixed value and <span class="math inline">\(\epsilon\)</span> is the noise corresponding to distribution <span class="math inline">\(\mathcal{N}(0, \sigma^2)\)</span>.</p>
-<p>Because of the probabilistic nature of this problem, this can be viewed as an estimation problem and the best solution can be approached using Maximum Likelihood. This is given by, <span class="math display">\[\begin{align*}
-\mathcal{L}\left(w; \hspace{0.5em} \begin{array}{cccc}
-x_1, x_2, \ldots, x_n \\
-y_1, y_2, \ldots, y_n\\
-\end{array} \right )
-&amp;= \prod _{i=1} ^n \left [ \frac{1}{\sqrt{2\pi}\sigma}  e^{\frac{-(w^Tx_i - y_i)^2}{2\sigma^2}} \right ] \\
-\log\mathcal{L}\left(w; \hspace{0.5em} \begin{array}{cccc}
-x_1, x_2, \ldots, x_n \\
-y_1, y_2, \ldots, y_n\\
-\end{array} \right )
-&amp;= \sum _{i=1} ^n \left [ \frac{-(w^Tx_i - y_i)^2}{2\sigma^2} + \log \left ( \frac{1}{\sqrt{2\pi}\sigma} \right ) \right ]
-\end{align*}\]</span> <span class="math display">\[
-\text{Taking gradients w.r.t. } w \text{ on both sides}
-\]</span> <span class="math display">\[
-\hat{w}_{ML} = w^* = (XX^T)^+Xy
-\]</span> Therefore, Maximum Likelihood Estimator assuming Zero mean Gaussian Noise is the same as linear regression with square error.</p>
-</section>
-<section id="credits" class="level1">
-<h1>Credits</h1>
-<p>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</p>
+<p>Consider a dataset <span class="math inline">\(\mathbf{x}_1, \ldots, \mathbf{x}_n\)</span> with <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^d\)</span>, and the corresponding labels <span class="math inline">\(\mathbf{y}_1, \ldots, \mathbf{y}_n\)</span> with <span class="math inline">\(\mathbf{y}_i \in \mathbb{R}\)</span>. The probabilistic view of linear regression assumes that the target variable <span class="math inline">\(\mathbf{y}_i\)</span> can be modeled as a linear combination of the input features <span class="math inline">\(\mathbf{x}_i\)</span>, with an additional noise term <span class="math inline">\(\epsilon\)</span> following a zero-mean Gaussian distribution with variance <span class="math inline">\(\sigma^2\)</span>. Mathematically, this can be expressed as:</p>
+<p><span class="math display">\[
+\mathbf{y}_i = \mathbf{w}^T\mathbf{x}_i + \epsilon_i
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{w} \in \mathbb{R}^d\)</span> represents the weight vector that captures the relationship between the inputs and the target variable.</p>
+<p>To estimate the weight vector <span class="math inline">\(\mathbf{w}\)</span> that best fits the data, we can apply the principle of Maximum Likelihood (ML). The ML estimation seeks to find the parameter values that maximize the likelihood of observing the given data.</p>
+<p>Assuming that the noise term <span class="math inline">\(\epsilon_i\)</span> follows a zero-mean Gaussian distribution with variance <span class="math inline">\(\sigma^2\)</span>, we can express the likelihood function as:</p>
+<p><span class="math display">\[\begin{align*}
+\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) &amp;= P(\mathbf{y}|\mathbf{X}; \mathbf{w}) \\
+&amp;= \prod_{i=1}^n P(\mathbf{y}_i|\mathbf{x}_i; \mathbf{w}) \\
+&amp;= \prod_{i=1}^n \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-\frac{(\mathbf{w}^T\mathbf{x}_i - \mathbf{y}_i)^2}{2\sigma^2}\right)
+\end{align*}\]</span></p>
+<p>Taking the logarithm of the likelihood function, we have:</p>
+<p><span class="math display">\[\begin{align*}
+\log \mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) &amp;= \sum_{i=1}^n \log \left(\frac{1}{\sqrt{2\pi}\sigma}\right) - \frac{(\mathbf{w}^T\mathbf{x}_i - \mathbf{y}_i)^2}{2\sigma^2} \\
+&amp;= -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (\mathbf{w}^T\mathbf{x}_i - \mathbf{y}_i)^2
+\end{align*}\]</span></p>
+<p>To find the maximum likelihood estimate <span class="math inline">\(\mathbf{w}_{\text{ML}}\)</span>, we want to maximize <span class="math inline">\(\log \mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y})\)</span>. Maximizing the likelihood is equivalent to minimizing the negative log-likelihood. Thus, we seek to minimize:</p>
+<p><span class="math display">\[\begin{align*}
+-\log \mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) &amp;= \frac{1}{2\sigma^2}\sum_{i=1}^n (\mathbf{w}^T\mathbf{x}_i - \mathbf{y}_i)^2
+\end{align*}\]</span></p>
+<p>This expression is equivalent to the mean squared error (MSE) objective function used in linear regression. Therefore, finding the maximum likelihood estimate <span class="math inline">\(\mathbf{w}_{\text{ML}}\)</span> is equivalent to solving the linear regression problem using the squared error loss.</p>
+<p>To obtain the closed-form solution for <span class="math inline">\(\mathbf{w}_{\text{ML}}\)</span>, we differentiate the negative log-likelihood with respect to <span class="math inline">\(\mathbf{w}\)</span> and set the derivative to zero:</p>
+<p><span class="math display">\[\begin{align*}
+\nabla_{\mathbf{w}} \left(-\log \mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y})\right) &amp;= \frac{1}{\sigma^2}\sum_{i=1}^n (\mathbf{w}^T\mathbf{x}_i - \mathbf{y}_i)\mathbf{x}_i^T = \mathbf{0}
+\end{align*}\]</span></p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[\begin{align*}
+\frac{1}{\sigma^2}\left(\mathbf{X}\mathbf{X}^T\mathbf{w} - \mathbf{X}\mathbf{y}\right) &amp;= \mathbf{0}
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(\mathbf{X}\)</span> is the matrix whose rows are the input vectors <span class="math inline">\(\mathbf{x}_i\)</span> and <span class="math inline">\(\mathbf{y}\)</span> is the column vector of labels. Rearranging the equation, we have:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{X}\mathbf{X}^T\mathbf{w} &amp;= \mathbf{X}\mathbf{y}
+\end{align*}\]</span></p>
+<p>To obtain the closed-form solution for <span class="math inline">\(\mathbf{w}_{\text{ML}}\)</span>, we multiply both sides by the inverse of <span class="math inline">\(\mathbf{X}\mathbf{X}^T\)</span>, denoted as <span class="math inline">\((\mathbf{X}\mathbf{X}^T)^{-1}\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{w}_{\text{ML}} &amp;= (\mathbf{X}\mathbf{X}^T)^{-1}\mathbf{X}\mathbf{y}
+\end{align*}\]</span></p>
+<p>Thus, the closed-form solution for the maximum likelihood estimate <span class="math inline">\(\mathbf{w}_{\text{ML}}\)</span> is given by the product of <span class="math inline">\((\mathbf{X}\mathbf{X}^T)^{-1}\)</span> and <span class="math inline">\(\mathbf{X}\mathbf{y}\)</span>.</p>
+<p>The closed-form solution for <span class="math inline">\(\mathbf{w}_{\text{ML}}\)</span> in linear regression demonstrates that it can be obtained by directly applying a matrix inverse operation to the product of the input matrix <span class="math inline">\(\mathbf{X}\)</span> and the target variable vector <span class="math inline">\(\mathbf{y}\)</span>. This closed-form solution provides an efficient and direct way to estimate the weight vector <span class="math inline">\(\mathbf{w}\)</span> based on the given data.</p>
 
 
 </section>
@@ -368,6 +421,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -581,6 +749,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../pages/Wk04.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week-04</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../pages/Wk06.html" class="pagination-link">
+        <span class="nav-page-text">Week-06</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

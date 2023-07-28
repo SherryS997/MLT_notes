@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,15 +30,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../pages/Wk04.html" rel="next">
+<link href="../pages/Wk02.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,8 +96,8 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">MLT Notes</a> 
         <div class="sidebar-tools-main">
-    <a href="https://www.linkedin.com/in/sherry-thomassp/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
-    <a href="https://github.com/SherryS997/MLT_notes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bsc-iitm/MLT_notes" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -212,16 +216,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#k-means-clustering-lloyds-algorithm" id="toc-k-means-clustering-lloyds-algorithm" class="nav-link" data-scroll-target="#k-means-clustering-lloyds-algorithm">K-means Clustering (Lloyd’s Algorithm)</a>
   <ul class="collapse">
   <li><a href="#the-algorithm" id="toc-the-algorithm" class="nav-link" data-scroll-target="#the-algorithm">The Algorithm</a></li>
-  <li><a href="#fact-regarding-lloyds-algorithm" id="toc-fact-regarding-lloyds-algorithm" class="nav-link" data-scroll-target="#fact-regarding-lloyds-algorithm">Fact regarding Lloyd’s Algorithm</a></li>
   </ul></li>
   <li><a href="#convergence-of-k-means-algorithm" id="toc-convergence-of-k-means-algorithm" class="nav-link" data-scroll-target="#convergence-of-k-means-algorithm">Convergence of K-means Algorithm</a></li>
   <li><a href="#nature-of-clusters-produced-by-k-means" id="toc-nature-of-clusters-produced-by-k-means" class="nav-link" data-scroll-target="#nature-of-clusters-produced-by-k-means">Nature of Clusters Produced by K-means</a></li>
-  <li><a href="#initialization-of-centroids-and-k-means" id="toc-initialization-of-centroids-and-k-means" class="nav-link" data-scroll-target="#initialization-of-centroids-and-k-means">Initialization of Centroids and K-means++</a>
-  <ul class="collapse">
-  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means">K-means++</a></li>
-  </ul></li>
+  <li><a href="#smart-initialization---k-means" id="toc-smart-initialization---k-means" class="nav-link" data-scroll-target="#smart-initialization---k-means">Smart Initialization - K-means++</a></li>
   <li><a href="#choice-of-k" id="toc-choice-of-k" class="nav-link" data-scroll-target="#choice-of-k">Choice of K</a></li>
-  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -245,104 +244,115 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>PDF Link: <a href="../notes/Wk03.pdf">notes</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Feedback/Correction: <a href="https://forms.gle/LehGfBWFX3yWFDBH6">Click here!</a>.</p>
+</div>
+</div>
+<p>PDF Link: <a href="../notes/Wk03.pdf">Click here!</a></p>
 <section id="introduction-to-clustering" class="level1">
 <h1>Introduction to Clustering</h1>
-<p>Clustering is a method of unsupervised machine learning that groups similar objects into clusters, discovering structure in data for exploratory analysis or as a pre-processing step for other algorithms.</p>
-<p>Our objective is to group <span class="math inline">\(n\)</span> datapoints into <span class="math inline">\(k\)</span> clusters.</p>
+<p>Clustering represents an essential method in unsupervised machine learning aimed at grouping similar objects into clusters, thereby revealing inherent structures within the data for exploratory analysis or serving as a preprocessing step for subsequent algorithms.</p>
+<p>Our primary objective is to partition a set of <span class="math inline">\(n\)</span> datapoints into <span class="math inline">\(k\)</span> clusters.</p>
 <p>Notation: <span class="math display">\[
-\{x_1, x_2, \dots, x_n \} \hspace{6em} x_i \in \mathbb{R}^d
+\mathbf{X}=\{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n \} \quad \mathbf{x}_i \in \mathbb{R}^d
 \]</span> <span class="math display">\[
-\{z_1, z_2, \dots, z_n\} \hspace{2em} z_i \in \{1, 2, \dots, k\}
-\]</span> <strong>Objective Function</strong>: <span class="math display">\[
-F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}_2 ^2
-\]</span> where <span class="math display">\[
-\mu _k = \frac{\displaystyle \sum _{i = 1} ^{n} {x_i \cdot \mathbf{1}(z_i=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbf{1}(z_i=k)}}
-\]</span> <strong>Goal</strong>: <span class="math display">\[
-\min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2
-\]</span> Unfortunately, finding a solution manually is an NP-Hard problem due to the existence of <span class="math inline">\(k^n\)</span> possibilities. As a result, alternative approaches must be considered to address this challenge.</p>
+S = \{\mathbf{z} \quad \forall \mathbf{z} \in \{1, 2, \ldots k\}^n \}
+\]</span> <span class="math display">\[
+\boldsymbol{\mu} _k = \frac{\displaystyle \sum _{i = 1} ^{n} {\mathbf{x}_i \cdot \mathbb{1}(z_i=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbb{1}(z_i=k)}}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\mathbf{x}_i\)</span> denotes the <span class="math inline">\(i^{th}\)</span> datapoint.</li>
+<li><span class="math inline">\(z_i\)</span> denotes the cluster indicator of <span class="math inline">\(\mathbf{x}_i\)</span>.</li>
+<li><span class="math inline">\(\boldsymbol{\mu}_{z_i}\)</span> denotes the mean of the cluster with indicator <span class="math inline">\(z_i\)</span>.</li>
+<li><span class="math inline">\(S\)</span> represents the set of all possible cluster assignments. It is important to note that <span class="math inline">\(S\)</span> is <strong>finite</strong> (<span class="math inline">\(k^n\)</span>).</li>
+</ul>
+<p><strong>Goal</strong>: <span class="math display">\[
+\min _{\mathbf{z} \in S} \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||}^2
+\]</span></p>
+<p>However, the manual solution to this optimization problem is classified as an <a href="https://en.wikipedia.org/wiki/NP-hardness">NP-Hard</a> problem, which necessitates considering alternative approaches to approximate its solution due to computational constraints.</p>
 </section>
 <section id="k-means-clustering-lloyds-algorithm" class="level1">
 <h1>K-means Clustering (Lloyd’s Algorithm)</h1>
-<p>Lloyd’s Algorithm, also known as the k-means algorithm, is a widely used and straightforward method for clustering that divides a dataset into <span class="math inline">\(K\)</span> pre-determined clusters by iteratively computing the mean distance between the points and their cluster centroids.</p>
+<p>Lloyd’s Algorithm, popularly known as the k-means algorithm, offers a widely utilized and straightforward clustering method that segregates a dataset into <span class="math inline">\(K\)</span> predetermined clusters by iteratively computing the mean distance between the points and their cluster centroids.</p>
 <section id="the-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="the-algorithm">The Algorithm</h2>
-<p>The algorithm is as follows:</p>
-<p><strong>Step 1: Initialization</strong>: Assign <span class="math inline">\(z_1^0, z_2^0, \ldots, z_n^0\)</span> where <span class="math inline">\(z_i^0 \in \{1, 2, \ldots, k\}\)</span>. The approach on how to initialize them is discussed later.</p>
-<p><strong>Step 2: Compute Means</strong>: <span class="math display">\[
-\mu _k ^t = \frac{\displaystyle \sum _{i = 1} ^{n} {x_i \cdot \mathbf{1}(z_i^t=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbf{1}(z_i^t=k)}} \hspace{2em} \forall k
+<p>The algorithm proceeds as follows:</p>
+<p><strong>Step 1: Initialization</strong>: Randomly assign datapoints from the dataset as the initial cluster centers.</p>
+<p><strong>Step 2: Reassignment Step</strong>: <span class="math display">\[
+z _i ^{t} = \underset{k}{\arg \min} {|| \mathbf{x}_i - \boldsymbol{\mu} _{k} ^t ||}_2 ^2 \hspace{2em} \forall i
 \]</span></p>
-<p><strong>Step 3: Reassignment Step</strong>: <span class="math display">\[
-z _i ^{t+1} = \underset{k}{\arg \min} {|| x_i - \mu _{k} ^t ||}_2 ^2 \hspace{2em} \forall i
+<p><strong>Step 3: Compute Means</strong>: <span class="math display">\[
+\boldsymbol{\mu} _k ^{t+1} = \frac{\displaystyle \sum _{i = 1} ^{n} {\mathbf{x}_i \cdot \mathbb{1}(z_i^t=k)}}{\displaystyle \sum _{i = 1} ^{n} {\mathbb{1}(z_i^t=k)}} \hspace{2em} \forall k
 \]</span></p>
-<p><strong>Step 4: Loop until Convergence</strong>: Repeat steps 2 and 3 until convergence for <span class="math inline">\(t\)</span> iterations.</p>
-</section>
-<section id="fact-regarding-lloyds-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="fact-regarding-lloyds-algorithm">Fact regarding Lloyd’s Algorithm</h2>
-<p>Lloyd’s Algorithm, also known as K-means, is guaranteed to converge to a solution. While the converged solution may not be the optimal one, it has been observed to produce acceptable clustering results in practice.</p>
+<p><strong>Step 4: Loop until Convergence</strong>: Repeat steps 2 and 3 until the cluster assignments do not change.</p>
 </section>
 </section>
 <section id="convergence-of-k-means-algorithm" class="level1">
 <h1>Convergence of K-means Algorithm</h1>
-<p>The objective function strictly reduces after each reassignment. <span class="math display">\[
-F(z_1^{t+1}, z_2^{t+1}, \ldots, z_n^{t+1}) \le F(z_1^{t}, z_2^{t}, \ldots, z_n^{t})
-\]</span> And as there are only finite number of reassignments possible, the algorithm must converge.</p>
-<p><strong>Alternate Explanation</strong>: K-means algorithm converges because it is an iterative procedure that minimizes the sum of squared distances between points and their cluster centroids, which is a convex function with a global minimum. The algorithm will reach the convergence point, guaranteed to exist, under mild assumptions on the initial cluster means, making it a reliable tool for clustering.</p>
+<p>The convergence of K-means algorithm with respect to the objective is established by considering the following points:</p>
+<ul>
+<li>The set of all possible cluster assignments <span class="math inline">\(S\)</span> is <strong>finite</strong>.</li>
+<li>The objective function value strictly decreases after each iteration of Lloyd’s Algorithm. <span class="math display">\[
+F(z_1^{t+1}, z_2^{t+1}, \ldots, z_n^{t+1}) &lt; F(z_1^{t}, z_2^{t}, \ldots, z_n^{t})
+\]</span></li>
+</ul>
+<p>Moreover, a smarter initialization of K-means can improve the likelihood of converging to a good cluster assignment with a reduced number of iterations. Although the final assignment may not necessarily represent the global optima of the objective function, it is practically satisfactory as the objective function strictly decreases with each reassignment.</p>
+<p>Considering the finiteness of the number of possible assignments (<span class="math inline">\(k^n\)</span>), convergence of the algorithm is guaranteed.</p>
+<p><strong>Alternate Explanation</strong>: The convergence of the K-means algorithm is ascertained by its iterative nature, which minimizes the sum of squared distances between points and their cluster centroids—a convex function possessing a global minimum. The algorithm, under mild assumptions regarding the initial cluster means, reaches its convergence point, making it a dependable tool for clustering.</p>
 </section>
 <section id="nature-of-clusters-produced-by-k-means" class="level1">
 <h1>Nature of Clusters Produced by K-means</h1>
-<p>Let <span class="math inline">\(\mu _1\)</span> and <span class="math inline">\(\mu _2\)</span> be the centroids of the clusters <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> respectively.</p>
-<p>For <span class="math inline">\(C_1\)</span>, <span class="math display">\[\begin{gather*}
-    {|| x - \mu _{1} ||}^2 \le {|| x - \mu _{2} ||}^2 \\
-    \therefore x^T(\mu _2 - \mu _1) \le \frac{||\mu _2||^2 - ||\mu _1||^2}{2} \hspace{2em} \forall x
-\end{gather*}\]</span> The cluster regions are known as half-spaces or Voronoi regions.</p>
+<p>Let <span class="math inline">\(\boldsymbol{\mu}_1\)</span> and <span class="math inline">\(\boldsymbol{\mu}_2\)</span> denote the centroids of the clusters <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span>, respectively.</p>
+<p>For <span class="math inline">\(C_1\)</span>, <span class="math display">\[\begin{align*}
+    {|| \mathbf{x} - \boldsymbol{\mu} _{1} ||}^2 &amp;\le {|| \mathbf{x} - \boldsymbol{\mu} _{2} ||}^2 \\
+    \therefore \mathbf{x}^T(\boldsymbol{\mu} _2 - \boldsymbol{\mu} _1) &amp;\le \frac{||\boldsymbol{\mu} _2||^2 - ||\boldsymbol{\mu} _1||^2}{2} \hspace{2em} \forall \mathbf{x}
+\end{align*}\]</span></p>
+<p>The above equation takes the form of <span class="math inline">\(\mathbf{x}^T(w)&lt;c\)</span>, indicating a linear separator or half-space. As a result, our resulting partition of the region represents an intersection of multiple half-spaces, commonly known as a Voronoi Partition.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/clustering.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Voronoi regions for three clusters</figcaption>
+<figcaption class="figure-caption">Voronoi Partition</figcaption>
 </figure>
 </div>
-<p>But what if the dataset is as follow:</p>
-<p><img src="../images/ccircles.png" class="img-fluid"></p>
-<p>The standard k-means algorithm may not perform well when the underlying clusters in the dataset have a non-linear structure. In such cases, alternative methods such as Kernel K-means or Spectral Clustering can be employed to improve clustering accuracy. However, the intricacies of these methods will not be covered in this session.</p>
+<p>However, the standard k-means algorithm may not perform effectively when the underlying clusters in the dataset possess a non-linear structure. In such cases, alternative methods like Kernel K-means or Spectral Clustering can be employed to enhance clustering accuracy. Nonetheless, a detailed exploration of these methods is beyond the scope of this course.</p>
 </section>
-<section id="initialization-of-centroids-and-k-means" class="level1">
-<h1>Initialization of Centroids and K-means++</h1>
-<p>One possible way to initialize the centroids is to randomly assign datapoints from the dataset as centroids.</p>
-<p>The other method is K-means++.</p>
-<section id="k-means" class="level2">
-<h2 class="anchored" data-anchor-id="k-means">K-means++</h2>
-<p>The premise is to select centroids that are as far as possible from each other.</p>
+<section id="smart-initialization---k-means" class="level1">
+<h1>Smart Initialization - K-means++</h1>
+<p>The concept of K-means++ involves selecting centroids that are maximally distant from each other.</p>
 <ul>
-<li>Step 1: Choose <span class="math inline">\(\mu _1 ^0\)</span> randomly from the dataset.</li>
-<li>Step 2: For <span class="math inline">\(l \in \{2, 3, \ldots, k\}\)</span>, choose <span class="math inline">\(\mu _l ^0\)</span> probablistically proportional to score(<span class="math inline">\(S\)</span>) where <span class="math inline">\(S\)</span> is, <span class="math display">\[
-  S(x) = \min _{\{j=1, 2, \ldots, l-1\}} {|| x - \mu _{j} ^0 ||}^2 \hspace{2em} \forall x
-\]</span> The probabilistic aspect of the algorithm provides an expected guarantee of optimal convergence in K-means. The guarantee is given by, <span class="math display">\[
-  \mathbb{E} \left[ \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2 \right ]
-  \le O(\log k) \left [ \min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||}^2 \right ]
-\]</span> where <span class="math inline">\(O(\log k)\)</span> is a constant of order <span class="math inline">\(\log k\)</span>.</li>
-<li>Step 3: Once the centroids are determined, we proceed with Lloyd’s Algorithm.</li>
+<li><p>Step 1: Randomly select <span class="math inline">\(\boldsymbol{\mu} _1 ^0\)</span> from the dataset.</p></li>
+<li><p>Step 2: For <span class="math inline">\(l \in \{2, 3, \ldots, k\}\)</span>, choose <span class="math inline">\(\boldsymbol{\mu} _l ^0\)</span> probabilistically proportional to the score(<span class="math inline">\(S\)</span>), where <span class="math inline">\(S\)</span> is defined as follows: <span class="math display">\[
+  S(\mathbf{x}_i) = \min _{\{j=1, 2, \ldots, l-1\}} {|| \mathbf{x}_i - \boldsymbol{\mu} _{j} ^0 ||}^2 \quad \forall \mathbf{x}_i \in \mathbf{X}
+\]</span> The probabilistic aspect of the algorithm provides an expected guarantee of optimal convergence in K-means. The guarantee is given by: <span class="math display">\[
+  \mathbb{E} \left[ \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||}^2 \right ]
+  \le O(\log k) \left [ \min _{\{z_1, z_2, \ldots, z_n\}} \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||}^2 \right ]
+\]</span> where <span class="math inline">\(O(\log k)\)</span> is a constant of order <span class="math inline">\(\log k\)</span>.</p></li>
+<li><p>Step 3: Once the centroids are determined, we proceed with our usual Lloyd’s Algorithm.</p></li>
 </ul>
-</section>
 </section>
 <section id="choice-of-k" class="level1">
 <h1>Choice of K</h1>
-<p>A pre-requisite of K-means is <span class="math inline">\(k\)</span> or the number of clusters. But what if <span class="math inline">\(k\)</span> is unknown? If <span class="math inline">\(k\)</span> is choosen to be equal to <span class="math inline">\(n\)</span>, <span class="math display">\[
-F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||} ^2 = 0
-\]</span> But we don’t want as many clusters as datapoints. Therefore, <span class="math inline">\(k\)</span> needs to be as small as possible. We do this by penalizing large values of k. <span class="math display">\[
-\underset{k}{\arg \min} \left [ \sum _{i=1} ^{n} {|| x_i - \mu _{z_i} ||} ^2 + \text{Penalty}(k) \right ]
-\]</span> Two common criteria for making the above argument:</p>
+<p>A prerequisite for K-means is determining the number of clusters, denoted as <span class="math inline">\(k\)</span>. However, what if the value of <span class="math inline">\(k\)</span> is unknown?</p>
+<p>If we were to choose <span class="math inline">\(k\)</span> to be equal to <span class="math inline">\(n\)</span>: <span class="math display">\[
+F(z_1, z_2, \dots, z_n) = \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||} ^2 = 0
+\]</span> However, as having as many clusters as datapoints is undesirable, we aim to minimize <span class="math inline">\(k\)</span> while penalizing large values of <span class="math inline">\(k\)</span>. <span class="math display">\[
+\underset{k}{\arg \min} \left [ \sum _{i=1} ^{n} {|| \mathbf{x}_i - \boldsymbol{\mu} _{z_i} ||} ^2 + \text{Penalty}(k) \right ]
+\]</span> Two common criteria for making the above argument are:</p>
 <ul>
-<li>Akaike Information Criterion: <span class="math inline">\(\left [ 2K - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
-<li>Bayesian Information Criterion: <span class="math inline">\(\left [ K\ln(n) - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
+<li><a href="https://en.wikipedia.org/wiki/Akaike_information_criterion"><span class="math inline">\(\text{\textcolor{blue}{Akaike Information Criterion}}\)</span></a>: <span class="math inline">\(\left [ 2K - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
+<li><a href="https://en.wikipedia.org/wiki/Bayesian_information_criterion"><span class="math inline">\(\text{\textcolor{blue}{Bayesian Information Criterion}}\)</span></a>: <span class="math inline">\(\left [ K\ln(n) - 2\ln(\hat{\mathcal{L}}(\theta ^*)) \right ]\)</span></li>
 </ul>
-<p>Details for the same will be discussed in future lectures.</p>
-</section>
-<section id="credits" class="level1">
-<h1>Credits</h1>
-<ul>
-<li>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</li>
-</ul>
+<p>However, detailed elaboration of these criteria is beyond the scope of this course.</p>
 
 
 </section>
@@ -368,6 +378,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -581,6 +706,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../pages/Wk02.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week-02</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../pages/Wk04.html" class="pagination-link">
+        <span class="nav-page-text">Week-04</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

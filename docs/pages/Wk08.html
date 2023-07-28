@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,15 +30,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../pages/Wk09.html" rel="next">
+<link href="../pages/Wk07.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,8 +96,8 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">MLT Notes</a> 
         <div class="sidebar-tools-main">
-    <a href="https://www.linkedin.com/in/sherry-thomassp/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
-    <a href="https://github.com/SherryS997/MLT_notes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bsc-iitm/MLT_notes" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -220,10 +224,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#decision-function-of-naive-bayes" id="toc-decision-function-of-naive-bayes" class="nav-link" data-scroll-target="#decision-function-of-naive-bayes">Decision Function of Naive Bayes</a></li>
   <li><a href="#gaussian-naive-bayes" id="toc-gaussian-naive-bayes" class="nav-link" data-scroll-target="#gaussian-naive-bayes">Gaussian Naive Bayes</a>
   <ul class="collapse">
-  <li><a href="#prediction-using-bayes-rule" id="toc-prediction-using-bayes-rule" class="nav-link" data-scroll-target="#prediction-using-bayes-rule">Prediction using Bayes Rule</a></li>
+  <li><a href="#prediction-using-bayes-rule" id="toc-prediction-using-bayes-rule" class="nav-link" data-scroll-target="#prediction-using-bayes-rule">Prediction using Bayes’ Rule</a></li>
   <li><a href="#decision-boundaries-for-different-covariances" id="toc-decision-boundaries-for-different-covariances" class="nav-link" data-scroll-target="#decision-boundaries-for-different-covariances">Decision Boundaries for Different Covariances</a></li>
   </ul></li>
-  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -247,142 +250,175 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>PDF Link: <a href="../notes/Wk08.pdf">notes</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Feedback/Correction: <a href="https://forms.gle/LehGfBWFX3yWFDBH6">Click here!</a>.</p>
+</div>
+</div>
+<p>PDF Link: <a href="../notes/Wk08.pdf">Click here!</a></p>
 <section id="generative-model-based-algorithm" class="level1">
 <h1>Generative Model Based Algorithm</h1>
-<p>A Generative Model Based Algorithm tries to model the probability distribution of the input data and then generates new samples from this distribution. It involves learning the joint probability distribution of the features and labels of the training data, and then using this model to make predictions for new, unseen data.</p>
-<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \{0, 1\}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
-<p>General Steps in the algorithm are:</p>
-<ul>
-<li>Decide the labels by tossing a coin <span class="math inline">\(P(y_i=1)=p\)</span>.</li>
-<li>Decide features using the labels in step 1 using <span class="math inline">\(P(x_i|y_i)\)</span>.</li>
-</ul>
-<p>The parameters in the model are as follows:</p>
-<ul>
+<p>A Generative Model Based Algorithm is an approach that seeks to model the probability distribution of the input data and generate new samples based on this distribution. The key idea involves learning the joint probability distribution of the features and labels in the training data and utilizing this learned model to make predictions for previously unseen data.</p>
+<p>Let us consider a dataset <span class="math inline">\(D=\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\}\)</span>, where <span class="math inline">\(\mathbf{x}_i \in \{0, 1\}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
+<p>The general steps of the algorithm are as follows:</p>
+<ol type="1">
+<li>Decide the labels by tossing a coin with <span class="math inline">\(P(y_i=1)=p\)</span>.</li>
+<li>Determine the features using the labels obtained in Step 1 through the conditional probability <span class="math inline">\(P(\mathbf{x}_i|y_i)\)</span>.</li>
+</ol>
+<p>The parameters in the generative model are defined as follows:</p>
+<ol type="1">
 <li>Parameter <span class="math inline">\(\hat{p}\)</span> to decide the label: 1</li>
-<li>Parameters for <span class="math inline">\(P(x|y=1)\)</span>: <span class="math inline">\(2^d-1\)</span></li>
-<li>Parameters for <span class="math inline">\(P(x|y=0)\)</span>: <span class="math inline">\(2^d-1\)</span></li>
-</ul>
-<p>Hence, the total number of parameters <span class="math display">\[\begin{align*}
-    &amp;=1 + (2^d-1) + (2^d-1)\\
-    &amp;=1 + 2(2^d-1)\\
-    &amp;=2^{d+1}-1
+<li>Parameters for <span class="math inline">\(P(\mathbf{x}|y=1)\)</span>: <span class="math inline">\(2^d-1\)</span></li>
+<li>Parameters for <span class="math inline">\(P(\mathbf{x}|y=0)\)</span>: <span class="math inline">\(2^d-1\)</span></li>
+</ol>
+<p>Consequently, the total number of parameters is given by: <span class="math display">\[\begin{align*}
+    &amp; = 1 + (2^d-1) + (2^d-1) \\
+    &amp; = 1 + 2(2^d-1) \\
+    &amp; = 2^{d+1}-1
 \end{align*}\]</span></p>
 <p><strong>Issues</strong>:</p>
-<ul>
-<li>Too many parameters.</li>
-<li>Not a reasonable model.</li>
-</ul>
+<ol type="1">
+<li>Too many parameters, which may lead to overfitting.</li>
+<li>The model may not be practically viable due to the assumption made in the generative process.</li>
+</ol>
 <section id="alternate-generative-model" class="level2">
 <h2 class="anchored" data-anchor-id="alternate-generative-model">Alternate Generative Model</h2>
-<p>An alternate model begins with the class conditional independence assumption. The <strong>class conditional independence assumption</strong> is a common assumption made in machine learning algorithms that assumes the features of an object are conditionally independent given its class label.</p>
-<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \{0, 1\}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
-<p>General Steps in the algorithm are:</p>
-<ul>
-<li>Decide the labels by tossing a coin <span class="math inline">\(P(y_i=1)=p\)</span>.</li>
-<li>Decide features for <span class="math inline">\(x\)</span> given <span class="math inline">\(y\)</span> using: <span class="math display">\[
-P(x = [f_1, f_2, \ldots, f_d]|y) = \prod_{i=1}^d(p^y_i)^{f_i}(1-p^y_i)^{1-f_i}
+<p>An alternative generative model starts with the class conditional independence assumption, which is a common assumption in various machine learning algorithms. This assumption states that the features of an object are conditionally independent given its class label.</p>
+<p>Let us again consider the dataset <span class="math inline">\(D=\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\}\)</span>, with <span class="math inline">\(\mathbf{x}_i \in \{0, 1\}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
+<p>The general steps of the algorithm under this alternative model are as follows:</p>
+<ol type="1">
+<li>Decide the labels by tossing a coin with <span class="math inline">\(P(y_i=1)=p\)</span>.</li>
+<li>Determine the features for <span class="math inline">\(\mathbf{x}\)</span> given <span class="math inline">\(y\)</span> using the following conditional probability: <span class="math display">\[
+P(\mathbf{x} = [f_1, f_2, \ldots, f_d]|y) = \prod_{i=1}^d(p^{y_i}_i)^{f_i}(1-p^{y_i}_i)^{1-f_i}
 \]</span></li>
-</ul>
-<p>The parameters in the model are as follows:</p>
-<ul>
+</ol>
+<p>The parameters in this alternative model are as follows:</p>
+<ol type="1">
 <li>Parameter <span class="math inline">\(\hat{p}\)</span> to decide the label: 1</li>
-<li>Parameters for <span class="math inline">\(P(x|y=1)\)</span>: <span class="math inline">\(d\)</span></li>
-<li>Parameters for <span class="math inline">\(P(x|y=0)\)</span>: <span class="math inline">\(d\)</span></li>
-</ul>
-<p>Hence, the total number of parameters <span class="math display">\[\begin{align*}
-    &amp;=1 + d + d\\
-    &amp;=2d+1
+<li>Parameters for <span class="math inline">\(P(\mathbf{x}|y=1)\)</span>: <span class="math inline">\(d\)</span></li>
+<li>Parameters for <span class="math inline">\(P(\mathbf{x}|y=0)\)</span>: <span class="math inline">\(d\)</span></li>
+</ol>
+<p>Thus, the total number of parameters is given by: <span class="math display">\[\begin{align*}
+    &amp; = 1 + d + d \\
+    &amp; = 2d + 1
 \end{align*}\]</span></p>
 <p>The parameters are estimated using Maximum Likelihood Estimation.</p>
 </section>
 </section>
 <section id="naive-bayes-algorithm" class="level1">
 <h1>Naive Bayes Algorithm</h1>
-<p>The model is given by, <span class="math display">\[
-P(x = [f_1, f_2, \ldots, f_d]|y) = \prod_{i=1}^d(p^y_i)^{f_i}(1-p^y_i)^{1-f_i}
-\]</span> The parameters to be estimated are <span class="math inline">\(p,\{p^0_1,p^0_2,\ldots,p^0_d\},\{p^1_1,p^1_2,\ldots,p^1_d\}\)</span>. Using Maximum Likelihood Estimation, we get the following results: <span class="math display">\[\begin{align*}
-\hat{p}&amp;=\frac{1}{n}\sum_{i=1}^ny_i\\
-\hat{p}^y_j &amp;= \frac{\displaystyle \sum_{i=1}^n\mathbb{1}(f^i_j=1,y_i=y)}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=y)} \hspace{1em} \genfrac{}{}{0pt}{}{\forall j \in\{1,2,\ldots,d\}}{\forall y \in \{0,1\}}
+<p>The Naive Bayes algorithm is a classification algorithm based on Bayes’ theorem, which assumes that the features are independent of each other given the class label. The model calculates the probability of a sample belonging to a class by estimating the conditional probability of each feature given the class and then combining these probabilities using Bayes’ theorem. Despite its simple assumption, Naive Bayes has been found to perform well in various applications, particularly when the number of features is large but the training data is limited.</p>
+<p>The model is given by: <span class="math display">\[
+P(\mathbf{x} = [f_1, f_2, \ldots, f_d]|y) = \prod_{i=1}^d(p^{y_i}_i)^{f_i}(1-p^{y_i}_i)^{1-f_i}
+\]</span></p>
+<p>The parameters to be estimated are <span class="math inline">\(p\)</span>, <span class="math inline">\(\{p^0_1,p^0_2,\ldots,p^0_d\}\)</span>, and <span class="math inline">\(\{p^1_1,p^1_2,\ldots,p^1_d\}\)</span>. Using Maximum Likelihood Estimation, we obtain the following estimates: <span class="math display">\[
+\hat{p} = \frac{1}{n}\sum_{i=1}^ny_i
+\]</span> <span class="math display">\[\begin{align*}
+\hat{p}^y_j &amp; = \frac{\displaystyle \sum_{i=1}^n\mathbb{1}(f^i_j=1,y_i=y)}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=y)} \hspace{1em} \text{for all } j \in \{1,2,\ldots,d\},\text{ and } \forall y \in \{0,1\}
 \end{align*}\]</span></p>
 <section id="prediction-using-the-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="prediction-using-the-parameters">Prediction using the parameters</h2>
-<p>Given <span class="math inline">\(x^{test}\in\{0,1\}^d\)</span>, prediction for <span class="math inline">\(\hat{y}^{test}\)</span> is done using the following: <span class="math display">\[
-P(\hat{y}^{test}=1|x^{test}) \ge P(\hat{y}^{test}=0|x^{test})
-\]</span> If the above is true, <span class="math inline">\(\hat{y}^{test}=1\)</span>, otherwise <span class="math inline">\(0\)</span>.</p>
-<p>Using Bayes rule, we can get the values for <span class="math inline">\(P(\hat{y}^{test}=1|x^{test})\)</span> and <span class="math inline">\(P(\hat{y}^{test}=0|x^{test})\)</span>: <span class="math display">\[\begin{align*}
-P(\hat{y}^{test}=1|x^{test})&amp;=\frac{P(x^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)}{P(x^{test})}\\
-P(\hat{y}^{test}=0|x^{test})&amp;=\frac{P(x^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)}{P(x^{test})}
-\end{align*}\]</span> As we predict by comparing the two values, we can do this without actually solving for <span class="math inline">\(P(x^{test})\)</span>.</p>
-<p>Solving for <span class="math inline">\(P(x^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)\)</span>, we get, <span class="math display">\[\begin{align*}
-&amp;=P(x^{test} = [f_1, f_2, \ldots, f_d]|y^{test}=1)*P(\hat{y}^{test}=1)\\
+<p>Given <span class="math inline">\(\mathbf{x}^{test}\in\{0,1\}^d\)</span>, the prediction for <span class="math inline">\(\hat{y}^{test}\)</span> is done using the following criterion:</p>
+<p><span class="math display">\[
+P(\hat{y}^{test}=1|\mathbf{x}^{test}) \ge P(\hat{y}^{test}=0|\mathbf{x}^{test})
+\]</span></p>
+<p>If the above inequality holds, then <span class="math inline">\(\hat{y}^{test}=1\)</span>, otherwise <span class="math inline">\(\hat{y}^{test}=0\)</span>.</p>
+<p>Using Bayes’ rule, we can express <span class="math inline">\(P(\hat{y}^{test}=1|\mathbf{x}^{test})\)</span> and <span class="math inline">\(P(\hat{y}^{test}=0|\mathbf{x}^{test})\)</span> as follows:</p>
+<p><span class="math display">\[\begin{align*}
+P(\hat{y}^{test}=1|\mathbf{x}^{test}) &amp; = \frac{P(\mathbf{x}^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)}{P(\mathbf{x}^{test})} \\
+P(\hat{y}^{test}=0|\mathbf{x}^{test}) &amp; = \frac{P(\mathbf{x}^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)}{P(\mathbf{x}^{test})}
+\end{align*}\]</span></p>
+<p>However, since we are only interested in the comparison of these probabilities, we can avoid calculating <span class="math inline">\(P(\mathbf{x}^{test})\)</span>.</p>
+<p>By solving for <span class="math inline">\(P(\mathbf{x}^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)\)</span>, we find:</p>
+<p><span class="math display">\[\begin{align*}
+&amp;=P(\mathbf{x}^{test} = [f_1, f_2, \ldots, f_d]|y^{test}=1)*P(\hat{y}^{test}=1) \\
 &amp;=\left(\prod_{i=1}^d(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\right)*\hat{p}
-\end{align*}\]</span> Similarly we solve for <span class="math inline">\(P(x^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)\)</span>.</p>
-<p>Therefore, if <span class="math display">\[
+\end{align*}\]</span></p>
+<p>Similarly, we can obtain <span class="math inline">\(P(\mathbf{x}^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)\)</span>.</p>
+<p>Therefore, we predict <span class="math inline">\(\hat{y}^{test}=1\)</span> if:</p>
+<p><span class="math display">\[
 \left(\prod_{i=1}^d(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\right)*\hat{p} \ge \left(\prod_{i=1}^d(\hat{p}^0_i)^{f_i}(1-\hat{p}^0_i)^{1-f_i}\right)*(1-\hat{p})
-\]</span> we predict <span class="math inline">\(y^{test}=1\)</span>, othewise <span class="math inline">\(y^{test}=0\)</span>.</p>
-<p>The model implements two main things:</p>
-<ul>
-<li>Class Conditional Independence Assumption</li>
-<li>Bayes Rule</li>
-</ul>
-<p>Therefore, we call this algorithm Naive Bayes.</p>
-<p>In short, <strong>Naive Bayes</strong> is a classification algorithm based on Bayes’ theorem, which assumes that the features are independent of each other given the class label. It calculates the probability of a sample belonging to a class by estimating the conditional probability of each feature given the class and then multiplying them together using Bayes’ theorem. Despite its simple assumption, Naive Bayes is known to perform well in various applications, particularly when there are many features but relatively few training examples.</p>
+\]</span></p>
+<p>Otherwise, we predict <span class="math inline">\(\hat{y}^{test}=0\)</span>.</p>
+<p>The Naive Bayes algorithm employs two main techniques:</p>
+<ol type="1">
+<li>The Class Conditional Independence Assumption.</li>
+<li>Utilizing Bayes’ Rule.</li>
+</ol>
+<p>As a result, this algorithm is commonly referred to as Naive Bayes.</p>
+<p>In summary, <strong>Naive Bayes</strong> is a classification algorithm based on Bayes’ theorem, which assumes that the features are independent of each other given the class label. It estimates the conditional probabilities of features given the class and uses these probabilities to make predictions for new data. Despite its naive assumption, Naive Bayes has demonstrated good performance across various applications, particularly when dealing with high-dimensional data and limited training examples.</p>
 </section>
 <section id="pitfalls-of-naive-bayes" class="level2">
 <h2 class="anchored" data-anchor-id="pitfalls-of-naive-bayes">Pitfalls of Naive Bayes</h2>
-<p>The most prominent issue with Naive Bayes is that if a feature is not seen in the training set but seen in the testing set, the prediction probability for both the classes would be zero. <span class="math display">\[\begin{align*}
-P(\hat{y}^{test}=1|x^{test} = [f_1, f_2, \ldots, f_d])&amp;\propto\left(\prod_{i=1}^d(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\right)*\hat{p}\\
-P(\hat{y}^{test}=0|x^{test} = [f_1, f_2, \ldots, f_d])&amp;\propto\left(\prod_{i=1}^d(\hat{p}^0_i)^{f_i}(1-\hat{p}^0_i)^{1-f_i}\right)*(1-\hat{p})
-\end{align*}\]</span> Even if one feature <span class="math inline">\(f_i\)</span> was zero in training set, we get <span class="math inline">\(\hat{p}^1_i=\hat{p}^0_i=0\)</span>, which ultimately results in <span class="math inline">\(P(\hat{y}^{test}=0|x^{test})=P(\hat{y}^{test}=1|x^{test})=0\)</span>.</p>
-<p>A popular fix for this is to introduce two “pseudo” datapoints with labels <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> each into the dataset whose features are all ones. This technique is also known as Laplace smoothing.</p>
-<p>Briefly speaking, <strong>Laplace smoothing</strong> is a technique used to address the zero-frequency problem in probabilistic models, particularly in text classification. It involves adding a small constant value to the count of each feature and the number of unique classes to avoid zero probability estimates, which can cause problems during model training and prediction. By adding this smoothing term, the model becomes more robust and can handle unseen data more effectively.</p>
+<p>One prominent issue with Naive Bayes is that if a feature is not observed in the training set but present in the testing set, the prediction probabilities for both classes become zero.</p>
+<p><span class="math display">\[\begin{align*}
+P(\hat{y}^{test}=1|\mathbf{x}^{test} = [f_1, f_2, \ldots, f_d]) &amp; \propto \left(\prod_{i=1}^d(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\right)*\hat{p} \\
+P(\hat{y}^{test}=0|\mathbf{x}^{test} = [f_1, f_2, \ldots, f_d]) &amp; \propto \left(\prod_{i=1}^d(\hat{p}^0_i)^{f_i}(1-\hat{p}^0_i)^{1-f_i}\right)*(1-\hat{p})
+\end{align*}\]</span></p>
+<p>If any feature <span class="math inline">\(f_i\)</span> was absent in the training set, it results in <span class="math inline">\(\hat{p}^1_i=\hat{p}^0_i=0\)</span>, leading to <span class="math inline">\(P(\hat{y}^{test}=0|\mathbf{x}^{test})=P(\hat{y}^{test}=1|\mathbf{x}^{test})=0\)</span>.</p>
+<p>A popular remedy for this issue is to introduce two “pseudo” data points with labels 1 and 0, respectively, into the dataset, where all their features are set to 1. This technique is also known as Laplace smoothing.</p>
+<p>In brief, <strong>Laplace smoothing</strong> is a technique employed to address the zero-frequency problem in probabilistic models, particularly in text classification. It involves adding a small constant value to the count of each feature and the number of unique classes to avoid zero probability estimates, which can cause problems during model training and prediction. By incorporating this smoothing term, the model becomes more robust and better suited for handling unseen data.</p>
 </section>
 </section>
 <section id="decision-function-of-naive-bayes" class="level1">
 <h1>Decision Function of Naive Bayes</h1>
-<p>Given <span class="math inline">\(x^{test}\in\{0,1\}^d\)</span>, prediction for <span class="math inline">\(\hat{y}^{test}\)</span> is <span class="math inline">\(1\)</span> if: <span class="math display">\[\begin{multline*}\\
-\frac{P(\hat{y}^{test}=1|x^{test})}{P(\hat{y}^{test}=0|x^{test})}\ge 1\\
-\log \left (\frac{P(\hat{y}^{test}=1|x^{test})}{P(\hat{y}^{test}=0|x^{test})}\right )\ge 0\\
-\log \left (\frac{\displaystyle\frac{P(x^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)}{P(x^{test})}}{\displaystyle\frac{P(x^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)}{P(x^{test})}}\right )\ge 0 \\
+<p>Given <span class="math inline">\(\mathbf{x}^{test}\in\{0,1\}^d\)</span>, the prediction for <span class="math inline">\(\hat{y}^{test}\)</span> is obtained using the following decision function:</p>
+<p><span class="math display">\[\begin{multline*}\\
+\frac{P(\hat{y}^{test}=1|\mathbf{x}^{test})}{P(\hat{y}^{test}=0|\mathbf{x}^{test})}\ge 1\\
+\log \left (\frac{P(\hat{y}^{test}=1|\mathbf{x}^{test})}{P(\hat{y}^{test}=0|\mathbf{x}^{test})}\right )\ge 0\\
+\log \left (\frac{\displaystyle\frac{P(\mathbf{x}^{test}|\hat{y}^{test}=1)*P(\hat{y}^{test}=1)}{P(\mathbf{x}^{test})}}{\displaystyle\frac{P(\mathbf{x}^{test}|\hat{y}^{test}=0)*P(\hat{y}^{test}=0)}{P(\mathbf{x}^{test})}}\right )\ge 0 \\
 \log \left (\prod_{i=1}^d\frac{(\hat{p}^1_i)^{f_i}(1-\hat{p}^1_i)^{1-f_i}\hat{p}}{(\hat{p}^0_i)^{f_i}(1-\hat{p}^0_i)^{1-f_i}(1-\hat{p})}\right )\ge 0 \\
 \log \left (\prod_{i=1}^d\left(\frac{\hat{p}^1_i}{\hat{p}^0_i}\right)^{f_i}\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)^{1-f_i}\frac{\hat{p}}{1-\hat{p}}\right )\ge 0 \\
 \sum_{i=1}^d \left (f_i\log\left(\frac{\hat{p}^1_i}{\hat{p}^0_i}\right)+(1-f_i)\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\right )\ge 0 \\
-\sum_{i=1}^d \left (f_i\log\left(\frac{\hat{p}^1_i(1-\hat{p}^0_i)}{\hat{p}^0_i(1-\hat{p}^1_i)}\right)\right )+\sum_{i=1}^d\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\ge 0\\ \\
-\end{multline*}\]</span> Hence, we can say that the decision function is of the form <span class="math inline">\(w^Tx+b\ge0\)</span> where <span class="math inline">\(w\in\mathbb{R}^d\)</span>, <span class="math inline">\(w_i=\displaystyle\log\left(\frac{\hat{p}^1_i(1-\hat{p}^0_i)}{\hat{p}^0_i(1-\hat{p}^1_i)}\right)\)</span> and <span class="math inline">\(b=\displaystyle\sum_{i=1}^d\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\)</span>.</p>
-<p>Therefore, the decision function of Naive Bayes is <strong>Linear</strong>.</p>
-<p>The decision boundary is given by <span class="math inline">\(\{x=P(y=1|x)=P(y=0|x)\}\)</span>.</p>
+\sum_{i=1}^d \left (f_i\log\left(\frac{\hat{p}^1_i(1-\hat{p}^0_i)}{\hat{p}^0_i(1-\hat{p}^1_i)}\right)\right )+\sum_{i=1}^d\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\ge 0
+\end{multline*}\]</span></p>
+<p>Thus, we can express the decision function as <span class="math inline">\(w^T\mathbf{x}+b\ge0\)</span>, where <span class="math inline">\(w\in\mathbb{R}^d\)</span>, <span class="math inline">\(w_i=\displaystyle\log\left(\frac{\hat{p}^1_i(1-\hat{p}^0_i)}{\hat{p}^0_i(1-\hat{p}^1_i)}\right)\)</span>, and <span class="math inline">\(b=\displaystyle\sum_{i=1}^d\log\left(\frac{1-\hat{p}^1_i}{1-\hat{p}^0_i}\right)+\log\left(\frac{\hat{p}}{1-\hat{p}}\right)\)</span>.</p>
+<p>Consequently, the decision function of Naive Bayes is <strong>linear</strong>.</p>
+<p>The decision boundary is given by <span class="math inline">\(\{\mathbf{x}=P(y=1|\mathbf{x})=P(y=0|\mathbf{x})\}\)</span>.</p>
 </section>
 <section id="gaussian-naive-bayes" class="level1">
 <h1>Gaussian Naive Bayes</h1>
-<p><strong>Gaussian Naive Bayes</strong>, also known as <strong>Gaussian Discriminant Analysis (GDA)</strong> or <strong>Gaussian Discriminant Analysis Naive Bayes (GDANB)</strong>, is a variant of the Naive Bayes algorithm for classification, which assumes that the features follow a Gaussian (normal) distribution and calculates the likelihood of a class for a given set of feature values by estimating the mean and variance of the feature values for each class.</p>
-<p>Let <span class="math inline">\(D=\{(x_1, y_1), \ldots, (x_n,y_n)\}\)</span> be the dataset, where <span class="math inline">\(x_i \in \mathbb{R}^d\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span>.</p>
-<p>Let <span class="math inline">\(P(x|y=1)\sim\mathcal{N}(\mu_1,\Sigma)\)</span> and <span class="math inline">\(P(x|y=0)\sim\mathcal{N}(\mu_0,\Sigma)\)</span>. We assume that the covariances are equal.</p>
-<p>The parameters to be estimated are <span class="math inline">\(\hat{p}\)</span>, <span class="math inline">\(\mu_0\)</span>, <span class="math inline">\(\mu_1\)</span>, and <span class="math inline">\(\Sigma\)</span>.</p>
-<p>Using Maximum Likelihood Estimation, we get the following results: <span class="math display">\[\begin{align*}
-\hat{p}&amp;=\frac{1}{n}\sum_{i=1}^ny_i \\
-\hat{\mu_1} &amp;= \frac{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=1)*x_i}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=1)} \\
-\hat{\mu_0} &amp;= \frac{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=0)*x_i}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=0)} \\
-\hat{\Sigma} &amp;= \frac{1}{n} \displaystyle \sum_{i=1}^n(x_i-\hat{\mu}_{y_i})(x_i-\hat{\mu}_{y_i})^T
-\end{align*}\]</span> Where <span class="math inline">\(\hat{p}\)</span> is the proportion of data points labeled <span class="math inline">\(1\)</span>, <span class="math inline">\(\hat{\mu_1}\)</span> is the sample mean of data points labeled <span class="math inline">\(1\)</span>, <span class="math inline">\(\hat{\mu_0}\)</span> is the sample mean of data points labeled <span class="math inline">\(0\)</span>, and <span class="math inline">\(\hat{\Sigma}\)</span> is covariance matrix of the centered dataset.</p>
+<p>Gaussian Naive Bayes, also known as Gaussian Discriminant Analysis (GDA) or Gaussian Discriminant Analysis Naive Bayes (GDANB), represents a variant of the Naive Bayes algorithm designed for classification tasks. This approach assumes that the features in the dataset follow a Gaussian (normal) distribution and computes the likelihood of a class for a given set of feature values by estimating the mean and variance of the feature values within each class.</p>
+<p>Consider a dataset, D, comprising data points in the form of pairs <span class="math inline">\(\{(\mathbf{x}_1, y_1), \ldots, (\mathbf{x}_n,y_n)\}\)</span>, where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^d\)</span> represents the feature vector and <span class="math inline">\(y_i \in \{0, 1\}\)</span> denotes the class label.</p>
+<p>Let <span class="math inline">\(P(\mathbf{x}|y=1)\sim\mathcal{N}(\boldsymbol{\mu}_1,\boldsymbol{\Sigma})\)</span> and <span class="math inline">\(P(\mathbf{x}|y=0)\sim\mathcal{N}(\boldsymbol{\mu}_0,\boldsymbol{\Sigma})\)</span>, with the assumption that the covariance matrices are equal.</p>
+<p>To estimate the parameters, we need to find values for <span class="math inline">\(\hat{p}\)</span>, <span class="math inline">\(\boldsymbol{\mu}_0\)</span>, <span class="math inline">\(\boldsymbol{\mu}_1\)</span>, and <span class="math inline">\(\boldsymbol{\Sigma}\)</span>. Using Maximum Likelihood Estimation, we obtain the following results:</p>
+<p><span class="math display">\[\begin{align*}
+\hat{p} &amp;= \frac{1}{n}\sum_{i=1}^n y_i \\
+\hat{\boldsymbol{\mu}}_1 &amp;= \frac{\displaystyle \sum_{i=1}^n \mathbb{1}(y_i=1)*\mathbf{x}_i}{\displaystyle \sum_{i=1}^n \mathbb{1}(y_i=1)} \\
+\hat{\boldsymbol{\mu}}_0 &amp;= \frac{\displaystyle \sum_{i=1}^n \mathbb{1}(y_i=0)*\mathbf{x}_i}{\displaystyle \sum_{i=1}^n \mathbb{1}(y_i=0)} \\
+\hat{\boldsymbol{\Sigma}} &amp;= \frac{1}{n} \displaystyle \sum_{i=1}^n (\mathbf{x}_i-\hat{\boldsymbol{\mu}}_{y_i})(\mathbf{x}_i-\hat{\boldsymbol{\mu}}_{y_i})^T
+\end{align*}\]</span></p>
+<p>In the above equations, <span class="math inline">\(\hat{p}\)</span> represents the proportion of data points labeled 1, <span class="math inline">\(\hat{\boldsymbol{\mu}}_1\)</span> is the sample mean of data points labeled 1, <span class="math inline">\(\hat{\boldsymbol{\mu}}_0\)</span> is the sample mean of data points labeled 0, and <span class="math inline">\(\hat{\boldsymbol{\Sigma}}\)</span> is the covariance matrix of the centered dataset.</p>
 <section id="prediction-using-bayes-rule" class="level2">
-<h2 class="anchored" data-anchor-id="prediction-using-bayes-rule">Prediction using Bayes Rule</h2>
+<h2 class="anchored" data-anchor-id="prediction-using-bayes-rule">Prediction using Bayes’ Rule</h2>
 <p>Prediction is based on the following equation: <span class="math display">\[
-P(y_{test}=1|x_{test})\propto P(x_{test}|y_{test})*P(y_{test})
-\]</span> where <span class="math inline">\(P(x_{test}|y_{test})\equiv f(x_{test};\hat{\mu}_{y_{test}}, \hat{\Sigma})\)</span> and <span class="math inline">\(P(y_{test})\equiv \hat{p}\)</span>.</p>
-<p>Predict <span class="math inline">\(y_{test}=1\)</span> if: <span class="math display">\[\begin{align*}
-f(x_{test};\hat{\mu}_1, \hat{\Sigma})*\hat{p}&amp;\ge f(x_{test};\hat{\mu}_0, \hat{\Sigma})*(1-\hat{p}) \\
-e^{-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma}(x_{test}-\hat{\mu}_1)}*\hat{p}&amp;\ge e^{-(x_{test}-\hat{\mu}_0)^T\hat{\Sigma}(x_{test}-\hat{\mu}_0)}*(1-\hat{p}) \\
--(x_{test}-\hat{\mu}_1)^T\hat{\Sigma}(x_{test}-\hat{\mu}_1)+\log(\hat{p})&amp;\ge -(x_{test}-\hat{\mu}_0)^T\hat{\Sigma}(x_{test}-\hat{\mu}_0) + \log(1-\hat{p}) \\
-\end{align*}\]</span> <span class="math display">\[
-\left( (\hat{\mu}_1-\hat{\mu}_0)^T\hat{\Sigma}^{-1} \right)x_{test} + \hat{\mu}_0^T\hat{\Sigma}^{-1}\hat{\mu}_0 - \hat{\mu}_1^T\hat{\Sigma}^{-1}\hat{\mu}_1 + log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
-\]</span> Hence, we can say that the decision function is of the form <span class="math inline">\(w^Tx+b\ge0\)</span> where <span class="math inline">\(w\in\mathbb{R}^d\)</span>, <span class="math inline">\(w_i= (\hat{\mu}_1-\hat{\mu}_0)^T\hat{\Sigma}^{-1}\)</span> and <span class="math inline">\(b=\hat{\mu}_0^T\hat{\Sigma}^{-1}\hat{\mu}_0 - \hat{\mu}_1^T\hat{\Sigma}^{-1}\hat{\mu}_1 + log(\frac{1-\hat{p}}{\hat{p}})\)</span>.</p>
-<p>Therefore, the decision function of Gaussian Naive Bayes when the covariance matrix is equal for both classes is <strong>Linear</strong>.</p>
+P(y_{test}=1|\mathbf{x}_{test})\propto P(\mathbf{x}_{test}|y_{test})*P(y_{test})
+\]</span></p>
+<p>Where <span class="math inline">\(P(\mathbf{x}_{test}|y_{test})\equiv f(\mathbf{x}_{test};\hat{\boldsymbol{\mu}}_{y_{test}}, \hat{\boldsymbol{\Sigma}})\)</span> and <span class="math inline">\(P(y_{test})\equiv \hat{p}\)</span>.</p>
+<p>To predict <span class="math inline">\(y_{test}=1\)</span>, we compare the probabilities:</p>
+<p><span class="math display">\[\begin{align*}
+f(\mathbf{x}_{i} ;\hat{\boldsymbol{\mu} }_{1} ,\hat{\boldsymbol{\Sigma} }_{1} )\hat{p} &amp; \geq f(\mathbf{x}_{i} ;\hat{\boldsymbol{\mu} }_{0} ,\hat{\boldsymbol{\Sigma} }_{0} )(1-\hat{p} )\\
+e^{-(\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{1} )^{T}\hat{\boldsymbol{\Sigma} }_{1}^{-1} (\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{1} )}\hat{p} &amp; \geq e^{-(\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{0} )^{T}\hat{\boldsymbol{\Sigma} }_{0}^{-1} (\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{0} )} (1-\hat{p} )\\
+-(\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{1} )^{T}\hat{\boldsymbol{\Sigma} }_{1}^{-1} (\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{1} )+\log (\hat{p} ) &amp; \geq -(\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{0} )^{T}\hat{\boldsymbol{\Sigma} }_{0}^{-1} (\mathbf{x}_{i} -\hat{\boldsymbol{\mu} }_{0} )+\log (1-\hat{p} )
+\end{align*}\]</span></p>
+<p>This inequality can be expressed as a linear decision function:</p>
+<p><span class="math display">\[
+\left( (\hat{\boldsymbol{\mu}}_1-\hat{\boldsymbol{\mu}}_0)^T\hat{\boldsymbol{\Sigma}}^{-1} \right)\mathbf{x}_{test} + \hat{\boldsymbol{\mu}}_0^T\hat{\boldsymbol{\Sigma}}^{-1}\hat{\boldsymbol{\mu}}_0 - \hat{\boldsymbol{\mu}}_1^T\hat{\boldsymbol{\Sigma}}^{-1}\hat{\boldsymbol{\mu}}_1 + \log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
+\]</span></p>
+<p>Thus, the decision function of Gaussian Naive Bayes is <strong>linear</strong>.</p>
 </section>
 <section id="decision-boundaries-for-different-covariances" class="level2">
 <h2 class="anchored" data-anchor-id="decision-boundaries-for-different-covariances">Decision Boundaries for Different Covariances</h2>
 <ol type="1">
-<li><strong>When the covariance matrices are equal for both classes</strong>: As seen previously, the decision boundary is linear.</li>
+<li><strong>When the covariance matrices are equal for both classes</strong>: As previously discussed, the decision boundary is linear.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -391,7 +427,7 @@ e^{-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma}(x_{test}-\hat{\mu}_1)}*\hat{p}&amp;\ge 
 </figure>
 </div>
 <ol start="2" type="1">
-<li><strong>When the covariance matrices are Identity matrices for both classes</strong>: The decision boundary is linear as well as the perpendicular bisector of the line drawn from <span class="math inline">\(\hat{\mu}_1\)</span> to <span class="math inline">\(\hat{\mu}_0\)</span>.</li>
+<li><strong>When the covariance matrices are Identity matrices for both classes</strong>: The decision boundary is both linear and the perpendicular bisector of the line drawn from <span class="math inline">\(\hat{\boldsymbol{\mu}}_1\)</span> to <span class="math inline">\(\hat{\boldsymbol{\mu}}_0\)</span>.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -400,16 +436,16 @@ e^{-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma}(x_{test}-\hat{\mu}_1)}*\hat{p}&amp;\ge 
 </figure>
 </div>
 <ol start="3" type="1">
-<li><strong>When the covariance matrices are not equal for both classes</strong>: Let <span class="math inline">\(\hat{\Sigma}_1\)</span> and <span class="math inline">\(\hat{\Sigma}_0\)</span> be the covariance matrices for classes <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> respectively. They are given by, <span class="math display">\[\begin{align*}
-\hat{\Sigma}_1 &amp;= \frac{1}{n} \displaystyle \sum_{i=1}^n(\mathbb{1}(y_i=1)*x_i-\hat{\mu}_1)(\mathbb{1}(y_i=1)*x_i-\hat{\mu}_1)^T \\
-\hat{\Sigma}_0 &amp;= \frac{1}{n} \displaystyle \sum_{i=1}^n(\mathbb{1}(y_i=0)*x_i-\hat{\mu}_0)(\mathbb{1}(y_i=0)*x_i-\hat{\mu}_0)^T
-\end{align*}\]</span> Predict <span class="math inline">\(y_{test}=1\)</span> if: <span class="math display">\[\begin{align*}
-f(x_{test};\hat{\mu}_1, \hat{\Sigma_1})*\hat{p}&amp;\ge f(x_{test};\hat{\mu}_0, \hat{\Sigma_0})*(1-\hat{p}) \\
-e^{-(x_{test}-\hat{\mu}_1)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_1)}*\hat{p}&amp;\ge e^{-(x_{test}-\hat{\mu}_0)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_0)}*(1-\hat{p}) \\
--(x_{test}-\hat{\mu}_1)^T\hat{\Sigma_1}(x_{test}-\hat{\mu}_1)+\log(\hat{p})&amp;\ge -(x_{test}-\hat{\mu}_0)^T\hat{\Sigma_0}(x_{test}-\hat{\mu}_0) + \log(1-\hat{p}) \\
-\end{align*}\]</span> <span class="math display">\[
-x_{test}^T(\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1})x_{test}-2(\hat{\mu}_1^T\hat{\Sigma}_1^{-1}-\hat{\mu}_0^T\hat{\Sigma}_0^{-1})x_{test}+(\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\hat{\mu}_0-\hat{\mu}_1^T\hat{\Sigma}_1^{-1}\hat{\mu}_1) + log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
-\]</span> Hence, we can say that the decision function is of the form <span class="math inline">\(x^TQx-2b^Tx+c\ge0\)</span> where <span class="math inline">\(Q=\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1}\)</span>, <span class="math inline">\(b=\hat{\mu}_1^T\hat{\Sigma}_1^{-1}-\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\)</span>, and <span class="math inline">\(c=(\hat{\mu}_0^T\hat{\Sigma}_0^{-1}\hat{\mu}_0-\hat{\mu}_1^T\hat{\Sigma}_1^{-1}\hat{\mu}_1) + log(\frac{1-\hat{p}}{\hat{p}})\)</span>. Hence, the decision boundary is a quadratic function when the covariance matrices are not equal for both classes.</li>
+<li><strong>When the covariance matrices are not equal for both classes</strong>: Let <span class="math inline">\(\hat{\boldsymbol{\Sigma}}_1\)</span> and <span class="math inline">\(\hat{\boldsymbol{\Sigma}}_0\)</span> be the covariance matrices for classes 1 and 0, respectively. They are given by, <span class="math display">\[\begin{align*}
+\hat{\boldsymbol{\Sigma}}_1 &amp;= \frac{\displaystyle \sum_{i=1}^n(\mathbb{1}(y_i=1)*\mathbf{x}_i-\hat{\boldsymbol{\mu}}_1)(\mathbb{1}(y_i=1)*\mathbf{x}_i-\hat{\boldsymbol{\mu}}_1)^T}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=1)} \\
+\hat{\boldsymbol{\Sigma}}_0 &amp;= \frac{\displaystyle \sum_{i=1}^n(\mathbb{1}(y_i=0)*\mathbf{x}_i-\hat{\boldsymbol{\mu}}_0)(\mathbb{1}(y_i=0)*\mathbf{x}_i-\hat{\boldsymbol{\mu}}_0)^T}{\displaystyle \sum_{i=1}^n\mathbb{1}(y_i=0)}
+\end{align*}\]</span> To predict <span class="math inline">\(y_{test}=1\)</span>, we compare the probabilities: <span class="math display">\[\begin{align*}
+f(\mathbf{x}_{test};\hat{\boldsymbol{\mu}}_1, \hat{\boldsymbol{\Sigma}}_1)*\hat{p}&amp;\ge f(\mathbf{x}_{test};\hat{\boldsymbol{\mu}}_0, \hat{\boldsymbol{\Sigma}}_0)*(1-\hat{p}) \\
+e^{-(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_1)^T\hat{\boldsymbol{\Sigma}}_1(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_1)}*\hat{p}&amp;\ge e^{-(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_0)^T\hat{\boldsymbol{\Sigma}}_1(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_0)}*(1-\hat{p}) \\
+-(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_1)^T\hat{\boldsymbol{\Sigma}}_1(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_1)+\log(\hat{p})&amp;\ge -(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_0)^T\hat{\boldsymbol{\Sigma}}_0(\mathbf{x}_{test}-\hat{\boldsymbol{\mu}}_0) + \log(1-\hat{p}) \\
+\end{align*}\]</span> This inequality leads to a quadratic decision function: <span class="math display">\[
+\mathbf{x}_{test}^T(\hat{\boldsymbol{\Sigma}}_1^{-1}-\hat{\boldsymbol{\Sigma}}_0^{-1})\mathbf{x}_{test}-2(\hat{\boldsymbol{\mu}}_1^T\hat{\boldsymbol{\Sigma}}_1^{-1}-\hat{\boldsymbol{\mu}}_0^T\hat{\boldsymbol{\Sigma}}_0^{-1})\mathbf{x}_{test}+(\hat{\boldsymbol{\mu}}_0^T\hat{\boldsymbol{\Sigma}}_0^{-1}\hat{\boldsymbol{\mu}}_0-\hat{\boldsymbol{\mu}}_1^T\hat{\boldsymbol{\Sigma}}_1^{-1}\hat{\boldsymbol{\mu}}_1) + \log(\frac{1-\hat{p}}{\hat{p}}) \ge 0
+\]</span> Hence, the decision boundary is a quadratic function when the covariance matrices are not equal for both classes.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -417,13 +453,9 @@ x_{test}^T(\hat{\Sigma}_1^{-1}-\hat{\Sigma}_0^{-1})x_{test}-2(\hat{\mu}_1^T\hat{
 <figcaption class="figure-caption">When the covariance matrices are not equal for both classes</figcaption>
 </figure>
 </div>
-</section>
-</section>
-<section id="credits" class="level1">
-<h1>Credits</h1>
-<p>Professor Arun Rajkumar: The content as well as the notations are from his slides and lecture.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -447,6 +479,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -660,6 +807,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../pages/Wk07.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week-07</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../pages/Wk09.html" class="pagination-link">
+        <span class="nav-page-text">Week-09</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
